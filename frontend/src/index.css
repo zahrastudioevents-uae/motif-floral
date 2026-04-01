@@ -15,6 +15,19 @@
   --color-quote-accent: #e6e1da;
 
   --max-width-content: 1500px;
+
+  @keyframes page-enter {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  --animate-page-enter: page-enter 0.42s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 @layer base {
@@ -23,5 +36,34 @@
   }
   body {
     @apply m-0 bg-mf-white font-sans text-mf-muted antialiased;
+  }
+
+  @keyframes hero-ig-progress {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+
+  .hero-ig-progress-fill {
+    transform-origin: left center;
+    animation-name: hero-ig-progress;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-page-enter {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+
+    .hero-ig-progress-fill {
+      animation: none !important;
+      transform: scaleX(1) !important;
+    }
   }
 }

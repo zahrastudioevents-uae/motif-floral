@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { HeroSlideshow } from '../components/HeroSlideshow'
-import { HomeHeader } from '../components/HomeHeader'
 import { HomeTestimonialsSection } from '../components/HomeTestimonialsSection'
 import { Seo } from '../components/Seo'
 import {
@@ -22,7 +21,6 @@ export function Home() {
         description="Bespoke floral design for weddings and events in Italy. Based in Rome, available worldwide."
       />
       <div className="relative">
-        <HomeHeader />
         <HeroSlideshow slides={HOME_HERO_SLIDES} />
       </div>
 
