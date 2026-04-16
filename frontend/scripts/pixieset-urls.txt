@@ -1,4 +1,5 @@
-# Unique /site/2qZExp/... paths used by the app (extend as needed)
+# Unique /site/2qZExp/... paths used by the app
+# ─── Already downloaded (from previous session) ───
 /site/2qZExp/PQ4LGW/Screenshot2025-08-27alle09.20.04-ce84c882-1500.png
 /site/2qZExp/r3RVe8/AE6A2655-ea7f1dbe-1500.jpg
 /site/2qZExp/J94eJX/026_mod-e3bcd6e4-1500.jpg
@@ -42,3 +43,59 @@
 /site/2qZExp/4Yw6mG/choose-your-bouquet-peach-white-99d86911-1500.jpg
 /site/2qZExp/k5RXK7/choose-your-bouquet-white-bouquet-wedding-italy-5aa10427-1500.jpg
 /site/2qZExp/dDRXMp/choose-your-bouquet-dhalias-pink-la-posta-vecchia-lapostavecchia-682d23cb-1500.jpg
+
+# ─── NEW: Home hero slides (live site) ───
+/site/2qZExp/3vdn63/Villa-Astor-Editorial-Haute-Weddings-113-a3126e19-1500.jpg
+/site/2qZExp/jQnrro/Home_Palazzo_Shedir_Roma_candlelight_dinner_Motif_Floral-fbd3a536-1500.jpg
+/site/2qZExp/5yKppe/Home_tuscany_wedding_centerpiece_peach_orange_pink_imperial_table-d9cac71b-1500.jpg
+/site/2qZExp/6QJllV/Home_ceremony_villa_aurelia_destination_wedding-a7aef12f-1500.jpg
+
+# ─── NEW: Home tiles (live site) ───
+/site/2qZExp/JM7xqy/Wedding-portfolio-orange-peach-bouquet-villa-aurelia-a99c987e-1500.jpg
+/site/2qZExp/E0ljm6/Home_romantic_renaissance_centerpiece_with_peach_orange_english_roses_pink_scabiosa_mocha_lisianthus-c55ebe4d-1500.jpg
+/site/2qZExp/ZOzQqy/1I5A0488-3a83adcb-1500.jpg
+
+# ─── NEW: Featured In logos (live site) ───
+/site/2qZExp/LWv6la/Screenshot2025-08-21alle22.27.20-ed78ad74-1500.png
+/site/2qZExp/5yKOae/Screenshot2025-08-26alle15.28.27-3533841f-1500.png
+/site/2qZExp/b8GOo3/XjDi9j8alKgVt5QTtFESvaHXfaCQvm8jfNgI0ZMJ-cf3f45c2-1500.png
+/site/2qZExp/8YpKo1/WEDVIBES.MEDIA-community-badge-2025-1-33be91de-1500.png
+/site/2qZExp/0M1xlk/Screenshot2025-08-26alle16.04.27-c18928a2-1500.png
+/site/2qZExp/6QJkWb/Screenshot2025-08-26alle16.04.19-51da7edd-1500.png
+
+# ─── NEW: Our Services side image ───
+/site/2qZExp/on60ok/victoriajoyphotography-1510-7dfc0559-1500.jpg
+
+# ─── NEW: Selected Works gallery (live site) ───
+/site/2qZExp/JMzQ0p/PalazzoVilonRoma-183-e7efc586-1500.jpg
+/site/2qZExp/8YpW4b/victoriajoyphotography--9-0667343b-1500.jpg
+/site/2qZExp/lYnJn0/Screenshot2025-08-27alle09.27.12-9f490609-1500.png
+/site/2qZExp/jQVvXq/Home-portfolio-wedding-romn-ivanov-b0ef1c82-1500.jpg
+/site/2qZExp/E0rPlY/Contact_us_Alyson_Scott_Villa_Aurelia_bouquet-3e1451bd-1500.png
+/site/2qZExp/e7xpGq/Home_ceremony_villa_aurelia_destination_wedding-a03eeca7-1500.jpg
+/site/2qZExp/YXOJLp/AndreaFadyHoteldelaVille-184-6f4af68f-1500.jpg
+/site/2qZExp/a3MOMb/Screenshot2025-08-27alle09.28.13-3d39ff21-1500.png
+/site/2qZExp/34zqpA/LaDolceVitainRome-488_mod-2c7de256-1500.jpg
+/site/2qZExp/Gn8yAR/LaDolceVitainRome-336_mod-4f600bde-1500.jpg
+/site/2qZExp/QbYmXE/AndreaFadyHoteldelaVille-182-e04e367f-1500.jpg
+/site/2qZExp/rAWqZD/AD-wedding-361_mod-ca275eb6-1500.jpg
+/site/2qZExp/8lpMJb/AD-wedding-380_mod-f9f7c441-1500.jpg
+/site/2qZExp/qA7vVw/LaDolceVitainRome-57_mod-3f6c0568-1500.jpg
+/site/2qZExp/yAVnm4/photo-148-7dcad257-1500.jpg
+/site/2qZExp/Gn8yRy/photo-315-106ed9b0-1500.jpg
+/site/2qZExp/KmWVaY/LexiTruesdalePhotography51-c22e4a07-1500.jpg
+
+# ─── NEW: Let's Connect background ───
+/site/2qZExp/QaYPKb/Home_palazzo_shedir_vilon_Imperial_table_candles_fabric_ancient_villa-647ef63b-1500.jpg
+
+# ─── NEW: Testimonials (live site) ───
+/site/2qZExp/nbvxoe/AD-wedding-361_mod-4052f8de-1500.jpg
+/site/2qZExp/0mxr8Y/AD-wedding-275_mod-b92ce12e-1500.jpg
+/site/2qZExp/QJKPMZ/LucieWatsonPhotography-14_mod-3bf1b58d-1500.jpg
+/site/2qZExp/6bk0Lb/IMG_5585-3855ca4a-1500.jpeg
+/site/2qZExp/GwVod6/Savanna_And_Nick_Casale_Del_Gallo-739-b5bbc2b6-1500.jpg
+
+# ─── NEW: About page (live site) ───
+/site/2qZExp/zAwL7p/photo-187-99e8d5eb-1500.jpg
+/site/2qZExp/on1J1P/Screenshot2025-08-27alle09.25.30-e16c7358-1500.png
+/site/2qZExp/vjbLn9/Screenshot2025-08-27alle10.40.53-74f911aa-1500.png
