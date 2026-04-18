@@ -5,6 +5,7 @@ export const HOME_HERO_SLIDES = [
   {
     src: img('/site/2qZExp/3vdn63/Villa-Astor-Editorial-Haute-Weddings-113-a3126e19-1500.jpg'),
     alt: 'Villa Astor editorial with bride and groom in a grand hallway.',
+    objectPosition: 'center 75%',
   },
   {
     src: img('/site/2qZExp/jQnrro/Home_Palazzo_Shedir_Roma_candlelight_dinner_Motif_Floral-fbd3a536-1500.jpg'),
@@ -67,7 +68,6 @@ export const GALLERY_IMAGES = [
   img('/site/2qZExp/QbYmXE/AndreaFadyHoteldelaVille-182-e04e367f-1500.jpg'),
   img('/site/2qZExp/rAWqZD/AD-wedding-361_mod-ca275eb6-1500.jpg'),
   img('/site/2qZExp/y0qoXr/Screenshot2025-08-27alle09.33.32-d394ddd2-1500.png'),
-  img('/site/2qZExp/K7rO41/Home-bouquet-violet-burgundy-bouquet--77aada7f-1500.jpg'),
   img('/site/2qZExp/8lpMJb/AD-wedding-380_mod-f9f7c441-1500.jpg'),
   img('/site/2qZExp/qA7vVw/LaDolceVitainRome-57_mod-3f6c0568-1500.jpg'),
   img('/site/2qZExp/yAVnm4/photo-148-7dcad257-1500.jpg'),

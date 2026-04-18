@@ -179,7 +179,7 @@ export function Contact() {
               <button
                 type="submit"
                 disabled={status === 'loading'}
-                className="bg-mf-btn px-10 py-3 text-[0.625rem] font-medium uppercase tracking-[0.1em] text-white hover:bg-mf-btn-hover disabled:opacity-50"
+                className="mf-cta mf-cta-dark disabled:opacity-50"
               >
                 {status === 'loading' ? 'Sending…' : 'Submit'}
               </button>

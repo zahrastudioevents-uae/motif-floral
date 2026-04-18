@@ -3,59 +3,16 @@ import { Link } from 'react-router-dom'
 import { Autoplay } from 'swiper/modules'
 import type { Swiper as SwiperType } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
+import { LongStemNavArrowLeft, LongStemNavArrowRight } from './icons/ThinArrows'
 import 'swiper/css'
 
 const AUTOPLAY_MS = 5500
-
-function ChevronPrev({ className, size = 28 }: { className?: string; size?: number }) {
-  return (
-    <svg
-      className={className}
-      width={size * 0.55}
-      height={size}
-      viewBox="0 0 11 20"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden
-    >
-      <path
-        d="M9 2L3 10l6 8"
-        stroke="currentColor"
-        strokeWidth="1.2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  )
-}
-
-function ChevronNext({ className, size = 28 }: { className?: string; size?: number }) {
-  return (
-    <svg
-      className={className}
-      width={size * 0.55}
-      height={size}
-      viewBox="0 0 11 20"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden
-    >
-      <path
-        d="M2 2l6 8-6 8"
-        stroke="currentColor"
-        strokeWidth="1.2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  )
-}
 
 export function HeroSlideshow({
   slides,
   children,
 }: {
-  slides: { src: string; alt: string }[]
+  slides: { src: string; alt: string; objectPosition?: string }[]
   children?: React.ReactNode
 }) {
   const swiperRef = useRef<SwiperType | null>(null)
@@ -110,7 +67,12 @@ export function HeroSlideshow({
       >
         {slides.map((s) => (
           <SwiperSlide key={s.src} className="!flex items-center justify-center">
-            <img src={s.src} alt={s.alt} className="h-full w-full object-cover" />
+            <img
+              src={s.src}
+              alt={s.alt}
+              className="h-full w-full object-cover"
+              style={s.objectPosition ? { objectPosition: s.objectPosition } : undefined}
+            />
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/45 via-transparent to-black/35" />
           </SwiperSlide>
         ))}
@@ -135,36 +97,40 @@ export function HeroSlideshow({
         </div>
       ) : null}
 
-      {total > 1 ? (
-        <>
-          <button
-            type="button"
-            onClick={onPrev}
-            className="absolute left-[max(1.25rem,env(safe-area-inset-left,0px))] top-1/2 z-[35] hidden -translate-y-1/2 items-center justify-center border-0 bg-transparent p-2 text-white/80 transition-opacity duration-200 hover:text-white md:flex"
-            aria-label="Previous slide"
-          >
-            <ChevronPrev size={36} />
-          </button>
-          <button
-            type="button"
-            onClick={onNext}
-            className="absolute right-[max(1.25rem,env(safe-area-inset-right,0px))] top-1/2 z-[35] hidden -translate-y-1/2 items-center justify-center border-0 bg-transparent p-2 text-white/80 transition-opacity duration-200 hover:text-white md:flex"
-            aria-label="Next slide"
-          >
-            <ChevronNext size={36} />
-          </button>
-        </>
-      ) : null}
-
       <div className="pointer-events-none absolute inset-0 z-40 flex flex-col items-center justify-end pb-[min(8%,5rem)]">
         <Link
           to="/getquote/"
-          className="pointer-events-auto inline-block rounded-full bg-white px-12 py-3.5 text-[0.8125rem] font-extralight uppercase tracking-[0.12em] text-mf-black shadow-sm transition-opacity hover:opacity-90 md:text-[0.875rem] md:px-14 md:py-4"
+          className="pointer-events-auto mf-cta mf-cta-light"
         >
           Get a quote
         </Link>
         {children ? <div className="mt-[1.5rem]">{children}</div> : null}
       </div>
+
+      {/* Slide numbering with arrows - bottom right */}
+      {total > 1 ? (
+        <div className="absolute bottom-6 right-6 z-40 flex items-center gap-6 md:bottom-8 md:right-8 md:gap-8">
+          <button
+            type="button"
+            onClick={onPrev}
+            className="-m-1 flex items-center p-1 text-white/85 transition-opacity hover:text-white"
+            aria-label="Previous slide"
+          >
+            <LongStemNavArrowLeft className="block" />
+          </button>
+          <span className="font-sans text-[0.75rem] font-extralight tabular-nums tracking-[0.18em] text-white/95">
+            {active + 1} / {total}
+          </span>
+          <button
+            type="button"
+            onClick={onNext}
+            className="-m-1 flex items-center p-1 text-white/85 transition-opacity hover:text-white"
+            aria-label="Next slide"
+          >
+            <LongStemNavArrowRight className="block" />
+          </button>
+        </div>
+      ) : null}
     </section>
   )
 }

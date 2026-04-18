@@ -6,7 +6,7 @@ export function EmbroideredRibbons() {
     <>
       <Seo
         title="Silk embroidered Ribbons – Handmade precious embroideries - Motif Floral"
-        description="Hand-embroidered silk ribbons with Miyuki beads — custom text, monograms, and heirloom finishes by Motif Floral."
+        description="Hand-embroidered silk ribbons with Miyuki beads, custom text, monograms, and heirloom finishes by Motif Floral."
       />
       <section className="mx-auto max-w-[1500px] px-[4vw] py-16 text-center md:text-left">
         <p className="font-sans text-[0.8125rem] uppercase tracking-[0.15em] text-mf-muted">
@@ -32,7 +32,7 @@ export function EmbroideredRibbons() {
             <p className="mt-6 font-sans text-sm text-mf-muted">Let&apos;s design your ribbon together.</p>
           </div>
           <p className="font-sans text-sm text-mf-muted">
-            Hand-embroidered design with delicate Miyuki beads — custom illustrations or words,
+            Hand-embroidered design with delicate Miyuki beads, custom illustrations or words,
             each piece crafted one stitch at a time, transforming a simple detail into a personal
             heirloom. Each ribbon is designed in dialogue with you: the words you choose, the
             symbols you love, the style that reflects your day.
@@ -41,11 +41,11 @@ export function EmbroideredRibbons() {
             <h2 className="text-[1.1rem] uppercase">What we create</h2>
             <ul className="mt-4 list-disc space-y-2 pl-5 font-sans text-sm text-mf-muted">
               <li>Silk ribbons crafted with premium quality fabrics</li>
-              <li>Personalised text embroidery — names, initials, dates, vows</li>
+              <li>Personalised text embroidery, names, initials, dates, vows</li>
               <li>Custom logos, monograms &amp; bespoke drawings</li>
               <li>Couture beadwork with fine Miyuki beads</li>
               <li>Heirloom-quality finishes</li>
-              <li>Completely handmade — never mass-produced</li>
+              <li>Completely handmade, never mass-produced</li>
             </ul>
           </div>
           <div>
@@ -69,7 +69,7 @@ export function EmbroideredRibbons() {
         </p>
         <Link
           to="/contact/"
-          className="mt-8 inline-block bg-mf-btn px-10 py-3 text-[0.625rem] font-medium uppercase tracking-[0.1em] text-white hover:bg-mf-btn-hover"
+          className="mf-cta mf-cta-dark mt-8"
         >
           Contact us
         </Link>

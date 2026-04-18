@@ -67,3 +67,18 @@
     }
   }
 }
+
+/* Primary CTA: same shape/typography as hero “Get a quote” */
+@layer components {
+  .mf-cta {
+    @apply inline-block cursor-pointer rounded-none border-0 px-12 py-3.5 text-center text-[0.8125rem] font-normal uppercase tracking-[0.12em] shadow-sm no-underline md:px-14 md:py-4 md:text-[0.875rem];
+  }
+
+  .mf-cta-light {
+    @apply bg-white text-mf-black transition-opacity hover:opacity-90;
+  }
+
+  .mf-cta-dark {
+    @apply bg-mf-btn text-white transition-colors hover:bg-mf-btn-hover;
+  }
+}

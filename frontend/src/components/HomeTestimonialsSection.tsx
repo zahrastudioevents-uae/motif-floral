@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { ThinArrowLeft, ThinArrowRight } from './icons/ThinArrows'
+import { LongStemNavArrowLeft, LongStemNavArrowRight } from './icons/ThinArrows'
 
 export type HomeTestimonialSlide = {
   quote: string
@@ -25,8 +25,8 @@ export function HomeTestimonialsSection({ slides }: { slides: HomeTestimonialSli
         Testimonials
       </h2>
 
-      <div className="mx-auto mt-12 grid max-w-[1500px] gap-12 md:mt-16 md:grid-cols-12 md:items-stretch md:gap-10">
-        {/* Left: two photos side-by-side with "Love notes" + "Read more" */}
+      <div className="mx-auto mt-12 grid max-w-[1500px] gap-12 md:mt-16 md:grid-cols-12 md:items-center md:gap-10">
+        {/* Left: two photos as one visual group, vertically centered vs quote card */}
         <div className="md:col-span-5">
           <div className="grid grid-cols-2 gap-3">
             {/* Left column: back image + READ MORE button */}
@@ -38,7 +38,7 @@ export function HomeTestimonialsSection({ slides }: { slides: HomeTestimonialSli
               />
               <Link
                 to="/testimonials/"
-                className="mt-4 inline-block self-start bg-mf-btn px-6 py-2.5 text-[0.625rem] font-medium uppercase tracking-[0.12em] text-white transition-colors hover:bg-mf-btn-hover"
+                className="mf-cta mf-cta-dark mt-4 self-center"
               >
                 Read more
               </Link>
@@ -58,9 +58,9 @@ export function HomeTestimonialsSection({ slides }: { slides: HomeTestimonialSli
         </div>
 
         {/* Right: quote card */}
-        <div className="flex min-h-[340px] flex-col bg-[#f7f7f5] px-6 py-8 md:col-span-7 md:min-h-[480px] md:px-12 md:py-10">
+        <div className="flex min-h-[340px] flex-col bg-[#f9f9f7] px-6 py-8 md:col-span-7 md:min-h-[480px] md:px-12 md:py-10">
           <blockquote className="flex flex-1 flex-col justify-center text-center">
-            <p className="font-serif text-[0.9375rem] font-normal italic leading-[1.85] text-mf-muted md:text-[1rem]">
+            <p className="font-sans text-[0.75rem] font-light italic leading-[1.85] tracking-[0.01em] text-[#4a4a4a]">
               &ldquo;{s.quote}&rdquo;
             </p>
             <footer className="mt-8 font-sans text-[0.8125rem] font-normal uppercase tracking-[0.2em] text-mf-black md:text-[0.875rem]">
@@ -68,25 +68,25 @@ export function HomeTestimonialsSection({ slides }: { slides: HomeTestimonialSli
             </footer>
           </blockquote>
 
-          <div className="mt-8 flex w-full items-center justify-between text-mf-black md:mt-10">
+          <div className="mt-8 flex w-full items-center justify-center gap-6 text-mf-black md:mt-10 md:gap-8">
             <button
               type="button"
               onClick={prev}
-              className="p-1 text-mf-black transition-opacity hover:opacity-60"
+              className="-m-1 flex items-center p-1 text-mf-black transition-opacity hover:opacity-60"
               aria-label="Previous testimonial"
             >
-              <ThinArrowLeft className="block" />
+              <LongStemNavArrowLeft className="block" />
             </button>
-            <span className="font-sans text-[0.6875rem] font-light tabular-nums tracking-[0.14em] text-mf-black">
+            <span className="font-sans text-[0.75rem] font-extralight tabular-nums tracking-[0.18em] text-mf-black">
               {i + 1} / {total}
             </span>
             <button
               type="button"
               onClick={next}
-              className="p-1 text-mf-black transition-opacity hover:opacity-60"
+              className="-m-1 flex items-center p-1 text-mf-black transition-opacity hover:opacity-60"
               aria-label="Next testimonial"
             >
-              <ThinArrowRight className="block" />
+              <LongStemNavArrowRight className="block" />
             </button>
           </div>
         </div>

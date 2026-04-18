@@ -70,7 +70,7 @@ export function ChooseBouquet() {
               <div className="mt-10 text-center">
                 <Link
                   to="/contact/"
-                  className="inline-block bg-mf-btn px-10 py-3 text-[0.625rem] font-medium uppercase tracking-[0.1em] text-white hover:bg-mf-btn-hover"
+                  className="mf-cta mf-cta-dark"
                 >
                   Contact us
                 </Link>
@@ -113,7 +113,7 @@ export function ChooseBouquet() {
             </div>
             <Link
               to="/embroideredribbons/"
-              className="mt-10 inline-block bg-mf-btn px-10 py-3 text-[0.625rem] font-medium uppercase tracking-[0.1em] text-white hover:bg-mf-btn-hover"
+              className="mf-cta mf-cta-dark mt-10"
             >
               Discover more
             </Link>

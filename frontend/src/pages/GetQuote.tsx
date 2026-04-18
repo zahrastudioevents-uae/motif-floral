@@ -312,7 +312,7 @@ export function GetQuote() {
               <button
                 type="submit"
                 disabled={status === 'loading'}
-                className="mt-8 w-full bg-mf-black py-4 text-[0.6875rem] font-medium uppercase tracking-[0.15em] text-white transition-colors hover:bg-mf-muted disabled:opacity-50 md:w-auto md:px-16"
+                className="mf-cta mf-cta-dark mt-8 w-full disabled:opacity-50 md:w-auto"
               >
                 {status === 'loading' ? 'Sending\u2026' : 'Send your request'}
               </button>

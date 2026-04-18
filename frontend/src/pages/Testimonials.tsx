@@ -1,9 +1,81 @@
+import { useEffect, useRef, type ReactNode } from 'react'
 import { Seo } from '../components/Seo'
 import {
   REVIEWS,
   TESTIMONIALS_CTA_BG,
   TESTIMONIALS_HERO,
 } from '../data/testimonialsPage'
+
+/** Fraction of section height the image travels during parallax (larger = more movement) */
+const PARALLAX_SPEED = 0.45
+
+function ParallaxCoverSection({
+  imageSrc,
+  imageAlt,
+  objectPosition,
+  sectionClassName,
+  children,
+}: {
+  imageSrc: string
+  imageAlt: string
+  objectPosition?: string
+  sectionClassName: string
+  children: ReactNode
+}) {
+  const sectionRef = useRef<HTMLElement>(null)
+  const imgRef = useRef<HTMLImageElement>(null)
+
+  useEffect(() => {
+    const section = sectionRef.current
+    const img = imgRef.current
+    if (!section || !img) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
+    let raf = 0
+    const update = () => {
+      const rect = section.getBoundingClientRect()
+      const vh = window.innerHeight
+      // center of section relative to center of viewport (0 = perfectly centred)
+      const centerOffset = (rect.top + rect.height / 2) - vh / 2
+      const offset = centerOffset * PARALLAX_SPEED
+      img.style.transform = `translate3d(0, ${offset.toFixed(2)}px, 0)`
+    }
+
+    const onScroll = () => {
+      cancelAnimationFrame(raf)
+      raf = requestAnimationFrame(update)
+    }
+
+    update()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', update)
+    return () => {
+      cancelAnimationFrame(raf)
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', update)
+    }
+  }, [])
+
+  return (
+    <section ref={sectionRef} className={sectionClassName}>
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <img
+          ref={imgRef}
+          src={imageSrc}
+          alt={imageAlt}
+          /* Oversized so parallax travel never exposes edges (±15% of section height) */
+          className="absolute left-0 h-[160%] w-full object-cover will-change-transform"
+          style={{
+            top: '-30%',
+            objectPosition: objectPosition ?? 'center center',
+          }}
+        />
+      </div>
+      <div className="absolute inset-0 bg-black/20" />
+      {children}
+    </section>
+  )
+}
 
 export function Testimonials() {
   return (
@@ -12,14 +84,12 @@ export function Testimonials() {
         title="Client Reviews – Motif Floral - Motif Floral"
         description="Discover what couples and clients say about their Motif Floral experience."
       />
-      <section className="relative flex min-h-[45vh] items-end justify-center pb-16 pt-32 text-white md:min-h-[50vh]">
-        <img
-          src={TESTIMONIALS_HERO}
-          alt=""
-          className="absolute inset-0 h-full w-full object-cover"
-          style={{ objectPosition: '53% 32%' }}
-        />
-        <div className="absolute inset-0 bg-black/20" />
+      <ParallaxCoverSection
+        imageSrc={TESTIMONIALS_HERO}
+        imageAlt=""
+        objectPosition="center 40%"
+        sectionClassName="relative flex min-h-[45vh] items-end justify-center overflow-hidden pb-16 pt-32 text-white md:min-h-[50vh]"
+      >
         <div className="relative z-10 px-[4vw] text-center">
           <h1 className="font-sans text-[min(2.25rem,1rem+1.39vw)] font-light uppercase tracking-wide text-white">
             Testimonials
@@ -28,7 +98,7 @@ export function Testimonials() {
             Kind words from our amazing clients
           </p>
         </div>
-      </section>
+      </ParallaxCoverSection>
 
       {REVIEWS.map((r) => (
         <section
@@ -36,7 +106,7 @@ export function Testimonials() {
           className="border-b border-mf-accent py-16 last:border-b-0"
         >
           <div className="mx-auto grid max-w-[1500px] gap-10 px-[4vw] md:grid-cols-2 md:items-center">
-            <div className="overflow-hidden border border-mf-accent">
+            <div className="mx-auto w-full max-w-[min(100%,300px)] overflow-hidden border border-mf-accent md:mx-0 md:max-w-[360px]">
               <img
                 src={r.image}
                 alt={r.alt}
@@ -45,7 +115,9 @@ export function Testimonials() {
               />
             </div>
             <div>
-              <p className="font-sans text-[0.875rem] leading-[1.8] text-mf-muted">{r.text}</p>
+              <p className="text-center font-sans text-[13px] font-light italic leading-[1.85] tracking-[0.01em] text-[#4a4a4a] md:text-left">
+                {r.text}
+              </p>
               <h2 className="mt-8 font-sans text-[1.25rem] font-light uppercase tracking-wide text-mf-black">
                 {r.names}
               </h2>
@@ -54,13 +126,12 @@ export function Testimonials() {
         </section>
       ))}
 
-      <section className="relative min-h-[50vh] text-white">
-        <img
-          src={TESTIMONIALS_CTA_BG}
-          alt=""
-          className="absolute inset-0 h-full w-full object-cover"
-        />
-        <div className="absolute inset-0 bg-black/20" />
+      <ParallaxCoverSection
+        imageSrc={TESTIMONIALS_CTA_BG}
+        imageAlt=""
+        objectPosition="53% bottom"
+        sectionClassName="relative min-h-[50vh] overflow-hidden text-white"
+      >
         <div className="relative z-10 mx-auto flex max-w-3xl flex-col items-center px-[4vw] py-24 text-center">
           <h2 className="font-display text-[min(3rem,1rem+2.22vw)] font-normal uppercase text-white">
             Share your experience here
@@ -72,12 +143,12 @@ export function Testimonials() {
             href="https://g.page/r/CYVhcWjqwrsBEAI/review"
             target="_blank"
             rel="noreferrer"
-            className="mt-10 inline-block bg-mf-btn px-10 py-3 text-[0.625rem] font-medium uppercase tracking-[0.1em] text-white hover:bg-mf-btn-hover"
+            className="mf-cta mf-cta-dark mt-10"
           >
             Please leave a review
           </a>
         </div>
-      </section>
+      </ParallaxCoverSection>
     </>
   )
 }

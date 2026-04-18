@@ -23,20 +23,19 @@ export function Home() {
         description="Bespoke floral design for weddings and events in Italy. Based in Rome, available worldwide."
       />
       <div className="relative">
-        <HeroSlideshow slides={HOME_HERO_SLIDES}>
-          <div className="pointer-events-none text-center text-white">
-            <p className="font-sans text-[0.6875rem] font-light uppercase tracking-[0.15em] md:text-[0.75rem]">
-              Currently booking 2026 events
-            </p>
-            <p className="mt-1.5 font-sans text-[0.6875rem] font-light uppercase tracking-[0.15em] md:text-[0.75rem]">
-              Destination weddings | Intimate weddings | Elopements | Events
-            </p>
-          </div>
-        </HeroSlideshow>
+        <HeroSlideshow slides={HOME_HERO_SLIDES} />
       </div>
 
       <section className="bg-mf-white">
-        <div className="mx-auto grid max-w-[1500px] grid-cols-1 gap-[3px] px-[4vw] py-16 md:grid-cols-3 md:gap-[3px]">
+        <div className="mx-auto max-w-[1500px] px-[4vw] pt-12 pb-10 text-center md:pt-14 md:pb-12">
+          <p className="font-sans text-[15px] font-light uppercase tracking-[0.15em] text-mf-black">
+            Currently booking 2027 & 2028 events
+          </p>
+          <p className="mt-1.5 font-sans text-[15px] font-light uppercase tracking-[0.15em] text-mf-muted">
+            Destination weddings | Intimate weddings | Elopements | Events
+          </p>
+        </div>
+        <div className="mx-auto grid max-w-[1500px] grid-cols-1 gap-[3px] px-[4vw] pb-16 md:grid-cols-3 md:gap-[3px]">
           {HOME_TILES.map((t) => (
             <Link
               key={t.to}
@@ -64,7 +63,7 @@ export function Home() {
       </section>
 
       <section className="bg-mf-white py-14 md:py-20">
-        <p className="text-center font-sans text-[0.6875rem] font-light uppercase tracking-[0.22em] text-mf-muted">
+        <p className="text-center font-sans text-[15px] font-light uppercase tracking-[0.22em] text-mf-muted">
           FEATURED IN
         </p>
         <div className="mx-auto mt-10 flex max-w-[1400px] flex-wrap items-center justify-center gap-x-8 gap-y-10 px-[4vw] md:mt-12 md:gap-x-12 md:gap-y-8">
@@ -92,7 +91,7 @@ export function Home() {
           Our services
         </h2>
         <div className="mt-12 grid gap-12 md:grid-cols-[1fr_auto]">
-          <div className="space-y-10">
+          <div className="space-y-8 md:space-y-9">
             <div>
               <h3 className="font-sans text-[1.1rem] font-light uppercase tracking-[0.12em] text-mf-black">
                 Full wedding floral design
@@ -135,37 +134,26 @@ export function Home() {
 
             <hr className="border-mf-accent" />
 
-            <div>
-              <h3 className="font-sans text-[1.1rem] font-light uppercase tracking-[0.12em] text-mf-black">
-                Intimate weddings &amp; elopements
-              </h3>
-              <p className="mt-1 font-sans text-[0.75rem] font-light uppercase tracking-[0.1em] text-mf-muted">
-                Intimate Weddings | Micro Weddings | Elopements
-              </p>
-              <ul className="mt-5 space-y-1 font-sans text-[0.8125rem] leading-relaxed text-mf-muted">
-                <li>Ceremony</li>
-                <li>Personal flowers</li>
-                <li>Dinner decorations</li>
-                <li>Centerpieces</li>
-                <li>Romantic setups</li>
-              </ul>
-            </div>
-
-            <hr className="border-mf-accent" />
-
-            <div>
-              <h3 className="font-sans text-[1.1rem] font-light uppercase tracking-[0.12em] text-mf-black">
-                Rentals &amp; decorative styling
-              </h3>
-              <ul className="mt-5 space-y-1 font-sans text-[0.8125rem] leading-relaxed text-mf-muted">
-                <li>Vases</li>
-                <li>Candelabras</li>
-                <li>Accessories</li>
-                <li>Candles</li>
-                <li>Linens</li>
-                <li>Backdrops</li>
-                <li>Styling Fabrics</li>
-              </ul>
+            <div className="space-y-8">
+              <div>
+                <h3 className="font-sans text-[1.05rem] font-light uppercase leading-snug tracking-[0.12em] text-mf-black md:text-[1.1rem]">
+                  Intimate weddings &amp; elopements
+                </h3>
+                <p className="mt-0.5 font-sans text-[0.7rem] font-light uppercase tracking-[0.1em] text-mf-muted md:text-[0.75rem]">
+                  Intimate Weddings | Micro Weddings | Elopements
+                </p>
+                <p className="mt-3 font-sans text-[0.8125rem] font-normal leading-relaxed text-mf-muted">
+                  Ceremony, personal flowers, dinner decorations, centerpieces, romantic setups
+                </p>
+              </div>
+              <div>
+                <h3 className="font-sans text-[1.05rem] font-light uppercase leading-snug tracking-[0.12em] text-mf-black md:text-[1.1rem]">
+                  Rentals &amp; decorative styling
+                </h3>
+                <p className="mt-3 font-sans text-[0.8125rem] font-normal leading-relaxed text-mf-muted">
+                  Vases, candelabras, accessories, candles, linens, backdrops, styling fabrics
+                </p>
+              </div>
             </div>
 
             <hr className="border-mf-accent" />
@@ -216,12 +204,12 @@ export function Home() {
         <h2 className="text-center font-sans text-[min(2.25rem,1rem+1.2vw)] font-extralight uppercase tracking-[0.08em] text-mf-black">
           Selected works
         </h2>
-        <div className="mx-auto mt-10 max-w-[1500px] columns-2 gap-2 px-[4vw] md:columns-3">
+        <div className="mx-auto mt-10 max-w-[1500px] columns-2 gap-4 px-[4vw] md:columns-3 md:gap-5">
           {GALLERY_IMAGES.map((src) => (
             <button
               key={src}
               type="button"
-              className="mb-2 block w-full overflow-hidden border-0 p-0 break-inside-avoid"
+              className="mb-3 block w-full overflow-hidden border-0 p-0 break-inside-avoid md:mb-4"
               onClick={() => setLightbox(src)}
             >
               <img
@@ -234,10 +222,7 @@ export function Home() {
           ))}
         </div>
         <div className="mt-10 text-center">
-          <Link
-            to="/portfolio/"
-            className="inline-block bg-mf-btn px-10 py-3 text-[0.625rem] font-medium uppercase tracking-[0.1em] text-white hover:bg-mf-btn-hover"
-          >
+          <Link to="/portfolio/" className="mf-cta mf-cta-dark">
             View portfolio
           </Link>
         </div>
@@ -261,11 +246,10 @@ export function Home() {
       <HomeTestimonialsSection slides={HOME_TESTIMONIAL_SLIDES} />
 
       <section
-        className="relative flex min-h-[min(58vh,36rem)] flex-col bg-cover bg-center text-white md:min-h-[min(62vh,40rem)] lg:min-h-[min(65vh,44rem)]"
+        className="relative flex min-h-[min(72vh,44rem)] flex-col bg-cover bg-center text-white md:min-h-[min(78vh,52rem)] lg:min-h-[min(82vh,56rem)]"
         style={{ backgroundImage: `url(${LETS_CONNECT_BG})` }}
       >
-        <div className="absolute inset-0 bg-black/40" />
-        <div className="relative z-10 mx-auto mt-auto flex w-full max-w-[1500px] flex-col gap-8 px-[4vw] pb-5 pt-16 md:flex-row md:items-end md:justify-between md:gap-12 md:pb-6 md:pt-24 lg:pb-7">
+        <div className="relative z-10 mx-auto mb-16 mt-auto flex w-full max-w-[1500px] flex-col gap-8 px-[4vw] pb-5 pt-16 md:mb-24 md:flex-row md:items-end md:justify-between md:gap-12 md:pb-6 md:pt-20 lg:mb-28 lg:pb-7">
           <div className="max-w-xl text-left">
             <h2 className="font-display text-[min(3.5rem,1.4rem+2.3vw)] font-normal uppercase tracking-wide">
               Let&apos;s Connect
@@ -277,9 +261,9 @@ export function Home() {
           </div>
           <Link
             to="/contact/"
-            className="inline-block shrink-0 self-start rounded-none bg-white px-12 py-4 text-[0.625rem] font-extralight uppercase tracking-[0.14em] text-mf-black transition-opacity hover:opacity-90 md:self-end md:px-14 md:py-4"
+            className="mf-cta mf-cta-light shrink-0 self-start md:self-end"
           >
-            Get in touch
+            Contact us
           </Link>
         </div>
       </section>

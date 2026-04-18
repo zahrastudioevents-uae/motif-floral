@@ -27,65 +27,58 @@ export function Portfolio() {
           Thank you for contacting me!
         </div>
       ) : null}
-      <section className="relative flex min-h-[55vh] items-end justify-center bg-mf-black pb-16 pt-32 text-white md:min-h-[65vh]">
+      <section className="relative flex min-h-[55vh] flex-col items-center justify-end pb-14 pt-32 text-white md:min-h-[65vh]">
         <img
           src={HERO}
           alt=""
-          className="absolute inset-0 h-full w-full object-cover opacity-90"
+          className="absolute inset-0 h-full w-full object-cover"
+          style={{ objectPosition: 'center 60%' }}
         />
-        <div className="absolute inset-0 bg-black/35" />
+        <div className="absolute inset-0 bg-black/40" />
         <div className="relative z-10 px-[4vw] text-center">
           <h1 className="font-display text-[min(3rem,1rem+2.22vw)] font-normal uppercase">
             Portfolio
           </h1>
-        </div>
-      </section>
-
-      <section className="bg-mf-white py-14 md:py-20">
-        <div className="mx-auto max-w-3xl px-[4vw] text-center">
-          <p className="font-sans text-[0.8125rem] font-light uppercase leading-[2] tracking-[0.12em] text-mf-muted">
-            Our floral editorials have been proudly featured in prestigious international
-            publications such as The Wed, Wed Vibes, Anti-Bride&hellip;
-          </p>
-          <p className="mt-4 font-sans text-[0.8125rem] font-light uppercase leading-[2] tracking-[0.12em] text-mf-muted">
-            Each project reflects our signature aesthetic a blend of timeless elegance, artistic
-            direction, and refined design that celebrates the poetry of flowers and the beauty
-            of extraordinary settings.
+          <p className="mx-auto mt-4 max-w-3xl font-sans text-[0.75rem] font-light uppercase leading-[2] tracking-[0.18em] text-white/85">
+            Our floral editorials have been proudly featured in prestigious international publications such as The Wed, Wed Vibes, Anti-Bride.
+            Each project reflects our signature aesthetic, a blend of timeless elegance, artistic direction, and refined design that celebrates the poetry of flowers and the beauty of extraordinary settings.
           </p>
         </div>
       </section>
 
       <section className="mx-auto max-w-[1500px] px-[4vw] py-16">
-        <div className="grid gap-x-8 gap-y-14 md:grid-cols-3">
+        <div className="grid gap-x-4 gap-y-7 md:grid-cols-3">
           {PORTFOLIO_ITEMS.map((item, idx) => (
-            <article key={item.venue + item.city + idx} className="text-mf-black">
-              <a href={item.href} target="_blank" rel="noreferrer" className="block">
-                <div className="overflow-hidden">
-                  <img
-                    src={item.image}
-                    alt={item.alt}
-                    className="aspect-[4/5] w-full object-cover transition-transform duration-500 hover:scale-[1.02]"
-                    loading="lazy"
-                  />
-                </div>
+            <article key={item.venue + item.city + idx}>
+              <a href={item.href} target="_blank" rel="noreferrer" className="group block overflow-hidden">
+                <img
+                  src={item.image}
+                  alt={item.alt}
+                  className="aspect-[4/5] w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                  loading="lazy"
+                />
               </a>
-              <p className="mt-4 text-[0.6875rem] uppercase tracking-[0.12em] text-mf-muted">
-                {item.category}
-              </p>
-              <h2 className="mt-2 font-display text-[1.35rem] font-normal uppercase leading-tight text-mf-black">
-                {item.venue}
-              </h2>
-              <h3 className="font-sans text-[0.75rem] font-semibold uppercase tracking-[0.08em] text-mf-black">
-                {item.city}
-              </h3>
-              {item.published ? (
-                <p className="mt-3 text-[0.75rem] text-mf-muted">
-                  Published on {item.published}
+              <div className="mt-3 border-t border-mf-accent pt-3 pl-3 text-left">
+                <p className="font-sans text-[0.6rem] font-light uppercase tracking-[0.2em] text-mf-muted">
+                  {item.category}
                 </p>
-              ) : null}
-              {item.articleTitle ? (
-                <p className="mt-1 text-[0.8125rem] text-mf-muted">{item.articleTitle}</p>
-              ) : null}
+                <h2 className="mt-1 font-display text-[1.1rem] font-normal uppercase leading-snug text-mf-black">
+                  {item.venue}
+                </h2>
+                <p className="font-sans text-[0.65rem] font-light uppercase tracking-[0.12em] text-mf-muted">
+                  {item.city}
+                </p>
+                {item.published ? (
+                  <p className="mt-2 font-sans text-[0.65rem] tracking-[0.05em] text-mf-muted">
+                    <span className="font-semibold">Featured in</span> {item.published}
+                  </p>
+                ) : null}
+                {item.articleTitle ? (
+                  <p className="mt-0.5 font-sans text-[0.65rem] font-light italic text-mf-muted">
+                    {item.articleTitle}
+                  </p>
+                ) : null}
+              </div>
             </article>
           ))}
         </div>
@@ -108,7 +101,7 @@ export function Portfolio() {
                 <img
                   src={ig.image}
                   alt={ig.label}
-                  className="aspect-square w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                  className="aspect-[4/5] w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
                 />
               </div>
               <p className="mt-3 text-center text-[0.75rem] text-mf-muted">{ig.label}</p>
@@ -126,7 +119,7 @@ export function Portfolio() {
         </h2>
         <Link
           to="/contact/"
-          className="mt-8 inline-block bg-mf-btn px-10 py-3 text-[0.625rem] font-medium uppercase tracking-[0.1em] text-white hover:bg-mf-btn-hover"
+          className="mf-cta mf-cta-dark mt-8"
         >
           Contact us
         </Link>

@@ -215,17 +215,17 @@ export const PORTFOLIO_ITEMS: PortfolioItem[] = [
 
 export const PORTFOLIO_INSTAGRAM = [
   {
-    href: 'https://www.instagram.com/motifloral/',
+    href: 'https://www.instagram.com/p/CoowLOkqIOj/',
     image: img('/site/2qZExp/QaYKx0/AlysonScott-274-a3bc0df8-1500.jpg'),
-    label: 'Published on Vogue',
-  },
-  {
-    href: 'https://www.instagram.com/motifloral/',
-    image: img('/site/2qZExp/8L3l5Q/Wedding-portfolio-villa-modern-bride-dark-6112505d-1500.jpg'),
     label: 'Published on Elle Spose',
   },
   {
-    href: 'https://www.instagram.com/motifloral/',
+    href: 'https://www.instagram.com/p/CrnaX1jNZq7/?img_index=1',
+    image: img('/site/2qZExp/8L3l5Q/Wedding-portfolio-villa-modern-bride-dark-6112505d-1500.jpg'),
+    label: 'Published on Vogue',
+  },
+  {
+    href: 'https://www.instagram.com/p/CvsUlj2KrXb/',
     image: img('/site/2qZExp/jzJkd4/AD-wedding-24-93019765-1500.jpg'),
     label: 'Published on Elle Spose',
   },
