@@ -94,4 +94,8 @@ export const RIBBON_SECTION = {
   bg: img('/site/2qZExp/3aJmdy/victoriajoyphotography-0614-ca75753f-1500.jpg'),
   sideL: img('/site/2qZExp/xZPL8x/victoriajoyphotography-0589-470a7417-1500.jpg'),
   sideR: img('/site/2qZExp/m5yODj/Editorial_Coppede_ElisaRinaldi_ph1-aff54d9a-1500.jpg'),
+  /** Editorial still for Options strip (accessories restyle). */
+  optionsAside: img(
+    '/site/2qZExp/E0ljm6/Home_romantic_renaissance_centerpiece_with_peach_orange_english_roses_pink_scabiosa_mocha_lisianthus-c55ebe4d-1500.jpg',
+  ),
 }

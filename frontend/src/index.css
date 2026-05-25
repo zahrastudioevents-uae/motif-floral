@@ -65,6 +65,88 @@
       animation: none !important;
       transform: scaleX(1) !important;
     }
+
+    .animate-mf-luxury-fade,
+    .animate-mf-rise,
+    .animate-mf-rise-delay,
+    .animate-mf-rise-delay-2,
+    .animate-mf-marquee {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+
+    .animate-mf-wave-y {
+      animation: none !important;
+      transform: none !important;
+    }
+  }
+}
+
+@layer utilities {
+  @keyframes mf-luxury-fade {
+    from {
+      opacity: 0;
+      transform: scale(1.03);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes mf-rise {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes mf-marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes mf-wave-y {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0);
+    }
+    50% {
+      transform: translate3d(0, -0.42em, 0);
+    }
+  }
+
+  .animate-mf-luxury-fade {
+    animation: mf-luxury-fade 900ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .animate-mf-rise {
+    animation: mf-rise 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .animate-mf-rise-delay {
+    animation: mf-rise 760ms cubic-bezier(0.22, 1, 0.36, 1) 120ms both;
+  }
+
+  .animate-mf-rise-delay-2 {
+    animation: mf-rise 820ms cubic-bezier(0.22, 1, 0.36, 1) 220ms both;
+  }
+
+  .animate-mf-marquee {
+    animation: mf-marquee 34s linear infinite;
+  }
+
+  .animate-mf-wave-y {
+    animation: mf-wave-y 3s cubic-bezier(0.45, 0, 0.55, 1) infinite both;
   }
 }
 

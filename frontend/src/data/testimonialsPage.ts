@@ -1,5 +1,7 @@
 import { img } from '../lib/assets'
 
+export const GOOGLE_REVIEW_URL = 'https://g.page/r/CYVhcWjqwrsBEAI/review'
+
 export const TESTIMONIALS_HERO = img('/site/2qZExp/QD5PD3/IMG_2894_mod-bff09d8d-1500.JPG')
 
 export const TESTIMONIALS_CTA_BG = img(

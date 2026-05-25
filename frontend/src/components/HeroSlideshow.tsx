@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from 'react'
+import { useCallback, useRef, useState, type ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import { Autoplay } from 'swiper/modules'
 import type { Swiper as SwiperType } from 'swiper'
@@ -11,9 +11,17 @@ const AUTOPLAY_MS = 5500
 export function HeroSlideshow({
   slides,
   children,
+  primaryCta,
+  secondaryCta,
+  footerSlot,
 }: {
   slides: { src: string; alt: string; objectPosition?: string }[]
   children?: React.ReactNode
+  /** Overrides default “Get a quote” when provided */
+  primaryCta?: { to: string; label: string }
+  secondaryCta?: { to: string; label: string }
+  /** Pinned to the bottom of the hero (e.g. service strip) */
+  footerSlot?: ReactNode
 }) {
   const swiperRef = useRef<SwiperType | null>(null)
   const [active, setActive] = useState(0)
@@ -97,19 +105,68 @@ export function HeroSlideshow({
         </div>
       ) : null}
 
-      <div className="pointer-events-none absolute inset-0 z-40 flex flex-col items-center justify-end pb-[min(8%,5rem)]">
-        <Link
-          to="/getquote/"
-          className="pointer-events-auto mf-cta mf-cta-light"
-        >
-          Get a quote
-        </Link>
-        {children ? <div className="mt-[1.5rem]">{children}</div> : null}
+      <div
+        className={
+          footerSlot
+            ? 'pointer-events-none absolute inset-0 z-40 flex flex-col justify-end'
+            : 'pointer-events-none absolute inset-0 z-40 flex flex-col items-center justify-end gap-6 px-[4vw] pb-[min(8%,5rem)]'
+        }
+      >
+        {footerSlot ? (
+          <>
+            <div className="flex min-h-0 flex-1 flex-col justify-end px-[4vw] pb-8 pt-[max(6rem,18svh)] md:pb-12 md:pt-[max(7rem,20svh)]">
+              <div className="pointer-events-auto mx-auto flex w-full max-w-[1500px] flex-col items-center gap-8">
+                {children ? <div className="w-full">{children}</div> : null}
+                <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+                  <Link to={primaryCta?.to ?? '/getquote/'} className="mf-cta mf-cta-light">
+                    {primaryCta?.label ?? 'Get a quote'}
+                  </Link>
+                  {secondaryCta ? (
+                    <Link
+                      to={secondaryCta.to}
+                      className="mf-cta border border-white/45 bg-transparent text-white transition-colors hover:bg-white hover:text-mf-black"
+                    >
+                      {secondaryCta.label}
+                    </Link>
+                  ) : null}
+                </div>
+              </div>
+            </div>
+            <div className="pointer-events-auto w-full border-t border-white/25 bg-black/50 px-[4vw] py-4 backdrop-blur-[6px] md:py-5">
+              <div className="mx-auto max-w-[1500px]">{footerSlot}</div>
+            </div>
+          </>
+        ) : (
+          <>
+            {children ? (
+              <div className="pointer-events-auto w-full max-w-[1500px] px-[4vw]">{children}</div>
+            ) : null}
+            <div className="pointer-events-auto flex flex-col items-center gap-4 px-[4vw] sm:flex-row sm:justify-center">
+              <Link to={primaryCta?.to ?? '/getquote/'} className="mf-cta mf-cta-light">
+                {primaryCta?.label ?? 'Get a quote'}
+              </Link>
+              {secondaryCta ? (
+                <Link
+                  to={secondaryCta.to}
+                  className="mf-cta border border-white/45 bg-transparent text-white transition-colors hover:bg-white hover:text-mf-black"
+                >
+                  {secondaryCta.label}
+                </Link>
+              ) : null}
+            </div>
+          </>
+        )}
       </div>
 
-      {/* Slide numbering with arrows - bottom right */}
+      {/* Slide numbering with arrows - bottom right (raised when footer strip is present) */}
       {total > 1 ? (
-        <div className="absolute bottom-6 right-6 z-40 flex items-center gap-6 md:bottom-8 md:right-8 md:gap-8">
+        <div
+          className={
+            footerSlot
+              ? 'absolute bottom-[calc(6.5rem+env(safe-area-inset-bottom,0px))] right-6 z-40 flex items-center gap-6 md:bottom-[calc(7.5rem+env(safe-area-inset-bottom,0px))] md:right-8 md:gap-8'
+              : 'absolute bottom-6 right-6 z-40 flex items-center gap-6 md:bottom-8 md:right-8 md:gap-8'
+          }
+        >
           <button
             type="button"
             onClick={onPrev}

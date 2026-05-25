@@ -1,7 +1,11 @@
-import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Seo } from '../components/Seo'
 import { img } from '../lib/assets'
+
+/** Editorial bloom on warm ground — hero left column. */
+const ABOUT_HERO_IMAGE = img(
+  '/site/2qZExp/0Pr45o/choose-your-bouquet-violet-dhalias-dalias-cosmos-7f725976-1500.jpg',
+)
 
 const LOGO = img('/site/2qZExp/6QJ4bo/LOGO2025-01ce6514-1500.JPG')
 
@@ -35,13 +39,11 @@ const PARTNERS = [
 
 const CONNECT_IMAGES = {
   left: img('/site/2qZExp/vjbLn9/Screenshot2025-08-27alle10.40.53-74f911aa-1500.png'),
-  center: img('/site/2qZExp/a3MOMb/Screenshot2025-08-27alle09.28.13-3d39ff21-1500.png'),
-  right: img('/site/2qZExp/8YpW4b/victoriajoyphotography--9-0667343b-1500.jpg'),
+  /** Destination wedding Rome — third column. */
+  rome: '/images/about-connect-destination-rome.png',
 }
 
 export function About() {
-  const [centerHovered, setCenterHovered] = useState(false)
-
   return (
     <>
       <Seo
@@ -49,42 +51,46 @@ export function About() {
         description="Meet Motif Floral, bespoke wedding and event floristry based in Rome, creating poetic, refined designs across Italy and beyond."
       />
 
-      <section className="mx-auto max-w-[1500px] px-[4vw] pb-4 pt-16 text-center md:pt-20">
-        <h1 className="font-display text-[min(3.5rem,1.2rem+2.5vw)] font-normal uppercase tracking-wide text-mf-black">
-          Hi,
-        </h1>
-        <h1 className="mt-1 font-display text-[min(3.5rem,1.2rem+2.5vw)] font-normal uppercase tracking-wide text-mf-black">
-          we are motif floral
-        </h1>
-      </section>
+      <section className="mx-auto grid max-w-[1500px] items-stretch overflow-hidden pb-10 pt-16 md:grid-cols-[minmax(0,1.08fr)_minmax(280px,0.92fr)] md:rounded-sm md:px-[4vw] md:pb-14 md:pt-20 md:gap-0">
+        {/* Left: full editorial photo */}
+        <div className="relative isolate order-1 min-h-[48svh] md:min-h-[min(520px,max(68svh,calc(100svh-6rem)))]">
+          <img
+            src={ABOUT_HERO_IMAGE}
+            alt=""
+            className="absolute inset-0 size-full object-cover object-[50%_45%] md:rounded-l-md"
+          />
+        </div>
 
-      <section className="mx-auto max-w-[1100px] px-[4vw] py-10 md:py-16">
-        <div className="flex flex-col items-center gap-12 md:flex-row md:items-center md:gap-16">
-          {/* Logo */}
-          <div className="w-full shrink-0 md:w-[340px]">
-            <img src={LOGO} alt="Motif Floral logo" className="w-full object-contain" />
-          </div>
-
-          {/* Text */}
-          <div className="flex-1 text-center md:text-left">
-            <p className="font-sans text-[0.6875rem] font-light uppercase tracking-[0.22em] text-mf-muted">
+        {/* Right: headings + story */}
+        <div className="order-2 flex min-h-0 flex-col md:overflow-hidden md:rounded-r-md md:rounded-l-none">
+          <div className="bg-mf-accent px-[6vw] py-14 text-left md:flex md:min-h-0 md:flex-1 md:flex-col md:justify-center md:px-11 md:py-[clamp(3.5rem,6vw,5.75rem)] lg:px-14">
+            <h1 className="font-display text-[min(2.875rem,calc(1.2rem+2.8vw))] font-normal uppercase tracking-wide leading-tight text-mf-black">
+              Hi,
+              <span className="mt-3 block">we are motif floral</span>
+            </h1>
+            <p className="mt-6 font-sans text-[0.6875rem] font-light uppercase tracking-[0.26em] text-mf-muted md:tracking-[0.28em]">
               Let&apos;s get to know each other
             </p>
-            <div className="mt-8 space-y-5 font-sans text-[0.875rem] leading-[1.9] text-mf-muted">
-              <p>
-                Motif Floral was born from a shared passion for refined floral art and timeless
-                beauty. We create bespoke floral designs that tell each couple&apos;s story,
-                transforming emotions into colors, textures, and natural compositions. Every
-                creation is crafted with care and artistic sensitivity, blending elegance with an
-                organic aesthetic that enhances the atmosphere of each event.
-              </p>
-              <p>
-                Our work celebrates authenticity, sophistication, and the poetry of nature, flowers
-                become a language through which we express love, connection, and the essence of
-                every couple we design for. From intimate elopements to grand celebrations, our
-                vision is to create floral experiences that leave a lasting impression, evoking
-                emotion and timeless beauty in every detail.
-              </p>
+          </div>
+
+          <div className="flex flex-1 flex-col border-t border-black/10 bg-white px-[6vw] py-14 md:min-h-0 md:px-11 md:py-[clamp(2.75rem,4.5vw,4.25rem)] lg:px-14">
+            <div className="mx-auto max-w-[36rem] md:mx-0 md:max-w-none">
+              <div className="space-y-5 text-center font-sans text-[0.875rem] leading-[1.9] text-mf-muted md:text-left">
+                <p>
+                  Motif Floral was born from a shared passion for refined floral art and timeless
+                  beauty. We create bespoke floral designs that tell each couple&apos;s story,
+                  transforming emotions into colors, textures, and natural compositions. Every
+                  creation is crafted with care and artistic sensitivity, blending elegance with an
+                  organic aesthetic that enhances the atmosphere of each event.
+                </p>
+                <p>
+                  Our work celebrates authenticity, sophistication, and the poetry of nature, flowers
+                  become a language through which we express love, connection, and the essence of
+                  every couple we design for. From intimate elopements to grand celebrations, our
+                  vision is to create floral experiences that leave a lasting impression, evoking
+                  emotion and timeless beauty in every detail.
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -159,68 +165,43 @@ export function About() {
         </div>
       </section>
 
-      <section className="py-10">
-        <div className="mx-auto flex max-w-[1500px] items-center gap-2 px-[4vw]">
-          {/* Left wing */}
-          <div
-            className="overflow-hidden"
-            style={{
-              width: centerHovered ? '22%' : '15%',
-              transition: 'width 0.6s ease',
-            }}
-          >
+      <section className="py-12 md:py-16">
+        <div className="mx-auto grid max-w-[1500px] grid-cols-1 gap-4 px-[4vw] md:grid-cols-3 md:items-stretch md:gap-5">
+          <div className="relative isolate overflow-hidden rounded-sm shadow-[0_2px_20px_-4px_rgb(0_0_0/0.12)]">
             <img
               src={CONNECT_IMAGES.left}
               alt=""
-              className="h-full w-full object-cover"
-              style={{ aspectRatio: '3/4' }}
+              className="aspect-[3/4] w-full object-cover md:aspect-[4/5] lg:aspect-[3/4]"
               loading="lazy"
             />
           </div>
 
-          {/* Center */}
-          <div
-            className="relative overflow-hidden"
-            style={{
-              flex: centerHovered ? '0 1 56%' : '1 1 0%',
-              transition: 'flex 0.6s ease',
-            }}
-            onMouseEnter={() => setCenterHovered(true)}
-            onMouseLeave={() => setCenterHovered(false)}
-          >
+          <div className="relative isolate overflow-hidden rounded-sm bg-[#48362e] shadow-[0_2px_20px_-4px_rgb(0_0_0/0.12)] md:bg-[#3f3028]">
             <img
-              src={CONNECT_IMAGES.center}
-              alt=""
-              className="w-full object-cover"
+              src={LOGO}
+              alt="Motif Floral"
+              className="aspect-[3/4] w-full object-cover object-center md:aspect-[4/5] lg:aspect-[3/4]"
               loading="lazy"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/5 to-transparent" />
-            <div className="absolute bottom-0 left-0 right-0 flex flex-col items-center pb-10 text-center text-white md:pb-14">
-              <h2 className="font-display text-[min(2.5rem,1rem+1.5vw)] font-normal uppercase tracking-wide">
-                Let&apos;s connect
-              </h2>
-              <Link to="/contact/" className="mf-cta mf-cta-dark mt-6">
-                Contact us
-              </Link>
-            </div>
           </div>
 
-          {/* Right wing */}
-          <div
-            className="overflow-hidden"
-            style={{
-              width: centerHovered ? '22%' : '15%',
-              transition: 'width 0.6s ease',
-            }}
-          >
+          <div className="relative isolate overflow-hidden rounded-sm shadow-[0_2px_20px_-4px_rgb(0_0_0/0.12)]">
             <img
-              src={CONNECT_IMAGES.right}
+              src={CONNECT_IMAGES.rome}
               alt=""
-              className="h-full w-full object-cover"
-              style={{ aspectRatio: '3/4' }}
+              className="aspect-[3/4] w-full object-cover md:aspect-[4/5] lg:aspect-[3/4]"
               loading="lazy"
             />
           </div>
+        </div>
+
+        <div className="mx-auto max-w-[1500px] px-[4vw] pt-12 text-center md:pt-16">
+          <h2 className="font-display text-[min(2.35rem,calc(0.95rem+2.2vw))] font-normal uppercase tracking-wide text-mf-black">
+            Let&apos;s connect
+          </h2>
+          <Link to="/contact/" className="mf-cta mf-cta-dark mt-8 inline-flex">
+            Contact us
+          </Link>
         </div>
       </section>
     </>

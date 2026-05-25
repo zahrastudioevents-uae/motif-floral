@@ -41,7 +41,7 @@ export const HOME_TILES = [
     alt: 'Romantic renaissance centerpiece with peach, orange english roses and pink scabiosa.',
   },
   {
-    to: '/embroideredribbons/',
+    to: '/mfaccessori/',
     title: 'MF Accessories',
     cta: 'Click here',
     image: img('/site/2qZExp/ZOzQqy/1I5A0488-3a83adcb-1500.jpg'),
@@ -53,9 +53,7 @@ export const GALLERY_IMAGES = [
   img('/site/2qZExp/JMzQ0p/PalazzoVilonRoma-183-e7efc586-1500.jpg'),
   img('/site/2qZExp/8YpW4b/victoriajoyphotography--9-0667343b-1500.jpg'),
   img('/site/2qZExp/lYnJn0/Screenshot2025-08-27alle09.27.12-9f490609-1500.png'),
-  img('/site/2qZExp/jQVvXq/Home-portfolio-wedding-romn-ivanov-b0ef1c82-1500.jpg'),
   img('/site/2qZExp/E0rPlY/Contact_us_Alyson_Scott_Villa_Aurelia_bouquet-3e1451bd-1500.png'),
-  img('/site/2qZExp/e7xpGq/Home_ceremony_villa_aurelia_destination_wedding-a03eeca7-1500.jpg'),
   img('/site/2qZExp/PQ4LGW/Screenshot2025-08-27alle09.20.04-ce84c882-1500.png'),
   img('/site/2qZExp/YXOJLp/AndreaFadyHoteldelaVille-184-6f4af68f-1500.jpg'),
   img('/site/2qZExp/a3MOMb/Screenshot2025-08-27alle09.28.13-3d39ff21-1500.png'),

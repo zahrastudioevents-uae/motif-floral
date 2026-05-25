@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { ImageCarousel } from '../components/ImageCarousel'
+import { RestyleHero } from '../components/RestyleHero'
 import { Seo } from '../components/Seo'
 import { BOUQUET_TIERS, CHOOSE_HERO_IMAGES, RIBBON_SECTION } from '../data/chooseBouquet'
 
@@ -11,22 +12,23 @@ export function ChooseBouquet() {
         description="Browse our curated selection of bouquets to find the perfect design reflecting your taste and wedding theme."
       />
 
-      <section className="relative bg-mf-white py-12 md:py-20">
-        <div className="mx-auto grid max-w-[1500px] gap-6 px-[4vw] md:grid-cols-12 md:items-center">
-          <div className="relative md:col-span-8">
-            <div className="grid grid-cols-2 gap-2 md:grid-cols-4">
-              {CHOOSE_HERO_IMAGES.slice(0, 4).map((im) => (
-                <div key={im.src} className="aspect-[3/4] overflow-hidden border border-mf-accent">
-                  <img src={im.src} alt={im.alt} className="h-full w-full object-cover" />
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="md:col-span-4 md:text-right">
-            <h1 className="font-display text-[min(3rem,1rem+2.22vw)] font-normal uppercase text-mf-black">
-              choose your bouquet
-            </h1>
-          </div>
+      <RestyleHero
+        eyebrow="Bouquet collection"
+        title="Choose the gesture you will carry."
+        text="Three refined bouquet directions, from romantic abundance to sculptural minimalism."
+        image={CHOOSE_HERO_IMAGES[1].src}
+      />
+      <section className="bg-mf-white px-[4vw] py-20">
+        <div className="mx-auto grid max-w-[1500px] gap-3 md:grid-cols-5">
+          {CHOOSE_HERO_IMAGES.map((image, index) => (
+            <img
+              key={image.src}
+              src={image.src}
+              alt={image.alt}
+              className={`aspect-[3/4] w-full object-cover ${index % 2 ? 'md:translate-y-10' : ''}`}
+              loading="lazy"
+            />
+          ))}
         </div>
       </section>
 
@@ -39,14 +41,7 @@ export function ChooseBouquet() {
             <p className="font-sans text-[1.5rem] font-light uppercase text-mf-black">{tier.kicker}</p>
             <div className="mt-8 grid gap-10 lg:grid-cols-2 lg:items-start">
               <div>
-                <div className="overflow-hidden border border-mf-accent">
-                  <img
-                    src={tier.hero}
-                    alt={tier.heroAlt}
-                    className="aspect-[3/4] w-full object-cover"
-                    loading="lazy"
-                  />
-                </div>
+                <ImageCarousel images={[...tier.carousel]} variant="hero" />
               </div>
               <div>
                 <h2 className="font-display text-[min(2.25rem,1rem+1.39vw)] font-normal uppercase text-mf-black">
@@ -62,9 +57,6 @@ export function ChooseBouquet() {
                   <p className="mt-2">{tier.priceInc}</p>
                 </div>
               </div>
-            </div>
-            <div className="mt-12">
-              <ImageCarousel images={[...tier.carousel]} />
             </div>
             {tier.title === 'MINIMAL ELEGANCE BOUQUET' ? (
               <div className="mt-10 text-center">
@@ -112,7 +104,7 @@ export function ChooseBouquet() {
               </p>
             </div>
             <Link
-              to="/embroideredribbons/"
+              to="/mfaccessori/"
               className="mf-cta mf-cta-dark mt-10"
             >
               Discover more

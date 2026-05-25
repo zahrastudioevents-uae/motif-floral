@@ -1,4 +1,4 @@
-import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { Layout } from './components/Layout'
 import { About } from './pages/About'
 import { ChooseBouquet } from './pages/ChooseBouquet'
@@ -21,11 +21,8 @@ const router = createBrowserRouter([
       { path: 'getquote', element: <GetQuote /> },
       { path: 'chooseyourbouquet', element: <ChooseBouquet /> },
       { path: 'testimonials', element: <Testimonials /> },
+      { path: 'mfaccessori', element: <EmbroideredRibbons /> },
       { path: 'embroideredribbons', element: <EmbroideredRibbons /> },
-      {
-        path: 'mfaccessori',
-        element: <Navigate to="/embroideredribbons/" replace />,
-      },
     ],
   },
 ])

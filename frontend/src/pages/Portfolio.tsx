@@ -4,7 +4,8 @@ import { Seo } from '../components/Seo'
 import { PORTFOLIO_INSTAGRAM, PORTFOLIO_ITEMS } from '../data/portfolio'
 import { img } from '../lib/assets'
 
-const HERO = img('/site/2qZExp/8L3l5Q/Wedding-portfolio-villa-modern-bride-dark-6112505d-1500.jpg')
+/** Soft editorial florals hero (lighter treatment for white typography) */
+const HERO = img('/site/2qZExp/dDRXXp/choose-your-bouquet-white-modern-roses-a082ef66-1500.jpg')
 
 export function Portfolio() {
   const loc = useLocation()
@@ -27,19 +28,23 @@ export function Portfolio() {
           Thank you for contacting me!
         </div>
       ) : null}
-      <section className="relative flex min-h-[55vh] flex-col items-center justify-end pb-14 pt-32 text-white md:min-h-[65vh]">
+      <section className="relative flex min-h-[min(72vh,32rem)] flex-col justify-end pb-14 pt-[clamp(10rem,22vw,14rem)] text-white md:min-h-[min(78vh,40rem)] md:pb-20">
         <img
           src={HERO}
           alt=""
           className="absolute inset-0 h-full w-full object-cover"
-          style={{ objectPosition: 'center 60%' }}
+          style={{ objectPosition: 'center 45%' }}
         />
-        <div className="absolute inset-0 bg-black/40" />
-        <div className="relative z-10 px-[4vw] text-center">
-          <h1 className="font-display text-[min(3rem,1rem+2.22vw)] font-normal uppercase">
+        <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/25 to-black/18" />
+        <div className="relative z-10 mx-auto w-full max-w-[1500px] px-[4vw] text-left">
+          <p className="font-sans text-[0.6875rem] font-light uppercase tracking-[0.28em] text-white/82">
             Portfolio
+          </p>
+          <h1 className="mt-5 font-display text-[min(3.65rem,1.35rem+3.35vw)] font-normal uppercase leading-[1.05] tracking-[0.04em] md:tracking-[0.05em]">
+            <span className="block">Editorial worlds</span>
+            <span className="block">Across Italy.</span>
           </h1>
-          <p className="mx-auto mt-4 max-w-3xl font-sans text-[0.75rem] font-light uppercase leading-[2] tracking-[0.18em] text-white/85">
+          <p className="mt-6 max-w-2xl font-sans text-[0.6875rem] font-light uppercase leading-[1.95] tracking-[0.16em] text-white/82 md:text-[0.75rem] md:tracking-[0.18em]">
             Our floral editorials have been proudly featured in prestigious international publications such as The Wed, Wed Vibes, Anti-Bride.
             Each project reflects our signature aesthetic, a blend of timeless elegance, artistic direction, and refined design that celebrates the poetry of flowers and the beauty of extraordinary settings.
           </p>

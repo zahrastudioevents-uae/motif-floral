@@ -51,9 +51,9 @@ After deploy, compare desktop/tablet/mobile breakpoints with [motifloral.com](ht
 
 **Checklist (parity pass):**
 
-- Home: hero slideshow, booking strip, three tiles (bouquet → `/chooseyourbouquet/`, portfolio, MF Accessories tile → `/embroideredribbons/`), press row, services grid, gallery lightbox, testimonial text carousel, CTA links.
+- Home: hero slideshow, booking strip, three tiles (bouquet → `/chooseyourbouquet/`, portfolio, MF Accessories tile → `/mfaccessori/`), press row, services grid, gallery lightbox, testimonial text carousel, CTA links.
 - Overlay-header pages (white nav): Contact, Portfolio, Get Quote, Testimonials — hero legibility and link contrast.
-- Choose Your Bouquet: three tiers, prices/IVA copy, three Swiper carousels (autoplay ~5s), ribbon CTA → `/embroideredribbons/`.
+- Choose Your Bouquet: three tiers, prices/IVA copy, three Swiper carousels (autoplay ~5s), ribbon CTA → `/mfaccessori/`.
 - Testimonials: hero overlay 0.2, six review blocks, final CTA button → Google review URL (new tab).
 - Forms: Contact and Get Quote submit to `VITE_API_URL` `/api/contact` and `/api/quote`; honeypot field `surname` left empty.
 

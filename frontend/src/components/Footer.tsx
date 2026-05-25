@@ -46,12 +46,9 @@ const social = [
 
 export function Footer() {
   return (
-    <footer className="border-t border-mf-accent bg-mf-white py-8 md:py-10">
+    <footer className="border-t border-mf-accent bg-mf-white py-6 md:py-8">
       <div className="mx-auto max-w-[1500px] px-[4vw]">
-        <nav
-          className="mb-5 flex flex-wrap justify-center gap-x-10 gap-y-3 md:mb-6"
-          aria-label="Footer"
-        >
+        <nav className="mb-6 flex flex-wrap justify-center gap-x-10 gap-y-2" aria-label="Footer">
           {NAV.map(({ to, label }) => (
             <Link
               key={to}
@@ -62,7 +59,7 @@ export function Footer() {
             </Link>
           ))}
         </nav>
-        <div className="mb-5 flex justify-center gap-10 md:mb-6">
+        <div className="mb-3 flex justify-center gap-10 md:mb-4">
           {social.map((s) => (
             <a
               key={s.href}
@@ -81,7 +78,20 @@ export function Footer() {
             &copy; {new Date().getFullYear()} Motif Floral | Bespoke Floral Design for Weddings &amp;
             Events in Italy | Based in Rome &middot; Available Worldwide
           </p>
-          <p className="mt-2">VAT: 15270551003</p>
+          <p className="mx-auto mt-3 max-w-md text-[0.7rem] normal-case leading-snug md:text-[0.75rem]">
+            Reach us at{' '}
+            <a href="mailto:motifloral@gmail.com" className="underline decoration-mf-muted/40 underline-offset-2 hover:text-mf-black">
+              motifloral@gmail.com
+            </a>{' '}
+            or on WhatsApp{' '}
+            <a
+              href="https://wa.me/393345699447"
+              className="underline decoration-mf-muted/40 underline-offset-2 hover:text-mf-black"
+            >
+              +39 3345699447
+            </a>
+            .
+          </p>
         </small>
       </div>
     </footer>

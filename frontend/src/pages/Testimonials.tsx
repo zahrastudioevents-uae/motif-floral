@@ -1,81 +1,11 @@
-import { useEffect, useRef, type ReactNode } from 'react'
+import { RestyleHero } from '../components/RestyleHero'
 import { Seo } from '../components/Seo'
 import {
+  GOOGLE_REVIEW_URL,
   REVIEWS,
   TESTIMONIALS_CTA_BG,
   TESTIMONIALS_HERO,
 } from '../data/testimonialsPage'
-
-/** Fraction of section height the image travels during parallax (larger = more movement) */
-const PARALLAX_SPEED = 0.45
-
-function ParallaxCoverSection({
-  imageSrc,
-  imageAlt,
-  objectPosition,
-  sectionClassName,
-  children,
-}: {
-  imageSrc: string
-  imageAlt: string
-  objectPosition?: string
-  sectionClassName: string
-  children: ReactNode
-}) {
-  const sectionRef = useRef<HTMLElement>(null)
-  const imgRef = useRef<HTMLImageElement>(null)
-
-  useEffect(() => {
-    const section = sectionRef.current
-    const img = imgRef.current
-    if (!section || !img) return
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-
-    let raf = 0
-    const update = () => {
-      const rect = section.getBoundingClientRect()
-      const vh = window.innerHeight
-      // center of section relative to center of viewport (0 = perfectly centred)
-      const centerOffset = (rect.top + rect.height / 2) - vh / 2
-      const offset = centerOffset * PARALLAX_SPEED
-      img.style.transform = `translate3d(0, ${offset.toFixed(2)}px, 0)`
-    }
-
-    const onScroll = () => {
-      cancelAnimationFrame(raf)
-      raf = requestAnimationFrame(update)
-    }
-
-    update()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    window.addEventListener('resize', update)
-    return () => {
-      cancelAnimationFrame(raf)
-      window.removeEventListener('scroll', onScroll)
-      window.removeEventListener('resize', update)
-    }
-  }, [])
-
-  return (
-    <section ref={sectionRef} className={sectionClassName}>
-      <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <img
-          ref={imgRef}
-          src={imageSrc}
-          alt={imageAlt}
-          /* Oversized so parallax travel never exposes edges (±15% of section height) */
-          className="absolute left-0 h-[160%] w-full object-cover will-change-transform"
-          style={{
-            top: '-30%',
-            objectPosition: objectPosition ?? 'center center',
-          }}
-        />
-      </div>
-      <div className="absolute inset-0 bg-black/20" />
-      {children}
-    </section>
-  )
-}
 
 export function Testimonials() {
   return (
@@ -84,71 +14,66 @@ export function Testimonials() {
         title="Client Reviews – Motif Floral - Motif Floral"
         description="Discover what couples and clients say about their Motif Floral experience."
       />
-      <ParallaxCoverSection
-        imageSrc={TESTIMONIALS_HERO}
-        imageAlt=""
-        objectPosition="center 40%"
-        sectionClassName="relative flex min-h-[45vh] items-end justify-center overflow-hidden pb-16 pt-32 text-white md:min-h-[50vh]"
-      >
-        <div className="relative z-10 px-[4vw] text-center">
-          <h1 className="font-sans text-[min(2.25rem,1rem+1.39vw)] font-light uppercase tracking-wide text-white">
-            Testimonials
-          </h1>
-          <p className="mt-4 font-sans text-[0.875rem] text-white/95">
-            Kind words from our amazing clients
-          </p>
-        </div>
-      </ParallaxCoverSection>
-
-      {REVIEWS.map((r) => (
-        <section
-          key={r.names}
-          className="border-b border-mf-accent py-16 last:border-b-0"
-        >
-          <div className="mx-auto grid max-w-[1500px] gap-10 px-[4vw] md:grid-cols-2 md:items-center">
-            <div className="mx-auto w-full max-w-[min(100%,300px)] overflow-hidden border border-mf-accent md:mx-0 md:max-w-[360px]">
+      <RestyleHero
+        eyebrow="Kind words"
+        title="The feeling after the flowers fade."
+        text="Stories from couples who trusted Motif Floral with the atmosphere of their day."
+        image={TESTIMONIALS_HERO}
+      />
+      <section className="bg-mf-accent px-[4vw] py-20 md:py-28">
+        <div className="mx-auto max-w-[1200px] space-y-10">
+          {REVIEWS.map((review, index) => (
+            <article
+              key={review.names}
+              className="grid gap-8 bg-mf-white p-5 md:grid-cols-[280px_1fr] md:items-center md:p-8"
+            >
               <img
-                src={r.image}
-                alt={r.alt}
-                className="aspect-[3/4] w-full object-cover md:aspect-[2/3]"
+                src={review.image}
+                alt={review.alt}
+                className={`aspect-[3/4] w-full object-cover ${index % 2 ? 'md:order-2' : ''}`}
                 loading="lazy"
               />
-            </div>
-            <div>
-              <p className="text-center font-sans text-[13px] font-light italic leading-[1.85] tracking-[0.01em] text-[#4a4a4a] md:text-left">
-                {r.text}
-              </p>
-              <h2 className="mt-8 font-sans text-[1.25rem] font-light uppercase tracking-wide text-mf-black">
-                {r.names}
-              </h2>
-            </div>
-          </div>
-        </section>
-      ))}
-
-      <ParallaxCoverSection
-        imageSrc={TESTIMONIALS_CTA_BG}
-        imageAlt=""
-        objectPosition="53% bottom"
-        sectionClassName="relative min-h-[50vh] overflow-hidden text-white"
+              <div className={index % 2 ? 'md:order-1' : ''}>
+                <p className="font-sans text-[0.875rem] font-light leading-[1.9] text-mf-muted">
+                  {review.text}
+                </p>
+                <h2 className="mt-7 font-display text-[1.5rem] font-normal uppercase text-mf-black">
+                  {review.names}
+                </h2>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+      <section
+        aria-labelledby="testimonials-share-heading"
+        className="relative flex min-h-[50vh] flex-col items-center justify-center overflow-hidden bg-cover bg-center px-[4vw] py-24 md:min-h-[55vh] md:py-32"
+        style={{
+          backgroundImage: `url(${TESTIMONIALS_CTA_BG})`,
+          backgroundPosition: '53% bottom',
+        }}
       >
-        <div className="relative z-10 mx-auto flex max-w-3xl flex-col items-center px-[4vw] py-24 text-center">
-          <h2 className="font-display text-[min(3rem,1rem+2.22vw)] font-normal uppercase text-white">
+        <div className="absolute inset-0 bg-black/55" aria-hidden />
+        <div className="relative z-10 mx-auto flex max-w-3xl flex-col items-center text-center">
+          <h2
+            id="testimonials-share-heading"
+            className="font-display text-[min(2.75rem,calc(0.92rem+1.85vw))] font-normal uppercase leading-snug tracking-normal text-white md:text-[min(3.35rem,calc(1rem+2.35vw))]"
+          >
             Share your experience here
           </h2>
-          <p className="mt-4 font-sans text-[0.875rem] text-white/95">
+          <p className="mt-5 max-w-xl font-sans text-[0.875rem] font-light leading-relaxed text-white md:mt-6 md:text-[0.9375rem] md:leading-[1.75]">
             We would be delighted to read your words, they could help our future clients
           </p>
           <a
-            href="https://g.page/r/CYVhcWjqwrsBEAI/review"
+            href={GOOGLE_REVIEW_URL}
             target="_blank"
             rel="noreferrer"
-            className="mf-cta mf-cta-dark mt-10"
+            className="mf-cta mf-cta-dark mt-10 md:mt-12"
           >
             Please leave a review
           </a>
         </div>
-      </ParallaxCoverSection>
+      </section>
     </>
   )
 }

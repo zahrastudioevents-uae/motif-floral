@@ -4,7 +4,11 @@ import { HomeHeader } from './HomeHeader'
 
 export function Layout() {
   const { pathname } = useLocation()
-  const isHome = pathname === '/' || pathname === ''
+  const isHome =
+    pathname === '/' ||
+    pathname === '' ||
+    pathname === '/chooseyourbouquet/' ||
+    pathname === '/chooseyourbouquet'
 
   return (
     <div className="flex min-h-screen flex-col">
