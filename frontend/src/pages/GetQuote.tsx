@@ -345,7 +345,7 @@ export function GetQuote() {
                       placeholder="Maldives, Bali..."
                       value={eventFields.eventLocationDetail}
                       onChange={(e) => setEventFields((p) => ({ ...p, eventLocationDetail: e.target.value }))}
-                      className="mt-3 w-full max-w-md border-0 border-b border-mf-muted/25 bg-transparent py-2 font-sans text-[0.875rem] text-mf-black outline-none focus:border-mf-black"
+                      className="mt-3 w-full max-w-md mf-inline-field"
                     />
                   ) : null}
                 </div>
@@ -578,7 +578,7 @@ export function GetQuote() {
                         placeholder="How many?"
                         value={weddingFields.elopementGuestCount}
                         onChange={(e) => setWeddingFields((p) => ({ ...p, elopementGuestCount: e.target.value }))}
-                        className="mt-3 w-full max-w-[200px] border-0 border-b border-mf-muted/25 bg-transparent py-2 font-sans text-[0.875rem] text-mf-black outline-none focus:border-mf-black"
+                        className="mt-3 w-full max-w-[200px] mf-inline-field"
                       />
                     ) : null}
                   </div>
@@ -610,7 +610,7 @@ export function GetQuote() {
                         placeholder="What other events would you like to organize?"
                         value={weddingFields.multiDayDetail}
                         onChange={(e) => setWeddingFields((p) => ({ ...p, multiDayDetail: e.target.value }))}
-                        className="mt-3 w-full border-0 border-b border-mf-muted/25 bg-transparent py-2 font-sans text-[0.875rem] text-mf-black outline-none focus:border-mf-black"
+                        className="mt-3 w-full mf-inline-field"
                       />
                     ) : null}
                     <Hint text="Select at least one service" />

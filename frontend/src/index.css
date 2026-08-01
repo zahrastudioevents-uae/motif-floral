@@ -164,6 +164,40 @@
   .mf-cta-dark {
     @apply bg-mf-btn text-white transition-colors hover:bg-mf-btn-hover;
   }
+
+  /*
+   * Filled fields: a soft warm white that sits on the beige panel without
+   * reading as optical white, and no border. Focus lifts the fill and adds a
+   * faint inner edge, so the field is still clearly active without a frame.
+   */
+  .mf-field > input,
+  .mf-field > select,
+  .mf-field > textarea {
+    @apply w-full border-0 bg-[#fcf9f4] px-4 py-3.5 font-sans text-[1.0625rem] text-mf-black outline-none;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .mf-field > textarea {
+    @apply leading-relaxed;
+  }
+
+  .mf-field > input:focus,
+  .mf-field > select:focus,
+  .mf-field > textarea:focus {
+    background-color: #fffdfa;
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-mf-muted) 28%, transparent);
+  }
+
+  /* Same treatment for the follow-up inputs that appear outside a QField. */
+  .mf-inline-field {
+    @apply border-0 bg-[#fcf9f4] px-4 py-3 font-sans text-[1rem] text-mf-black outline-none;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .mf-inline-field:focus {
+    background-color: #fffdfa;
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-mf-muted) 28%, transparent);
+  }
 }
 
 /* Unlayered on purpose: this must beat the Tailwind utility that colours selects. */

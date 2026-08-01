@@ -57,7 +57,7 @@ export function PlannerQuestion({
           placeholder="Who is it? Name or website"
           value={value.plannerName}
           onChange={(e) => onChange({ ...value, plannerName: e.target.value })}
-          className="mt-4 w-full max-w-md border-0 border-b-2 border-mf-muted/30 bg-transparent py-3 font-sans text-[1.0625rem] text-mf-black outline-none transition-colors focus:border-mf-black"
+          className="mt-4 w-full max-w-md mf-inline-field"
         />
       ) : null}
 
