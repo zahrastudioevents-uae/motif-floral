@@ -1,17 +1,24 @@
+/** Single source of truth, shared by Contact and every Get a Quote tab. */
 export const HOW_FOUND_OPTIONS = [
-  'Instagram',
-  'Facebook',
-  'Pinterest',
   'Google search',
-  'Friend or referral',
-  'Wedding planner',
-  'Vendor referral',
+  'Instagram',
   'Blog or magazine',
+  'The Wed',
+  'Wed Vibes',
+  'Pinterest',
+  'Referral',
   'Other',
 ] as const
 
+/** These answers reveal a free text box asking who or which one. */
+export const HOW_FOUND_NEEDING_DETAIL: readonly string[] = ['Referral', 'Other']
+
+export const howFoundDetailPlaceholder = (value: string) =>
+  value === 'Referral' ? 'Who referred you?' : 'Please tell us where'
+
 export const CONTACT_SERVICE_OPTIONS = [
   'Full wedding floral design',
+  'Full wedding planning',
   'Intimate wedding / elopement',
   'Event or corporate',
   'Bridal bouquet only',

@@ -75,8 +75,17 @@ export function Footer() {
         </div>
         <small className="block text-center text-[0.625rem] font-light leading-relaxed tracking-[0.02em] text-mf-muted md:text-[0.65rem]">
           <p>
-            &copy; {new Date().getFullYear()} Motif Floral | Bespoke Floral Design for Weddings &amp;
-            Events in Italy | Based in Rome &middot; Available Worldwide
+            &copy; {new Date().getFullYear()} Motif Floral by{' '}
+            <a
+              href="https://velicostudio.com/"
+              target="_blank"
+              rel="noreferrer"
+              className="underline decoration-mf-muted/40 underline-offset-2 hover:text-mf-black"
+            >
+              Velico Studio
+            </a>{' '}
+            | Bespoke Floral Design for Weddings &amp; Events in Italy | Based in Rome &middot;
+            Available Worldwide
           </p>
           <p className="mx-auto mt-3 max-w-md text-[0.7rem] normal-case leading-snug md:text-[0.75rem]">
             Reach us at{' '}

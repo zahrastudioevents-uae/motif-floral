@@ -7,7 +7,7 @@ export function RestyleHero({
   image,
   children,
 }: {
-  eyebrow: string
+  eyebrow?: string
   title: string
   text?: ReactNode
   image: string
@@ -19,10 +19,12 @@ export function RestyleHero({
       <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/20 to-black/75" />
       <div className="relative z-10 mx-auto grid w-full max-w-[1500px] gap-10 md:grid-cols-[1fr_auto] md:items-end">
         <div className="max-w-4xl">
-          <p className="font-sans text-[0.6875rem] font-light uppercase tracking-[0.3em] text-white/70">
-            {eyebrow}
-          </p>
-          <h1 className="mt-5 font-display text-[min(5rem,2rem+5vw)] font-normal uppercase leading-[0.98] tracking-wide">
+          {eyebrow ? (
+            <p className="font-sans text-[0.6875rem] font-light uppercase tracking-[0.3em] text-white/70">
+              {eyebrow}
+            </p>
+          ) : null}
+          <h1 className={`font-display text-[min(5rem,2rem+5vw)] font-normal uppercase leading-[0.98] tracking-wide ${eyebrow ? 'mt-5' : ''}`}>
             {title}
           </h1>
           {text ? (

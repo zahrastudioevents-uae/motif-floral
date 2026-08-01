@@ -10,8 +10,12 @@ import {
   HOME_TILES,
   LETS_CONNECT_BG,
 } from '../data/home'
+import { GALLERY_MOTIF } from '../data/galleryMotif'
 import { MOTIF_PROCESS_IMAGE, SERVICE_STORIES } from '../data/motifProcess'
 import { PRESS_LOGOS, pressLogoMarqueeClasses } from '../data/press'
+
+/** New "mf" shoot photos first, then the existing selected-work images. */
+const SELECTED_WORK_IMAGES = [...GALLERY_MOTIF.map((p) => p.src), ...GALLERY_IMAGES]
 
 const BOOKING_HEADLINE_WORDS = 'Currently booking 2027 events'.split(' ')
 
@@ -49,8 +53,9 @@ export function Home() {
             </span>
           </h1>
           <p className="mx-auto mt-4 max-w-xl font-sans text-[0.8125rem] font-light leading-[1.85] text-mf-muted md:text-[0.875rem]">
-            Bespoke weddings and event florals shaped with an editorial eye, romantic restraint and
-            a deep sense of place.
+            Bespoke weddings and event florals shaped with an editorial eye,
+            <br />
+            romantic restraint and a deep sense of place.
           </p>
         </div>
       </section>
@@ -137,7 +142,7 @@ export function Home() {
         </div>
       </section>
 
-      <section className="mx-auto grid max-w-[1500px] items-stretch gap-12 px-[4vw] py-16 md:grid-cols-[1fr_0.92fr] md:py-24">
+      <section className="mx-auto grid max-w-[1500px] items-stretch gap-12 px-[4vw] pb-16 pt-4 md:grid-cols-[1fr_0.92fr] md:pb-24 md:pt-10">
         <div className="relative aspect-[4/5] w-full overflow-hidden bg-mf-accent md:aspect-auto md:min-h-0 md:h-full">
           <img
             src={MOTIF_PROCESS_IMAGE}
@@ -155,21 +160,21 @@ export function Home() {
           <h2 className="mt-4 font-display text-[min(3.4rem,1.5rem+3vw)] font-normal uppercase leading-tight text-mf-black">
             Designed like a composition, delivered like a luxury experience.
           </h2>
-          <div className="mt-10 divide-y divide-mf-muted/15">
+          <div className="mt-5 divide-y divide-mf-muted/15 md:mt-10">
             {SERVICE_STORIES.map((item) => (
               <button
                 key={item.title}
                 type="button"
-                className="group grid w-full gap-5 border-0 bg-transparent py-8 text-left md:grid-cols-[90px_1fr]"
+                className="group grid w-full grid-cols-[40px_1fr] items-baseline gap-2 border-0 bg-transparent py-3 text-left md:grid-cols-[90px_1fr] md:items-start md:gap-5 md:py-8"
               >
-                <span className="font-display text-3xl text-mf-black/35 transition-colors group-hover:text-mf-black">
+                <span className="font-display text-lg text-mf-black/35 transition-colors group-hover:text-mf-black md:text-3xl">
                   {item.eyebrow}
                 </span>
                 <span>
                   <span className="block font-sans text-[1rem] font-light uppercase tracking-[0.18em] text-mf-black">
                     {item.title}
                   </span>
-                  <span className="mt-3 block max-w-xl font-sans text-[0.875rem] font-light leading-[1.9] text-mf-muted">
+                  <span className="mt-1 block max-w-xl font-sans text-[0.875rem] font-light leading-[1.5] text-mf-muted md:mt-3 md:leading-[1.9]">
                     {item.text}
                   </span>
                 </span>
@@ -197,18 +202,18 @@ export function Home() {
           </div>
         </div>
 
-        <div className="mx-auto mt-12 max-w-[1500px] columns-2 gap-4 md:mt-14 md:columns-3 md:gap-5">
-          {GALLERY_IMAGES.map((src) => (
+        <div className="mx-auto mt-12 grid max-w-[1500px] grid-cols-2 gap-4 md:mt-14 md:grid-cols-3 md:gap-5">
+          {SELECTED_WORK_IMAGES.map((src) => (
             <button
               key={src}
               type="button"
-              className="mb-3 block w-full overflow-hidden border-0 p-0 break-inside-avoid md:mb-4"
+              className="block w-full overflow-hidden border-0 p-0"
               onClick={() => setLightbox(src)}
             >
               <img
                 src={src}
                 alt=""
-                className="w-full object-cover"
+                className="aspect-[2/3] w-full object-cover"
                 loading="lazy"
               />
             </button>

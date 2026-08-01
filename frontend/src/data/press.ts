@@ -9,15 +9,15 @@ export type PressLogo = {
 export const PRESS_LOGOS: PressLogo[] = [
   {
     src: img('/site/2qZExp/LWv6la/Screenshot2025-08-21alle22.27.20-ed78ad74-1500.png'),
-    alt: 'Style Me Pretty',
+    alt: 'Junebug Weddings',
   },
   {
     src: img('/site/2qZExp/5yKOae/Screenshot2025-08-26alle15.28.27-3533841f-1500.png'),
-    alt: 'Bridal Musings',
+    alt: 'The Anti-Bride',
   },
   {
     src: img('/site/2qZExp/b8GOo3/XjDi9j8alKgVt5QTtFESvaHXfaCQvm8jfNgI0ZMJ-cf3f45c2-1500.png'),
-    alt: 'Wedding Chicks',
+    alt: 'The Wed',
     prominent: true,
   },
   {

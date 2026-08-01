@@ -22,7 +22,7 @@ export function Testimonials() {
       />
       <section className="bg-mf-accent px-[4vw] py-20 md:py-28">
         <div className="mx-auto max-w-[1200px] space-y-10">
-          {REVIEWS.map((review, index) => (
+          {REVIEWS.map((review) => (
             <article
               key={review.names}
               className="grid gap-8 bg-mf-white p-5 md:grid-cols-[280px_1fr] md:items-center md:p-8"
@@ -30,10 +30,10 @@ export function Testimonials() {
               <img
                 src={review.image}
                 alt={review.alt}
-                className={`aspect-[3/4] w-full object-cover ${index % 2 ? 'md:order-2' : ''}`}
+                className="aspect-[3/4] w-full object-cover"
                 loading="lazy"
               />
-              <div className={index % 2 ? 'md:order-1' : ''}>
+              <div>
                 <p className="font-sans text-[0.875rem] font-light leading-[1.9] text-mf-muted">
                   {review.text}
                 </p>

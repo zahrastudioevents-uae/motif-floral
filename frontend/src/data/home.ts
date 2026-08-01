@@ -3,6 +3,11 @@ import { img } from '../lib/assets'
 /** Hero slideshow — five slides matching live homepage order */
 export const HOME_HERO_SLIDES = [
   {
+    src: '/images/home/home-hero-tablescape.jpg',
+    alt: 'Outdoor tablescape at golden hour with sunflowers, dahlias and painted porcelain.',
+    objectPosition: 'center 55%',
+  },
+  {
     src: img('/site/2qZExp/3vdn63/Villa-Astor-Editorial-Haute-Weddings-113-a3126e19-1500.jpg'),
     alt: 'Villa Astor editorial with bride and groom in a grand hallway.',
     objectPosition: 'center 75%',
@@ -54,7 +59,6 @@ export const GALLERY_IMAGES = [
   img('/site/2qZExp/8YpW4b/victoriajoyphotography--9-0667343b-1500.jpg'),
   img('/site/2qZExp/lYnJn0/Screenshot2025-08-27alle09.27.12-9f490609-1500.png'),
   img('/site/2qZExp/E0rPlY/Contact_us_Alyson_Scott_Villa_Aurelia_bouquet-3e1451bd-1500.png'),
-  img('/site/2qZExp/PQ4LGW/Screenshot2025-08-27alle09.20.04-ce84c882-1500.png'),
   img('/site/2qZExp/YXOJLp/AndreaFadyHoteldelaVille-184-6f4af68f-1500.jpg'),
   img('/site/2qZExp/a3MOMb/Screenshot2025-08-27alle09.28.13-3d39ff21-1500.png'),
   img('/site/2qZExp/on60ok/victoriajoyphotography-1510-7dfc0559-1500.jpg'),
@@ -67,12 +71,9 @@ export const GALLERY_IMAGES = [
   img('/site/2qZExp/rAWqZD/AD-wedding-361_mod-ca275eb6-1500.jpg'),
   img('/site/2qZExp/y0qoXr/Screenshot2025-08-27alle09.33.32-d394ddd2-1500.png'),
   img('/site/2qZExp/8lpMJb/AD-wedding-380_mod-f9f7c441-1500.jpg'),
-  img('/site/2qZExp/qA7vVw/LaDolceVitainRome-57_mod-3f6c0568-1500.jpg'),
   img('/site/2qZExp/yAVnm4/photo-148-7dcad257-1500.jpg'),
   img('/site/2qZExp/0mxroo/Savanna_And_Nick_Casale_Del_Gallo-251-ca9cfc50-1500.jpg'),
   img('/site/2qZExp/r3RVe8/AE6A2655-ea7f1dbe-1500.jpg'),
-  img('/site/2qZExp/Gn8yRy/photo-315-106ed9b0-1500.jpg'),
-  img('/site/2qZExp/KmWVaY/LexiTruesdalePhotography51-c22e4a07-1500.jpg'),
   img('/site/2qZExp/EY5eO5/Wedding_027_websize_mod-2abdd4d4-1500.jpg'),
   img('/site/2qZExp/5yKppe/Home_tuscany_wedding_centerpiece_peach_orange_pink_imperial_table-d9cac71b-1500.jpg'),
 ]

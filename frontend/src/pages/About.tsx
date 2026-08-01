@@ -25,14 +25,14 @@ const PARTNERS = [
   {
     title: 'Wed Vibes',
     subtitle: 'Partner',
-    href: 'https://www.wedvibes.com/',
+    href: 'https://wedvibes.media/directory/florists/motif-floral',
     image: img('/site/2qZExp/JMzQ0p/PalazzoVilonRoma-183-e7efc586-1500.jpg'),
   },
   {
     title: 'Wed Vibes',
     extra: 'MF Accessori',
     subtitle: 'Partner',
-    href: 'https://www.instagram.com/motifloral',
+    href: 'https://wedvibes.media/directory/shoes-and-accessories/motif-floral-accessori/',
     image: img('/site/2qZExp/on1J1P/Screenshot2025-08-27alle09.25.30-e16c7358-1500.png'),
   },
 ]
@@ -51,9 +51,9 @@ export function About() {
         description="Meet Motif Floral, bespoke wedding and event floristry based in Rome, creating poetic, refined designs across Italy and beyond."
       />
 
-      <section className="mx-auto grid max-w-[1500px] items-stretch overflow-hidden pb-10 pt-16 md:grid-cols-[minmax(0,1.08fr)_minmax(280px,0.92fr)] md:rounded-sm md:px-[4vw] md:pb-14 md:pt-20 md:gap-0">
+      <section className="mx-auto grid max-w-[1500px] items-stretch overflow-hidden pb-10 pt-16 md:grid-cols-[minmax(0,0.85fr)_minmax(280px,1.15fr)] md:rounded-sm md:px-[4vw] md:pb-14 md:pt-20 md:gap-0">
         {/* Left: full editorial photo */}
-        <div className="relative isolate order-1 min-h-[48svh] md:min-h-[min(520px,max(68svh,calc(100svh-6rem)))]">
+        <div className="relative isolate order-1 min-h-[64svh] md:min-h-[min(700px,max(80svh,calc(100svh-2rem)))]">
           <img
             src={ABOUT_HERO_IMAGE}
             alt=""
@@ -63,22 +63,22 @@ export function About() {
 
         {/* Right: headings + story */}
         <div className="order-2 flex min-h-0 flex-col md:overflow-hidden md:rounded-r-md md:rounded-l-none">
-          <div className="bg-mf-accent px-[6vw] py-14 text-left md:flex md:min-h-0 md:flex-1 md:flex-col md:justify-center md:px-11 md:py-[clamp(3.5rem,6vw,5.75rem)] lg:px-14">
-            <h1 className="font-display text-[min(2.875rem,calc(1.2rem+2.8vw))] font-normal uppercase tracking-wide leading-tight text-mf-black">
+          <div className="bg-mf-accent px-[6vw] py-8 text-left md:flex md:flex-none md:flex-col md:justify-center md:px-6 md:py-[clamp(2.75rem,5vw,4.25rem)] lg:px-8">
+            <h1 className="font-display text-[min(2.25rem,calc(1.1rem+2.2vw))] font-normal uppercase tracking-wide leading-tight text-mf-black">
               Hi,
-              <span className="mt-3 block">we are motif floral</span>
+              <span className="mt-2 block">we are motif floral</span>
             </h1>
-            <p className="mt-6 font-sans text-[0.6875rem] font-light uppercase tracking-[0.26em] text-mf-muted md:tracking-[0.28em]">
+            <p className="mt-3 font-sans text-[0.6875rem] font-light uppercase tracking-[0.26em] text-mf-muted md:tracking-[0.28em]">
               Let&apos;s get to know each other
             </p>
           </div>
 
-          <div className="flex flex-1 flex-col border-t border-black/10 bg-white px-[6vw] py-14 md:min-h-0 md:px-11 md:py-[clamp(2.75rem,4.5vw,4.25rem)] lg:px-14">
-            <div className="mx-auto max-w-[36rem] md:mx-0 md:max-w-none">
-              <div className="space-y-5 text-center font-sans text-[0.875rem] leading-[1.9] text-mf-muted md:text-left">
+          <div className="flex flex-1 flex-col border-t border-black/10 bg-white px-[6vw] py-14 md:min-h-0 md:px-14 md:py-[clamp(2.75rem,4.5vw,4.25rem)] lg:px-20">
+            <div className="mx-auto max-w-[36rem] md:max-w-[24rem]">
+              <div className="space-y-4 text-center font-sans text-[0.8125rem] leading-[1.75] text-mf-muted md:text-left">
                 <p>
-                  Motif Floral was born from a shared passion for refined floral art and timeless
-                  beauty. We create bespoke floral designs that tell each couple&apos;s story,
+                  Motif Floral was born in 2018 from a shared passion for refined floral art and
+                  timeless beauty. We create bespoke floral designs that tell each couple&apos;s story,
                   transforming emotions into colors, textures, and natural compositions. Every
                   creation is crafted with care and artistic sensitivity, blending elegance with an
                   organic aesthetic that enhances the atmosphere of each event.

@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom'
+import { PhotoGallery } from '../components/PhotoGallery'
 import { RestyleHero } from '../components/RestyleHero'
 import { Seo } from '../components/Seo'
 import { RIBBON_SECTION } from '../data/chooseBouquet'
+import { GALLERY_ACCESSORI } from '../data/galleryAccessori'
 
 export function EmbroideredRibbonsPage({
   seoTitle,
@@ -16,8 +18,11 @@ export function EmbroideredRibbonsPage({
     'mx-auto shrink-0 overflow-hidden rounded-sm md:mx-0 h-[17.75rem] w-[clamp(226px,min(248px,88vw))] sm:h-[19rem]'
   const picDuoBox = `${picBox} flex gap-[0.375rem] p-0`
   const rowGrid = 'grid gap-10 md:grid-cols-[auto_1fr] md:items-center md:gap-12 lg:gap-14'
+  /** Editorial list: hairline rules instead of bullets, one line per item. */
   const ribbonListCls =
-    'list-disc space-y-2.5 pl-5 font-sans text-[0.9rem] font-light leading-[1.75] text-mf-muted marker:text-mf-muted/70 md:space-y-3'
+    'border-t border-mf-muted/15 font-sans text-[0.8125rem] font-light uppercase leading-[1.6] tracking-[0.11em] text-mf-muted [&>li]:border-b [&>li]:border-mf-muted/15 [&>li]:py-3 md:text-[0.85rem] md:[&>li]:py-3.5'
+  const ribbonHeadingCls =
+    'font-display text-[min(1.75rem,calc(1rem+0.9vw))] font-normal uppercase leading-none tracking-[0.06em] text-mf-black'
 
   return (
     <>
@@ -36,7 +41,7 @@ export function EmbroideredRibbonsPage({
             </div>
             <div className="pt-2 md:pt-0">
               <div className="border-t border-mf-muted/15 pt-7 md:border-0 md:pt-0">
-                <h2 className="font-sans text-[0.75rem] uppercase tracking-[0.22em] text-mf-black">
+                <h2 className={ribbonHeadingCls}>
                   What we offer
                 </h2>
                 <p className="mt-5 font-sans text-[0.9rem] font-light leading-[1.9] text-mf-muted">
@@ -63,7 +68,7 @@ export function EmbroideredRibbonsPage({
 
           <div className={`${rowGrid} mt-16 border-t border-mf-muted/15 pt-16 md:mt-20 md:pt-20`}>
             <div className="order-2 border-t border-mf-muted/15 pt-7 md:order-1 md:border-0 md:pt-0">
-              <h2 className="font-sans text-[0.75rem] uppercase tracking-[0.22em] text-mf-black">
+              <h2 className={ribbonHeadingCls}>
                 What we create
               </h2>
               <ul className={`mt-5 ${ribbonListCls}`}>
@@ -100,7 +105,7 @@ export function EmbroideredRibbonsPage({
               <img src={RIBBON_SECTION.optionsAside} alt="" className="size-full object-cover" loading="lazy" />
             </div>
             <div className="border-t border-mf-muted/15 pt-7 md:border-0 md:pt-0">
-              <h2 className="font-sans text-[0.75rem] uppercase tracking-[0.22em] text-mf-black">
+              <h2 className={ribbonHeadingCls}>
                 Options
               </h2>
               <ul className={`mt-5 ${ribbonListCls}`}>
@@ -129,6 +134,10 @@ export function EmbroideredRibbonsPage({
           <p className="max-w-[46rem] font-display text-[min(2rem,calc(0.92rem+1.95vw))] font-normal uppercase leading-snug tracking-normal text-mf-black md:text-[min(2.35rem,calc(1rem+2.35vw))]">
             Crafted for those who notice the difference.
           </p>
+        </div>
+
+        <div className="mx-auto mt-16 max-w-[1500px] md:mt-20">
+          <PhotoGallery photos={GALLERY_ACCESSORI} columns={3} />
         </div>
       </section>
     </>

@@ -38,6 +38,7 @@
     @apply m-0 bg-mf-white font-sans text-mf-muted antialiased;
   }
 
+
   @keyframes hero-ig-progress {
     from {
       transform: scaleX(0);
@@ -163,4 +164,21 @@
   .mf-cta-dark {
     @apply bg-mf-btn text-white transition-colors hover:bg-mf-btn-hover;
   }
+}
+
+/* Unlayered on purpose: this must beat the Tailwind utility that colours selects. */
+select:has(> option[value='']:checked) {
+  color: color-mix(in srgb, var(--color-mf-muted) 62%, transparent);
+}
+
+/* Guidance inside a field stays small and quiet; what you actually type is full size. */
+input::placeholder,
+textarea::placeholder {
+  font-size: 0.8125rem;
+  letter-spacing: 0.01em;
+  color: color-mix(in srgb, var(--color-mf-muted) 62%, transparent);
+}
+
+select:has(> option[value='']:checked) {
+  font-size: 0.8125rem;
 }

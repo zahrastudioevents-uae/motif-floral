@@ -35,37 +35,71 @@ class ContactPayload(BaseModel):
     email: EmailStr
     country: str = Field(..., min_length=1)
     how_found_us: str = Field(..., min_length=1)
+    how_found_us_detail: str = ""
     event_date: str = Field(..., min_length=1)
     guest_count: str = Field(..., min_length=1)
     service_needed: str = Field(..., min_length=1)
     message: str = Field(..., min_length=1)
+    has_planner: str = ""
+    planner_name: str = ""
+    wants_planning: bool = False
     privacy_accepted: bool = Field(..., description="Must be true")
     surname: str = ""  # honeypot
 
 
-class QuotePayload(BaseModel):
-    full_name: str
-    partner_name: str
+class EventQuotePayload(BaseModel):
+    form_type: str = "events"
+    full_name: str = Field(..., min_length=1)
     email: EmailStr
-    country: str
-    instagram: str = ""
-    how_found_us: str
-    event_date: str
-    guest_count: str
-    moodboard: str
-    ceremony_type: str
-    ceremony_location: str
-    ceremony_setup: str
-    reception_venue: str
-    reception_tables: str
-    num_tables: str
-    table_setup_desc: str
-    pinterest: str
-    wedding_planner: str
-    photographer: str
-    budget: str
+    phone: str = Field(..., min_length=1)
+    event_date: str = Field(..., min_length=1)
+    event_location: str = Field(..., min_length=1)
+    event_location_detail: str = ""
+    location_name: str = ""
+    guest_count: str = Field(..., min_length=1)
+    vision: str = Field(..., min_length=1)
+    how_did_you_hear: str = Field(..., min_length=1)
+    how_did_you_hear_detail: str = ""
+    investment: str = Field(..., min_length=1)
+    has_planner: str = ""
+    planner_name: str = ""
+    wants_planning: bool = False
     privacy_accepted: bool
-    surname: str = ""
+    surname: str = ""  # honeypot
+
+
+class WeddingQuotePayload(BaseModel):
+    form_type: str  # "wedding" | "elopement"
+    full_name: str = Field(..., min_length=1)
+    fiance_name: str = Field(..., min_length=1)
+    email: EmailStr
+    phone: str = Field(..., min_length=1)
+    where_from: str = Field(..., min_length=1)
+    instagram: str = ""
+    how_did_you_meet: str = Field(..., min_length=1)
+    how_did_you_hear: str = Field(..., min_length=1)
+    how_did_you_hear_detail: str = ""
+    guest_count: str = ""
+    elopement_guest_type: str = ""
+    elopement_guest_count: str = ""
+    services_interested: list[str] = []
+    floral_pieces: list[str] = []
+    multi_day_detail: str = ""
+    event_date: str = Field(..., min_length=1)
+    region: str = Field(..., min_length=1)
+    region_detail: str = ""
+    ceremony_location: str = Field(..., min_length=1)
+    preferred_moment: str = Field(..., min_length=1)
+    pinterest_link: str = ""
+    style: str = Field(..., min_length=1)
+    style_elements: str = ""
+    dream_photographer: str = ""
+    budget: str = Field(..., min_length=1)
+    has_planner: str = ""
+    planner_name: str = ""
+    wants_planning: bool = False
+    privacy_accepted: bool
+    surname: str = ""  # honeypot
 
 
 def _send_resend(subject: str, html: str) -> None:
@@ -110,15 +144,32 @@ def post_contact(body: ContactPayload):
     return {"ok": True, "message": "Thank you for contacting us!"}
 
 
-@app.post("/api/quote")
-def post_quote(body: QuotePayload):
+@app.post("/api/quote-event")
+def post_quote_event(body: EventQuotePayload):
     if body.surname:
         return {"ok": True}
     if not body.privacy_accepted:
         raise HTTPException(status_code=400, detail="Privacy required")
     data = body.model_dump()
-    html = "<h2>Get a quote</h2>" + _rows(data)
-    _send_resend(f"Quote: {body.full_name}", html)
+    html = "<h2>Get a quote, Events</h2>" + _rows(data)
+    _send_resend(f"Quote (Events): {body.full_name}", html)
+    return {
+        "ok": True,
+        "message": "Thank you for contacting me!",
+        "redirect": "/portfolio/",
+    }
+
+
+@app.post("/api/quote-wedding")
+def post_quote_wedding(body: WeddingQuotePayload):
+    if body.surname:
+        return {"ok": True}
+    if not body.privacy_accepted:
+        raise HTTPException(status_code=400, detail="Privacy required")
+    data = body.model_dump()
+    label = "Elopement" if body.form_type == "elopement" else "Wedding"
+    html = f"<h2>Get a quote, {label}</h2>" + _rows(data)
+    _send_resend(f"Quote ({label}): {body.full_name}", html)
     return {
         "ok": True,
         "message": "Thank you for contacting me!",
