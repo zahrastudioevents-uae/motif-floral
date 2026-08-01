@@ -73,12 +73,16 @@ export function HeroSlideshow({
         }}
         onSlideChange={(s) => setActive(s.realIndex)}
       >
-        {slides.map((s) => (
+        {slides.map((s, i) => (
           <SwiperSlide key={s.src} className="!flex items-center justify-center">
+            {/* Only the first slide is on screen at load; the rest arrive as it advances. */}
             <img
               src={s.src}
               alt={s.alt}
               className="h-full w-full object-cover"
+              loading={i === 0 ? 'eager' : 'lazy'}
+              fetchPriority={i === 0 ? 'high' : 'low'}
+              decoding={i === 0 ? 'sync' : 'async'}
               style={s.objectPosition ? { objectPosition: s.objectPosition } : undefined}
             />
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/45 via-transparent to-black/35" />

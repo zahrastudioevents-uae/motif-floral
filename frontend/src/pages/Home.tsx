@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { GRID_SIZES, srcSetFor } from '../lib/assets'
 import { HeroSlideshow } from '../components/HeroSlideshow'
 import { HomeTestimonialsSection } from '../components/HomeTestimonialsSection'
 import { Seo } from '../components/Seo'
@@ -212,6 +213,8 @@ export function Home() {
             >
               <img
                 src={src}
+                srcSet={srcSetFor(src)}
+                sizes={GRID_SIZES}
                 alt=""
                 className="aspect-[2/3] w-full object-cover"
                 loading="lazy"

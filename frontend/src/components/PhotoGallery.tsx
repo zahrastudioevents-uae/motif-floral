@@ -1,3 +1,4 @@
+import { GRID_SIZES, srcSetFor } from '../lib/assets'
 export type GalleryPhoto = { src: string; alt: string }
 
 const COLS_CLASS = {
@@ -18,6 +19,8 @@ export function PhotoGallery({
         <figure key={photo.src} className="group overflow-hidden">
           <img
             src={photo.src}
+            srcSet={srcSetFor(photo.src)}
+            sizes={GRID_SIZES}
             alt={photo.alt}
             className="aspect-[2/3] w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
             loading="lazy"

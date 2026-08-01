@@ -12,7 +12,7 @@ import {
 } from '../data/forms'
 import { postJson } from '../lib/api'
 
-const CONTACT_HERO = '/images/contact-hero.jpg'
+const CONTACT_HERO = '/images/contact-hero.webp'
 
 export function Contact() {
   const [status, setStatus] = useState<'idle' | 'loading' | 'ok' | 'err'>('idle')

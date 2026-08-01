@@ -1,5 +1,5 @@
 /** Sticky hero for “The Motif process” panel (both home layouts) */
-export const MOTIF_PROCESS_IMAGE = '/images/motif-process-alyson-scott.png'
+export const MOTIF_PROCESS_IMAGE = '/images/motif-process-alyson-scott.webp'
 
 export const SERVICE_STORIES = [
   {

@@ -6,6 +6,6 @@ const EXCLUDED = new Set([11, 14])
 export const GALLERY_ACCESSORI: GalleryPhoto[] = Array.from({ length: 14 }, (_, i) => i + 1)
   .filter((n) => !EXCLUDED.has(n))
   .map((n) => ({
-    src: `/images/gallery-accessori/accessori-${String(n).padStart(2, '0')}.jpg`,
+    src: `/images/gallery-accessori/accessori-${String(n).padStart(2, '0')}.webp`,
     alt: 'Motif Floral, hand-embroidered silk ribbon and bridal accessory',
   }))

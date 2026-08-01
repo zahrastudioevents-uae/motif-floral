@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { Seo } from '../components/Seo'
 import { PORTFOLIO_INSTAGRAM, PORTFOLIO_ITEMS } from '../data/portfolio'
-import { img } from '../lib/assets'
+import { GRID_SIZES_WIDE, img, srcSetFor } from '../lib/assets'
 
 /** Soft editorial florals hero (lighter treatment for white typography) */
 const HERO = img('/site/2qZExp/dDRXXp/choose-your-bouquet-white-modern-roses-a082ef66-1500.jpg')
@@ -58,6 +58,8 @@ export function Portfolio() {
               <a href={item.href} target="_blank" rel="noreferrer" className="group block overflow-hidden">
                 <img
                   src={item.image}
+                  srcSet={srcSetFor(item.image)}
+                  sizes={GRID_SIZES_WIDE}
                   alt={item.alt}
                   className="aspect-[4/5] w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
                   loading="lazy"
@@ -105,6 +107,8 @@ export function Portfolio() {
               <div className="overflow-hidden">
                 <img
                   src={ig.image}
+                  srcSet={srcSetFor(ig.image)}
+                  sizes={GRID_SIZES_WIDE}
                   alt={ig.label}
                   className="aspect-[4/5] w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
                 />

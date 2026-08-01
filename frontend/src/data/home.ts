@@ -3,7 +3,7 @@ import { img } from '../lib/assets'
 /** Hero slideshow — five slides matching live homepage order */
 export const HOME_HERO_SLIDES = [
   {
-    src: '/images/home/home-hero-tablescape.jpg',
+    src: '/images/home/home-hero-tablescape.webp',
     alt: 'Outdoor tablescape at golden hour with sunflowers, dahlias and painted porcelain.',
     objectPosition: 'center 55%',
   },

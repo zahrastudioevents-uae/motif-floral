@@ -40,7 +40,7 @@ const PARTNERS = [
 const CONNECT_IMAGES = {
   left: img('/site/2qZExp/vjbLn9/Screenshot2025-08-27alle10.40.53-74f911aa-1500.png'),
   /** Destination wedding Rome — third column. */
-  rome: '/images/about-connect-destination-rome.png',
+  rome: '/images/about-connect-destination-rome.webp',
 }
 
 export function About() {
