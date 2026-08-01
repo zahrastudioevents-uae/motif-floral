@@ -95,12 +95,12 @@ export const BUDGET_ELOPEMENT = {
     '€ 12,000 - € 20,000',
     '€ 20,000+',
   ]),
+  /** Mirrors the EUR bands, so the lowest one starts at the same real figure. */
   AED: aed([
-    'AED 8,000 - AED 15,000',
-    'AED 15,000 - AED 25,000',
-    'AED 25,000 - AED 45,000',
-    'AED 45,000 - AED 75,000',
-    'AED 75,000+',
+    'AED 16,000 - AED 28,000',
+    'AED 28,000 - AED 48,000',
+    'AED 48,000 - AED 80,000',
+    'AED 80,000+',
   ]),
 }
 

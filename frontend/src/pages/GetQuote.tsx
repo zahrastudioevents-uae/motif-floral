@@ -175,6 +175,15 @@ export function GetQuote() {
     }
   }
 
+  const regionDetailPlaceholder = (region: LocationValue) =>
+    region === 'italy'
+      ? 'Amalfi Coast, Tuscany, Lake Como...'
+      : region === 'europe'
+        ? 'French Riviera, Santorini, Barcelona...'
+        : region === 'uae'
+          ? 'Dubai, Abu Dhabi, Ras Al Khaimah...'
+          : 'Maldives, Bali, Caribbean...'
+
   const howDidYouHearField = (
     value: string,
     detail: string,
@@ -503,6 +512,37 @@ export function GetQuote() {
                   />
                 </QField>
 
+                <div className="mb-6">
+                  <span className="font-sans text-[0.9rem] font-normal text-mf-black/80">
+                    Where is your {selectedService === 'wedding' ? 'wedding' : 'elopement'} taking place? *
+                  </span>
+                  <div className="mt-3">
+                    <RadioRow large
+                      name="weddingRegion"
+                      options={LOCATION_OPTIONS as unknown as { value: string; label: string }[]}
+                      value={weddingFields.region}
+                      onChange={(v) =>
+                        setWeddingFields((p) => ({
+                          ...p,
+                          region: v as LocationValue,
+                          regionDetail: '',
+                          // the budget bands change currency with the region
+                          budget: '',
+                        }))
+                      }
+                    />
+                  </div>
+                  {weddingFields.region ? (
+                    <input
+                      type="text"
+                      placeholder={regionDetailPlaceholder(weddingFields.region)}
+                      value={weddingFields.regionDetail}
+                      onChange={(e) => setWeddingFields((p) => ({ ...p, regionDetail: e.target.value }))}
+                      className="mt-3 w-full max-w-md mf-inline-field"
+                    />
+                  ) : null}
+                </div>
+
                 <div className="grid gap-x-8 md:grid-cols-2">
                   <div className="mb-6">
                     <span className="font-sans text-[0.9rem] font-normal text-mf-black/80">
@@ -670,7 +710,7 @@ export function GetQuote() {
                   />
                 </QField>
                 <QField large
-                  label={'Desired Investment (EUR)'}
+                  label={`Desired Investment (${currencyFor(weddingFields.region)})`}
                   required
                  
                 >
@@ -681,8 +721,12 @@ export function GetQuote() {
                   >
                     <option value="">Select your approximate budget range</option>
                     {(selectedService === 'wedding'
-                      ? BUDGET_WEDDING.EUR
-                      : BUDGET_ELOPEMENT.EUR
+                      ? currencyFor(weddingFields.region) === 'AED'
+                        ? BUDGET_WEDDING.AED
+                        : BUDGET_WEDDING.EUR
+                      : currencyFor(weddingFields.region) === 'AED'
+                        ? BUDGET_ELOPEMENT.AED
+                        : BUDGET_ELOPEMENT.EUR
                     ).map((b) => (
                       <option key={b} value={b}>
                         {b}
