@@ -17,7 +17,7 @@ import { MOTIF_PROCESS_IMAGE, SERVICE_STORIES } from '../data/motifProcess'
 import { PRESS_LOGOS, pressLogoMarqueeClasses } from '../data/press'
 
 /** New "mf" shoot photos first, then the existing selected-work images. */
-const SELECTED_WORK_IMAGES = [...GALLERY_MOTIF.map((p) => p.src), ...GALLERY_IMAGES]
+const SELECTED_WORK_IMAGES = [...GALLERY_MOTIF, ...GALLERY_IMAGES]
 
 const BOOKING_HEADLINE_WORDS = 'Currently booking 2027 events'.split(' ')
 
@@ -29,12 +29,12 @@ const BOOKING_SEGMENTS = [
 ] as const
 
 export function Home() {
-  const [lightbox, setLightbox] = useState<string | null>(null)
+  const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null)
 
   return (
     <>
       <Seo
-        title="Luxury Wedding & Event Floral Design in Italy | Motif Floral"
+        title="Wedding & Event Floral Design in Italy | Motif Floral"
         description="Bespoke floral design for weddings and events across Italy and the UAE. Based in Rome, founded 2018. Featured in Vogue, Elle and Style Me Pretty."
         jsonLd={graph(
           webPage(
@@ -215,18 +215,18 @@ export function Home() {
         </div>
 
         <div className="mx-auto mt-12 grid max-w-[1500px] grid-cols-2 gap-4 md:mt-14 md:grid-cols-3 md:gap-5">
-          {SELECTED_WORK_IMAGES.map((src) => (
+          {SELECTED_WORK_IMAGES.map((photo) => (
             <button
-              key={src}
+              key={photo.src}
               type="button"
               className="block w-full overflow-hidden border-0 p-0"
-              onClick={() => setLightbox(src)}
+              onClick={() => setLightbox(photo)}
             >
               <img
-                src={src}
-                srcSet={srcSetFor(src)}
+                src={photo.src}
+                srcSet={srcSetFor(photo.src)}
                 sizes={GRID_SIZES}
-                alt=""
+                alt={photo.alt}
                 className="aspect-[2/3] w-full object-cover"
                 loading="lazy"
               />
@@ -243,8 +243,8 @@ export function Home() {
           aria-label="Close gallery"
         >
           <img
-            src={lightbox}
-            alt=""
+            src={lightbox.src}
+            alt={lightbox.alt}
             className="max-h-[90vh] max-w-full object-contain"
           />
         </button>

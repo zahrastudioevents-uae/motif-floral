@@ -9,7 +9,7 @@ export const ROUTES = [
     path: '/',
     priority: '1.0',
     changefreq: 'weekly',
-    title: 'Luxury Wedding & Event Floral Design in Italy | Motif Floral',
+    title: 'Wedding & Event Floral Design in Italy | Motif Floral',
     description:
       'Bespoke floral design for weddings and events across Italy and the UAE. Based in Rome, founded 2018. Featured in Vogue, Elle and Style Me Pretty.',
     image: '/images/home/home-hero-tablescape.webp',
@@ -20,7 +20,7 @@ export const ROUTES = [
     changefreq: 'weekly',
     title: 'Portfolio | Editorial & Real Wedding Florals in Italy',
     description:
-      'Floral editorials and real weddings by Motif Floral, featured in Vogue, Elle, Style Me Pretty, The Wed and Wed Vibes. Villa Astor, Villa Aurelia, Castello Ruspoli and more.',
+      'Floral editorials and real weddings by Motif Floral, featured in Vogue, Elle, Style Me Pretty and The Wed. Villa Astor, Villa Aurelia, Castello Ruspoli.',
     image: '/images/site/2qZExp/3vdn63/Villa-Astor-Editorial-Haute-Weddings-113-a3126e19-1500.webp',
   },
   {

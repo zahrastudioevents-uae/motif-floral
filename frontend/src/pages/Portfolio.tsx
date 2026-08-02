@@ -22,7 +22,7 @@ export function Portfolio() {
     <>
       <Seo
         title="Portfolio | Editorial & Real Wedding Florals in Italy"
-        description="Floral editorials and real weddings by Motif Floral, featured in Vogue, Elle, Style Me Pretty, The Wed and Wed Vibes. Villa Astor, Villa Aurelia, Castello Ruspoli and more."
+        description="Floral editorials and real weddings by Motif Floral, featured in Vogue, Elle, Style Me Pretty and The Wed. Villa Astor, Villa Aurelia, Castello Ruspoli."
         jsonLd={graph(
           webPage(
             'Motif Floral portfolio',
