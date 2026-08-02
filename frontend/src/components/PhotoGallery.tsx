@@ -1,5 +1,10 @@
 import { GRID_SIZES, srcSetFor } from '../lib/assets'
-export type GalleryPhoto = { src: string; alt: string }
+export type GalleryPhoto = {
+  src: string
+  alt: string
+  /** Average colour of the photo, shown while it loads so the grid is never blank. */
+  tone?: string
+}
 
 const COLS_CLASS = {
   3: 'md:grid-cols-3',

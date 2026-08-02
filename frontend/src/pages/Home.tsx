@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { GRID_SIZES, srcSetFor } from '../lib/assets'
 import { HeroSlideshow } from '../components/HeroSlideshow'
@@ -29,7 +28,6 @@ const BOOKING_SEGMENTS = [
 ] as const
 
 export function Home() {
-  const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null)
 
   return (
     <>
@@ -216,11 +214,10 @@ export function Home() {
 
         <div className="mx-auto mt-12 grid max-w-[1500px] grid-cols-2 gap-4 md:mt-14 md:grid-cols-3 md:gap-5">
           {SELECTED_WORK_IMAGES.map((photo) => (
-            <button
+            <figure
               key={photo.src}
-              type="button"
-              className="block w-full overflow-hidden border-0 p-0"
-              onClick={() => setLightbox(photo)}
+              className="m-0 overflow-hidden"
+              style={{ backgroundColor: photo.tone }}
             >
               <img
                 src={photo.src}
@@ -229,26 +226,13 @@ export function Home() {
                 alt={photo.alt}
                 className="aspect-[2/3] w-full object-cover"
                 loading="lazy"
+                decoding="async"
               />
-            </button>
+            </figure>
           ))}
         </div>
       </section>
 
-      {lightbox ? (
-        <button
-          type="button"
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/85 p-4"
-          onClick={() => setLightbox(null)}
-          aria-label="Close gallery"
-        >
-          <img
-            src={lightbox.src}
-            alt={lightbox.alt}
-            className="max-h-[90vh] max-w-full object-contain"
-          />
-        </button>
-      ) : null}
 
       <HomeTestimonialsSection slides={HOME_TESTIMONIAL_SLIDES} />
 
