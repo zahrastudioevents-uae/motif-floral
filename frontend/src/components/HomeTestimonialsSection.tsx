@@ -1,4 +1,5 @@
 import { useCallback, useState } from 'react'
+import { GRID_SIZES, srcSetFor } from '../lib/assets'
 import { Link } from 'react-router-dom'
 import { LongStemNavArrowLeft, LongStemNavArrowRight } from './icons/ThinArrows'
 
@@ -33,6 +34,8 @@ export function HomeTestimonialsSection({ slides }: { slides: HomeTestimonialSli
             <div className="flex flex-col">
               <img
                 src={s.imgBack}
+                srcSet={srcSetFor(s.imgBack)}
+                sizes={GRID_SIZES}
                 alt={s.backAlt}
                 className="aspect-[3/4] w-full object-cover"
               />
@@ -50,6 +53,8 @@ export function HomeTestimonialsSection({ slides }: { slides: HomeTestimonialSli
               </p>
               <img
                 src={s.imgFront}
+                srcSet={srcSetFor(s.imgFront)}
+                sizes={GRID_SIZES}
                 alt={s.frontAlt}
                 className="aspect-[3/4] w-full object-cover"
               />

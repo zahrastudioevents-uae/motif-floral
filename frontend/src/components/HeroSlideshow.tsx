@@ -5,6 +5,7 @@ import type { Swiper as SwiperType } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { LongStemNavArrowLeft, LongStemNavArrowRight } from './icons/ThinArrows'
 import 'swiper/css'
+import { srcSetFor } from '../lib/assets'
 
 const AUTOPLAY_MS = 5500
 
@@ -26,6 +27,24 @@ export function HeroSlideshow({
   const swiperRef = useRef<SwiperType | null>(null)
   const [active, setActive] = useState(0)
   const total = slides.length
+
+  /**
+   * Swiper keeps every slide in the DOM, so native lazy loading never defers
+   * them: opening the page pulled all six photos at once. We render the <img>
+   * only for the slide on screen and the next one, and remember which ones
+   * have been shown so going back does not refetch.
+   */
+  const [reached, setReached] = useState<Set<number>>(() => new Set([0, 1]))
+  const shouldRender = (i: number) => reached.has(i)
+  const markReached = useCallback((index: number) => {
+    setReached((prev) => {
+      if (prev.has(index) && prev.has((index + 1) % total)) return prev
+      const next = new Set(prev)
+      next.add(index)
+      next.add((index + 1) % total)
+      return next
+    })
+  }, [total])
 
   const onPrev = useCallback(() => swiperRef.current?.slidePrev(), [])
   const onNext = useCallback(() => swiperRef.current?.slideNext(), [])
@@ -70,21 +89,29 @@ export function HeroSlideshow({
         onSwiper={(s) => {
           swiperRef.current = s
           setActive(s.realIndex)
+          markReached(s.realIndex)
         }}
-        onSlideChange={(s) => setActive(s.realIndex)}
+        onSlideChange={(s) => {
+          setActive(s.realIndex)
+          markReached(s.realIndex)
+        }}
       >
         {slides.map((s, i) => (
           <SwiperSlide key={s.src} className="!flex items-center justify-center">
-            {/* Only the first slide is on screen at load; the rest arrive as it advances. */}
-            <img
-              src={s.src}
-              alt={s.alt}
-              className="h-full w-full object-cover"
-              loading={i === 0 ? 'eager' : 'lazy'}
-              fetchPriority={i === 0 ? 'high' : 'low'}
-              decoding={i === 0 ? 'sync' : 'async'}
-              style={s.objectPosition ? { objectPosition: s.objectPosition } : undefined}
-            />
+            {shouldRender(i) ? (
+              <img
+                src={s.src}
+                srcSet={srcSetFor(s.src)}
+                sizes="100vw"
+                alt={s.alt}
+                className="h-full w-full object-cover"
+                fetchPriority={i === 0 ? 'high' : 'low'}
+                decoding={i === 0 ? 'sync' : 'async'}
+                style={s.objectPosition ? { objectPosition: s.objectPosition } : undefined}
+              />
+            ) : (
+              <div className="h-full w-full bg-mf-black" aria-hidden />
+            )}
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/45 via-transparent to-black/35" />
           </SwiperSlide>
         ))}

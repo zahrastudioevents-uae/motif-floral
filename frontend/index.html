@@ -2,19 +2,78 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Luxury Wedding &amp; Event Floral Design in Italy | Motif Floral</title>
     <meta
       name="description"
-      content="Luxury wedding and event floral design in Italy — Motif Floral, Rome."
+      content="Bespoke floral design for weddings and events across Italy and the UAE. Based in Rome, founded 2018. Featured in Vogue, Elle and Style Me Pretty."
     />
+    <link rel="canonical" href="https://www.motifloral.com/" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <meta name="theme-color" content="#f6eee1" />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
+
+    <!--
+      Static Open Graph. The Seo component refines these per page for crawlers
+      that run JavaScript, but WhatsApp, Facebook and iMessage do not, so a
+      shared link has to look right from the HTML alone.
+    -->
+    <meta property="og:site_name" content="Motif Floral" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.motifloral.com/" />
+    <meta property="og:title" content="Motif Floral, wedding &amp; event floral design in Italy" />
+    <meta
+      property="og:description"
+      content="Bespoke floral design for weddings and events across Italy and the UAE. Based in Rome."
+    />
+    <meta
+      property="og:image"
+      content="https://www.motifloral.com/images/home/home-hero-tablescape.webp"
+    />
+    <meta property="og:image:width" content="2400" />
+    <meta property="og:image:height" content="1600" />
+    <meta property="og:image:alt" content="Motif Floral tablescape at golden hour" />
+    <meta property="og:locale" content="en_GB" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Motif Floral, wedding &amp; event floral design in Italy" />
+    <meta
+      name="twitter:image"
+      content="https://www.motifloral.com/images/home/home-hero-tablescape.webp"
+    />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!--
+      Only the weights actually used: Montserrat 200 to 600, Antic Didone for
+      display. Lora was requested but never applied to anything. Loaded without
+      blocking the first paint, with a plain stylesheet for no-JS crawlers.
+    -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Antic+Didone&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400&display=swap"
       rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Antic+Didone&family=Montserrat:wght@200;300;400;500;600&display=swap"
+      media="print"
+      onload="this.media='all'"
     />
-    <title>Motif Floral</title>
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Antic+Didone&family=Montserrat:wght@200;300;400;500;600&display=swap"
+      />
+    </noscript>
+
+    <!-- The home hero is the largest paint; fetch the right size for the screen early. -->
+    <link
+      rel="preload"
+      as="image"
+      href="/images/home/home-hero-tablescape.webp"
+      imagesrcset="/images/home/home-hero-tablescape-800.webp 800w, /images/home/home-hero-tablescape-1200.webp 1200w, /images/home/home-hero-tablescape.webp 2400w"
+      imagesizes="100vw"
+      fetchpriority="high"
+    />
   </head>
   <body>
     <div id="root"></div>

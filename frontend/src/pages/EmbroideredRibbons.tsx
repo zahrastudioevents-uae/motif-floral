@@ -3,8 +3,8 @@ import { EmbroideredRibbonsPage } from './EmbroideredRibbonsPage'
 export function EmbroideredRibbons() {
   return (
     <EmbroideredRibbonsPage
-      seoTitle="Silk embroidered Ribbons – Handmade precious embroideries - Motif Floral"
-      seoDescription="Hand-embroidered silk ribbons with Miyuki beads, custom text, monograms, and heirloom finishes by Motif Floral."
+      seoTitle="MF Accessori | Hand-Embroidered Silk Ribbons"
+      seoDescription="Silk ribbons embroidered entirely by hand with your words, initials, monograms or original illustrations, with Miyuki glass beadwork. From €100."
       contactTo="/contact/"
     />
   )

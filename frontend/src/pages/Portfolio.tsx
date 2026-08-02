@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { Seo } from '../components/Seo'
+import { breadcrumb, graph, webPage } from '../lib/structuredData'
 import { PORTFOLIO_INSTAGRAM, PORTFOLIO_ITEMS } from '../data/portfolio'
 import { GRID_SIZES_WIDE, img, srcSetFor } from '../lib/assets'
 
@@ -20,8 +21,26 @@ export function Portfolio() {
   return (
     <>
       <Seo
-        title="Portfolio – Motif Floral - Motif Floral"
-        description="Editorial and real wedding floral design by Motif Floral across Italy."
+        title="Portfolio | Editorial & Real Wedding Florals in Italy"
+        description="Floral editorials and real weddings by Motif Floral, featured in Vogue, Elle, Style Me Pretty, The Wed and Wed Vibes. Villa Astor, Villa Aurelia, Castello Ruspoli and more."
+        jsonLd={graph(
+          webPage(
+            'Motif Floral portfolio',
+            '/portfolio/',
+            'Editorial and real wedding floral design across Italy.',
+          ),
+          breadcrumb([{ name: 'Home', path: '/' }, { name: 'Portfolio', path: '/portfolio/' }]),
+          {
+            '@type': 'ItemList',
+            name: 'Motif Floral editorials and real weddings',
+            itemListElement: PORTFOLIO_ITEMS.map((item, i) => ({
+              '@type': 'ListItem',
+              position: i + 1,
+              name: `${item.venue.replace(/,$/, '')}, ${item.city}`,
+              url: item.href,
+            })),
+          },
+        )}
       />
       {success ? (
         <div className="bg-mf-accent py-4 text-center font-sans text-sm text-mf-black">

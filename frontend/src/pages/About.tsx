@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { Seo } from '../components/Seo'
+import { breadcrumb, graph, webPage } from '../lib/structuredData'
 import { img } from '../lib/assets'
 
 /** Editorial bloom on warm ground — hero left column. */
@@ -47,8 +48,12 @@ export function About() {
   return (
     <>
       <Seo
-        title="About Motif Floral – Our Story & Philosophy - Motif Floral"
-        description="Meet Motif Floral, bespoke wedding and event floristry based in Rome, creating poetic, refined designs across Italy and beyond."
+        title="About Motif Floral | Our Story & Philosophy"
+        description="Motif Floral was born in 2018 in Rome. Bespoke wedding and event floristry, creating poetic, refined designs across Italy and the UAE."
+        jsonLd={graph(
+          webPage('About Motif Floral', '/about/', 'The story and philosophy behind Motif Floral.'),
+          breadcrumb([{ name: 'Home', path: '/' }, { name: 'About', path: '/about/' }]),
+        )}
       />
 
       <section className="mx-auto grid max-w-[1500px] items-stretch overflow-hidden pb-10 pt-16 md:grid-cols-[minmax(0,0.85fr)_minmax(280px,1.15fr)] md:rounded-sm md:px-[4vw] md:pb-14 md:pt-20 md:gap-0">

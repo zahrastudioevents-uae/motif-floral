@@ -4,6 +4,7 @@ import { CheckboxRow, FormSection, Hint, QField, RadioRow } from '../components/
 import { emptyPlanner, PlannerQuestion } from '../components/PlannerQuestion'
 import { RestyleHero } from '../components/RestyleHero'
 import { Seo } from '../components/Seo'
+import { breadcrumb, graph, webPage } from '../lib/structuredData'
 import {
   BUDGET_ELOPEMENT,
   BUDGET_EVENT,
@@ -237,8 +238,16 @@ export function GetQuote() {
   return (
     <>
       <Seo
-        title="Get a Quote – Motif Floral - Motif Floral"
-        description="Request a bespoke floral quote for your event, wedding or elopement in Italy."
+        title="Get a Quote | Motif Floral"
+        description="Request a floral quote for a wedding, elopement or event in Italy or the UAE. Wedding commissions start at €8,000, elopements at €4,000."
+        jsonLd={graph(
+          webPage(
+            'Request a quote from Motif Floral',
+            '/getquote/',
+            'Tell us about your celebration and we will design for it.',
+          ),
+          breadcrumb([{ name: 'Home', path: '/' }, { name: 'Get a Quote', path: '/getquote/' }]),
+        )}
       />
       <RestyleHero title="Share the vision. We will shape the floral world." image={QUOTE_HERO} />
 

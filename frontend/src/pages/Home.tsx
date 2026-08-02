@@ -4,6 +4,7 @@ import { GRID_SIZES, srcSetFor } from '../lib/assets'
 import { HeroSlideshow } from '../components/HeroSlideshow'
 import { HomeTestimonialsSection } from '../components/HomeTestimonialsSection'
 import { Seo } from '../components/Seo'
+import { faqSchema, graph, webPage } from '../lib/structuredData'
 import {
   GALLERY_IMAGES,
   HOME_HERO_SLIDES,
@@ -33,8 +34,16 @@ export function Home() {
   return (
     <>
       <Seo
-        title="Luxury Wedding & Event Floral Design in Italy – Motif Floral - Motif Floral"
-        description="Bespoke floral design for weddings and events in Italy. Based in Rome, available worldwide."
+        title="Luxury Wedding & Event Floral Design in Italy | Motif Floral"
+        description="Bespoke floral design for weddings and events across Italy and the UAE. Based in Rome, founded 2018. Featured in Vogue, Elle and Style Me Pretty."
+        jsonLd={graph(
+          webPage(
+            'Motif Floral, wedding and event floral design in Italy',
+            '/',
+            'Bespoke floral design for weddings and events across Italy and the UAE.',
+          ),
+          faqSchema,
+        )}
       />
       <div className="relative">
         <HeroSlideshow
@@ -90,6 +99,8 @@ export function Home() {
             >
               <img
                 src={t.image}
+                srcSet={srcSetFor(t.image)}
+                sizes={GRID_SIZES}
                 alt={t.alt}
                 className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
                 loading="lazy"

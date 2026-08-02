@@ -1,5 +1,6 @@
 import { RestyleHero } from '../components/RestyleHero'
 import { Seo } from '../components/Seo'
+import { breadcrumb, graph, webPage } from '../lib/structuredData'
 import {
   GOOGLE_REVIEW_URL,
   REVIEWS,
@@ -11,8 +12,12 @@ export function Testimonials() {
   return (
     <>
       <Seo
-        title="Client Reviews – Motif Floral - Motif Floral"
-        description="Discover what couples and clients say about their Motif Floral experience."
+        title="Client Reviews | Motif Floral"
+        description="What couples say about working with Motif Floral on their wedding florals in Italy."
+        jsonLd={graph(
+          webPage('Motif Floral reviews', '/testimonials/', 'Words from couples we designed for.'),
+          breadcrumb([{ name: 'Home', path: '/' }, { name: 'Reviews', path: '/testimonials/' }]),
+        )}
       />
       <RestyleHero
         eyebrow="Kind words"

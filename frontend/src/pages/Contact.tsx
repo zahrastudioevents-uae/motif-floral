@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 import { FormSection, QField } from '../components/FormLayout'
 import { RestyleHero } from '../components/RestyleHero'
 import { Seo } from '../components/Seo'
+import { absolute } from '../lib/site'
+import { breadcrumb, graph, webPage } from '../lib/structuredData'
 import {
   CONTACT_SERVICE_OPTIONS,
   HOW_FOUND_NEEDING_DETAIL,
@@ -54,8 +56,13 @@ export function Contact() {
   return (
     <>
       <Seo
-        title="Contact – Motif Floral - Motif Floral"
-        description="Contact Motif Floral for wedding and event florals in Italy."
+        title="Contact | Motif Floral, Rome"
+        description="Talk to Motif Floral about wedding and event florals in Italy and the UAE. Email motifloral@gmail.com or WhatsApp +39 334 569 9447."
+        jsonLd={graph(
+          webPage('Contact Motif Floral', '/contact/', 'Get in touch about your celebration.'),
+          breadcrumb([{ name: 'Home', path: '/' }, { name: 'Contact', path: '/contact/' }]),
+          { '@type': 'ContactPage', '@id': `${absolute('/contact/')}#contactpage` },
+        )}
       />
       <RestyleHero title="Let us begin with your atmosphere." image={CONTACT_HERO} />
       <section className="bg-[#f6eee1] px-[4vw] py-20 md:py-24">
