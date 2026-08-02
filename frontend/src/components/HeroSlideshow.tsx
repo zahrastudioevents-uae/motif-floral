@@ -201,7 +201,7 @@ export function HeroSlideshow({
           <button
             type="button"
             onClick={onPrev}
-            className="-m-1 flex items-center p-1 text-white/85 transition-opacity hover:text-white"
+            className="-m-2 flex min-h-[44px] min-w-[44px] items-center justify-center p-2 text-white/85 transition-opacity hover:text-white"
             aria-label="Previous slide"
           >
             <LongStemNavArrowLeft className="block" />
@@ -212,7 +212,7 @@ export function HeroSlideshow({
           <button
             type="button"
             onClick={onNext}
-            className="-m-1 flex items-center p-1 text-white/85 transition-opacity hover:text-white"
+            className="-m-2 flex min-h-[44px] min-w-[44px] items-center justify-center p-2 text-white/85 transition-opacity hover:text-white"
             aria-label="Next slide"
           >
             <LongStemNavArrowRight className="block" />

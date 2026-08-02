@@ -42,6 +42,7 @@ export function HomeTestimonialsSection({ slides }: { slides: HomeTestimonialSli
               <Link
                 to="/testimonials/"
                 className="mf-cta mf-cta-dark mt-4 self-center"
+                aria-label="Read more client reviews"
               >
                 Read more
               </Link>
