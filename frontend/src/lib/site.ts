@@ -6,7 +6,7 @@
  * VITE_NOINDEX=true so Google never indexes the staging copy. Drop both once
  * the domain points here.
  */
-export const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://www.motifloral.com').replace(
+export const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://motifloral.com').replace(
   /\/$/,
   '',
 )

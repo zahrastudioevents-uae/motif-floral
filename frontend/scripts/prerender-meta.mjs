@@ -20,7 +20,7 @@ import { ROUTES } from './seo-routes.mjs'
 const here = dirname(fileURLToPath(import.meta.url))
 const distDir = join(here, '..', 'dist')
 
-const SITE_URL = (process.env.VITE_SITE_URL || 'https://www.motifloral.com').replace(/\/$/, '')
+const SITE_URL = (process.env.VITE_SITE_URL || 'https://motifloral.com').replace(/\/$/, '')
 const NOINDEX = process.env.VITE_NOINDEX === 'true'
 
 /**
