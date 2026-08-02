@@ -23,6 +23,14 @@ const distDir = join(here, '..', 'dist')
 const SITE_URL = (process.env.VITE_SITE_URL || 'https://www.motifloral.com').replace(/\/$/, '')
 const NOINDEX = process.env.VITE_NOINDEX === 'true'
 
+/**
+ * Search Console's HTML-tag method. Set VITE_GOOGLE_SITE_VERIFICATION to the
+ * value Google gives you and it lands on every page, which is what the
+ * verifier looks for. Verifying the domain by DNS instead is better if you can
+ * reach the DNS panel, because it survives moving hosts.
+ */
+const GSC_TOKEN = process.env.VITE_GOOGLE_SITE_VERIFICATION || ''
+
 const shell = readFileSync(join(distDir, 'index.html'), 'utf8')
 
 const escape = (s) =>
@@ -62,6 +70,10 @@ for (const route of ROUTES) {
     'robots',
     NOINDEX ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1',
   )
+
+  if (GSC_TOKEN) {
+    html = setMeta(html, 'name', 'google-site-verification', GSC_TOKEN)
+  }
 
   // Only the home page paints that hero, so drop the preload elsewhere.
   if (route.path !== '/') {
