@@ -1,3 +1,5 @@
+import IMAGE_WIDTHS from './imageWidths.json'
+
 /**
  * Images ship with the site as WebP under /public/images.
  *
@@ -24,8 +26,14 @@ export function img(path: string): string {
  */
 export function srcSetFor(url: string): string | undefined {
   if (!url.startsWith('/images/') || !url.endsWith('.webp')) return undefined
-  const at = (w: number) => url.replace(/\.webp$/, `-${w}.webp`)
-  return `${at(800)} 800w, ${at(1200)} 1200w, ${url} 1500w`
+  const full = (IMAGE_WIDTHS as Record<string, number>)[url]
+  if (!full) return undefined
+  const at = (w: number) => `${url.replace(/\.webp$/, `-${w}.webp`)} ${w}w`
+  // Only offer variants that were actually generated, and describe the original
+  // with its real width: claiming a 2400px file is 1500px makes the browser
+  // pick it for screens that needed a third of the pixels.
+  const steps = [500, 800, 1200].filter((w) => w < full).map(at)
+  return [...steps, `${url} ${full}w`].join(', ')
 }
 
 /**

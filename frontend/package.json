@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "download:images": "bash scripts/download-images.sh",
     "download:press": "bash scripts/download-press-logos.sh",
-    "seo": "node scripts/generate-seo-files.mjs"
+    "seo": "node scripts/generate-seo-files.mjs",
+    "images": "node scripts/generate-image-manifest.mjs"
   },
   "dependencies": {
     "react": "^19.2.4",

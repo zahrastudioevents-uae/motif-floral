@@ -177,7 +177,7 @@ export function Home() {
                 type="button"
                 className="group grid w-full grid-cols-[40px_1fr] items-baseline gap-2 border-0 bg-transparent py-3 text-left md:grid-cols-[90px_1fr] md:items-start md:gap-5 md:py-8"
               >
-                <span className="font-display text-lg text-mf-black/35 transition-colors group-hover:text-mf-black md:text-3xl">
+                <span className="font-display text-lg text-mf-black/60 transition-colors group-hover:text-mf-black md:text-3xl">
                   {item.eyebrow}
                 </span>
                 <span>

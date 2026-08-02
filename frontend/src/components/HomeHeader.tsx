@@ -28,8 +28,8 @@ export function HomeHeader({ overHero = false }: { overHero?: boolean }) {
 
   const wordmarkStyle: CSSProperties = {
     aspectRatio: '1808 / 352',
-    WebkitMaskImage: 'url(/images/motif-wordmark.png)',
-    maskImage: 'url(/images/motif-wordmark.png)',
+    WebkitMaskImage: 'url(/images/motif-wordmark.webp)',
+    maskImage: 'url(/images/motif-wordmark.webp)',
     WebkitMaskSize: 'contain',
     maskSize: 'contain',
     WebkitMaskRepeat: 'no-repeat',
