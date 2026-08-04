@@ -134,3 +134,37 @@ export function CheckboxRow({
     </div>
   )
 }
+
+/**
+ * The consent checkbox, with the link to the policy it refers to. Consent that
+ * points at nothing is not consent.
+ */
+export function PrivacyConsent({
+  checked,
+  onChange,
+  name,
+}: {
+  checked?: boolean
+  onChange?: (v: boolean) => void
+  name?: string
+}) {
+  return (
+    <label className="flex gap-3 font-sans text-[0.8rem] leading-relaxed text-mf-muted">
+      <input
+        type="checkbox"
+        required
+        name={name}
+        {...(onChange ? { checked: !!checked, onChange: (e) => onChange(e.target.checked) } : {})}
+        className="mt-0.5 accent-mf-black"
+      />
+      <span>
+        I authorise the processing of my personal data to respond to this request, as described in
+        the{' '}
+        <a href="/privacy/" className="underline underline-offset-2 hover:text-mf-black">
+          Privacy Policy
+        </a>
+        . I may withdraw consent or ask for access or erasure at any time.
+      </span>
+    </label>
+  )
+}

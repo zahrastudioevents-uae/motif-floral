@@ -21,6 +21,9 @@ const Testimonials = lazy(() =>
 const EmbroideredRibbons = lazy(() =>
   import('./pages/EmbroideredRibbons').then((m) => ({ default: m.EmbroideredRibbons })),
 )
+const Privacy = lazy(() => import('./pages/Privacy').then((m) => ({ default: m.Privacy })))
+const NotFound = lazy(() => import('./pages/NotFound').then((m) => ({ default: m.NotFound })))
+const Location = lazy(() => import('./pages/Location').then((m) => ({ default: m.Location })))
 
 /** Deliberately blank: a spinner would flash for longer than these chunks take. */
 const page = (element: ReactNode) => <Suspense fallback={<div className="min-h-screen" />}>{element}</Suspense>
@@ -39,6 +42,10 @@ const router = createBrowserRouter([
       { path: 'testimonials', element: page(<Testimonials />) },
       { path: 'mfaccessori', element: page(<EmbroideredRibbons />) },
       { path: 'embroideredribbons', element: page(<EmbroideredRibbons />) },
+      { path: 'privacy', element: page(<Privacy />) },
+      { path: 'weddings/:slug', element: page(<Location />) },
+      // Anything else: a real 404 page rather than the router's default screen.
+      { path: '*', element: page(<NotFound />) },
     ],
   },
 ])

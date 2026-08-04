@@ -1,6 +1,6 @@
 import { type FormEvent, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { FormSection, QField } from '../components/FormLayout'
+import { FormSection, PrivacyConsent, QField } from '../components/FormLayout'
 import { RestyleHero } from '../components/RestyleHero'
 import { Seo } from '../components/Seo'
 import { absolute } from '../lib/site'
@@ -10,7 +10,6 @@ import {
   HOW_FOUND_NEEDING_DETAIL,
   HOW_FOUND_OPTIONS,
   howFoundDetailPlaceholder,
-  PRIVACY_TEXT,
 } from '../data/forms'
 import { postJson } from '../lib/api'
 
@@ -166,10 +165,7 @@ export function Contact() {
               </FormSection>
 
               <div className="border-t border-mf-muted/20 pt-9">
-                <label className="flex gap-3 font-sans text-[0.85rem] leading-relaxed text-mf-black/70">
-                  <input type="checkbox" name="privacy" required className="mt-0.5 accent-mf-black" />
-                  <span>{PRIVACY_TEXT}</span>
-                </label>
+                <PrivacyConsent name="privacy" />
                 {status === 'err' ? <p className="mt-4 text-sm text-red-700">{err}</p> : null}
                 <div className="mt-9 flex justify-center">
                   <button

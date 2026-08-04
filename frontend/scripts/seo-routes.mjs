@@ -70,6 +70,42 @@ export const ROUTES = [
     image: '/images/site/2qZExp/QD5PD3/IMG_2894_mod-bff09d8d-1500.webp',
   },
   {
+    path: '/weddings/rome/',
+    priority: '0.9',
+    changefreq: 'monthly',
+    title: 'Wedding Florist in Rome | Motif Floral',
+    description:
+      'Bespoke wedding florals in Rome by Motif Floral. Villa Aurelia, Villa Brasini, Palazzo Shedir, Campidoglio. Studio based in Rome, commissions from EUR 8,000.',
+    image: '/images/site/2qZExp/ZDPd8W/AD-wedding-100_mod-4b6e4542-1500.webp',
+  },
+  {
+    path: '/weddings/tuscany/',
+    priority: '0.9',
+    changefreq: 'monthly',
+    title: 'Wedding Florist in Tuscany | Motif Floral',
+    description:
+      'Wedding florals across Tuscany by Motif Floral, from Florence to Val d\u2019Orcia. Editorials published in Style Me Pretty and Wedding Chicks.',
+    image: '/images/site/2qZExp/EY5eO5/Wedding_027_websize_mod-2abdd4d4-1500.webp',
+  },
+  {
+    path: '/weddings/amalfi-coast/',
+    priority: '0.9',
+    changefreq: 'monthly',
+    title: 'Wedding Florist on the Amalfi Coast | Motif Floral',
+    description:
+      'Wedding florals on the Amalfi Coast and in Sorrento by Motif Floral. Villa Astor and Ravello. Editorials published in Wed Vibes.',
+    image: '/images/site/2qZExp/3vdn63/Villa-Astor-Editorial-Haute-Weddings-113-a3126e19-1500.webp',
+  },
+  {
+    path: '/privacy/',
+    priority: '0.3',
+    changefreq: 'yearly',
+    title: 'Privacy Policy | Motif Floral',
+    description:
+      'How Motif Floral collects, uses and stores the personal data you send through the contact and quote forms.',
+    image: '/images/home/home-hero-tablescape.webp',
+  },
+  {
     path: '/chooseyourbouquet/',
     priority: '0.6',
     changefreq: 'monthly',

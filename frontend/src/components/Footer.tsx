@@ -59,6 +59,27 @@ export function Footer() {
             </Link>
           ))}
         </nav>
+        {/* Internal links are how these pages get found at all. */}
+        <nav className="mb-6 flex flex-wrap justify-center gap-x-8 gap-y-2" aria-label="Where we work">
+          {[
+            ['/weddings/rome/', 'Weddings in Rome'],
+            ['/weddings/tuscany/', 'Weddings in Tuscany'],
+            ['/weddings/amalfi-coast/', 'Weddings on the Amalfi Coast'],
+          ].map(([to, label]) => (
+            <Link
+              key={to}
+              to={to}
+              className="text-[0.7rem] uppercase tracking-[0.1em] text-mf-muted hover:text-mf-black"
+            >
+              {label}
+            </Link>
+          ))}
+        </nav>
+        <nav className="mb-6 flex justify-center" aria-label="Legal">
+          <Link to="/privacy/" className="text-[0.7rem] uppercase tracking-[0.1em] text-mf-muted hover:text-mf-black">
+            Privacy Policy
+          </Link>
+        </nav>
         <div className="mb-3 flex justify-center gap-10 md:mb-4">
           {social.map((s) => (
             <a

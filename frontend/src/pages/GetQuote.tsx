@@ -1,6 +1,6 @@
 import { type FormEvent, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { CheckboxRow, FormSection, Hint, QField, RadioRow } from '../components/FormLayout'
+import { CheckboxRow, FormSection, Hint, PrivacyConsent, QField, RadioRow } from '../components/FormLayout'
 import { emptyPlanner, PlannerQuestion } from '../components/PlannerQuestion'
 import { RestyleHero } from '../components/RestyleHero'
 import { Seo } from '../components/Seo'
@@ -21,7 +21,7 @@ import {
   type ServiceType,
   WEDDING_SERVICE_OPTIONS,
 } from '../data/getQuote'
-import { howFoundDetailPlaceholder, PRIVACY_TEXT } from '../data/forms'
+import { howFoundDetailPlaceholder } from '../data/forms'
 import { postJson } from '../lib/api'
 import { img } from '../lib/assets'
 
@@ -214,16 +214,7 @@ export function GetQuote() {
 
   const privacyBlock = (checked: boolean, onChange: (v: boolean) => void) => (
     <div className="border-t border-mf-muted/15 pt-8">
-      <label className="flex gap-3 font-sans text-[0.75rem] leading-relaxed text-mf-muted">
-        <input
-          type="checkbox"
-          checked={checked}
-          onChange={(e) => onChange(e.target.checked)}
-          required
-          className="mt-0.5 accent-mf-black"
-        />
-        <span>{PRIVACY_TEXT}</span>
-      </label>
+      <PrivacyConsent checked={checked} onChange={onChange} />
     </div>
   )
 
