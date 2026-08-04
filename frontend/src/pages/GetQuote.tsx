@@ -1,6 +1,6 @@
 import { type FormEvent, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { CheckboxRow, FormSection, Hint, PrivacyConsent, QField, RadioRow } from '../components/FormLayout'
+import { CheckboxRow, FormError, FormSection, Hint, PrivacyConsent, QField, RadioRow } from '../components/FormLayout'
 import { emptyPlanner, PlannerQuestion } from '../components/PlannerQuestion'
 import { RestyleHero } from '../components/RestyleHero'
 import { Seo } from '../components/Seo'
@@ -420,7 +420,7 @@ export function GetQuote() {
               </FormSection>
 
               {privacyBlock(eventFields.privacyAccepted, (v) => setEventFields((p) => ({ ...p, privacyAccepted: v })))}
-              {status === 'err' ? <p className="mt-4 text-center text-sm text-red-700">{err}</p> : null}
+              {status === 'err' ? <FormError message={err} center /> : null}
               {submitButton}
             </form>
           ) : null}
@@ -740,7 +740,7 @@ export function GetQuote() {
               {privacyBlock(weddingFields.privacyAccepted, (v) =>
                 setWeddingFields((p) => ({ ...p, privacyAccepted: v })),
               )}
-              {status === 'err' ? <p className="mt-4 text-center text-sm text-red-700">{err}</p> : null}
+              {status === 'err' ? <FormError message={err} center /> : null}
               {submitButton}
             </form>
           ) : null}

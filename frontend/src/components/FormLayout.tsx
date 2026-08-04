@@ -1,4 +1,5 @@
 import { type ReactNode } from 'react'
+import { BUSINESS } from '../lib/site'
 
 export function FormSection({
   title,
@@ -132,6 +133,22 @@ export function CheckboxRow({
         </label>
       ))}
     </div>
+  )
+}
+
+/**
+ * What the visitor sees when the submission does not go through. It always
+ * carries the address, so a broken form costs a click rather than an enquiry.
+ */
+export function FormError({ message, center }: { message: string; center?: boolean }) {
+  return (
+    <p className={`mt-4 text-sm text-red-700 ${center ? 'text-center' : ''}`}>
+      {message} Please write to{' '}
+      <a href={`mailto:${BUSINESS.email}`} className="underline underline-offset-2">
+        {BUSINESS.email}
+      </a>{' '}
+      and we will answer from there.
+    </p>
   )
 }
 

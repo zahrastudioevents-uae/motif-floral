@@ -1,6 +1,6 @@
 import { type FormEvent, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { FormSection, PrivacyConsent, QField } from '../components/FormLayout'
+import { FormError, FormSection, PrivacyConsent, QField } from '../components/FormLayout'
 import { RestyleHero } from '../components/RestyleHero'
 import { Seo } from '../components/Seo'
 import { absolute } from '../lib/site'
@@ -166,7 +166,7 @@ export function Contact() {
 
               <div className="border-t border-mf-muted/20 pt-9">
                 <PrivacyConsent name="privacy" />
-                {status === 'err' ? <p className="mt-4 text-sm text-red-700">{err}</p> : null}
+                {status === 'err' ? <FormError message={err} /> : null}
                 <div className="mt-9 flex justify-center">
                   <button
                     type="submit"
