@@ -13,6 +13,10 @@
   --color-mf-btn-hover: #7d7d7d;
   --color-quote-primary: #f6f4f2;
   --color-quote-accent: #e6e1da;
+  /* The panel behind the Contact and Get a Quote forms. Lighter and less yellow
+     than the old #f6eee1, which read as cream rather than sand. */
+  --color-mf-sand: #f8f5f0;
+  --color-mf-sand-deep: #e9e3d9;
 
   --max-width-content: 1500px;
 
@@ -166,14 +170,14 @@
   }
 
   /*
-   * Filled fields: a soft warm white that sits on the beige panel without
-   * reading as optical white, and no border. Focus lifts the fill and adds a
-   * faint inner edge, so the field is still clearly active without a frame.
+   * Filled fields: plain white, so what you type stands out against the sand
+   * panel. No border; focus adds a faint inner edge so the field is clearly
+   * active without a frame around it.
    */
   .mf-field > input,
   .mf-field > select,
   .mf-field > textarea {
-    @apply w-full border-0 bg-[#fcf9f4] px-4 py-3.5 font-sans text-[1.0625rem] text-mf-black outline-none;
+    @apply w-full border-0 bg-white px-4 py-3.5 font-sans text-[1.0625rem] text-mf-black outline-none;
     transition: background-color 0.2s ease, box-shadow 0.2s ease;
   }
 
@@ -184,33 +188,48 @@
   .mf-field > input:focus,
   .mf-field > select:focus,
   .mf-field > textarea:focus {
-    background-color: #fffdfa;
+    background-color: #ffffff;
     box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-mf-muted) 28%, transparent);
   }
 
   /* Same treatment for the follow-up inputs that appear outside a QField. */
   .mf-inline-field {
-    @apply border-0 bg-[#fcf9f4] px-4 py-3 font-sans text-[1rem] text-mf-black outline-none;
+    @apply border-0 bg-white px-4 py-3 font-sans text-[1rem] text-mf-black outline-none;
     transition: background-color 0.2s ease, box-shadow 0.2s ease;
   }
 
   .mf-inline-field:focus {
-    background-color: #fffdfa;
+    background-color: #ffffff;
     box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-mf-muted) 28%, transparent);
+  }
+
+  /* A field the visitor has left with something wrong in it. */
+  .mf-field-invalid,
+  .mf-field.mf-field-invalid > input,
+  .mf-field.mf-field-invalid > select,
+  .mf-field.mf-field-invalid > textarea {
+    background-color: rgb(254 242 242 / 0.6);
+    box-shadow: inset 0 0 0 1px rgb(248 113 113);
   }
 }
 
 /* Unlayered on purpose: this must beat the Tailwind utility that colours selects. */
 select:has(> option[value='']:checked) {
-  color: color-mix(in srgb, var(--color-mf-muted) 62%, transparent);
+  color: var(--color-mf-muted);
 }
 
-/* Guidance inside a field stays small and quiet; what you actually type is full size. */
+/* Guidance inside a field: centred, quieter than what you type, still legible. */
 input::placeholder,
 textarea::placeholder {
-  font-size: 0.8125rem;
+  font-size: 0.9375rem;
   letter-spacing: 0.01em;
-  color: color-mix(in srgb, var(--color-mf-muted) 62%, transparent);
+  text-align: center;
+  color: color-mix(in srgb, var(--color-mf-muted) 85%, transparent);
+}
+
+/* An empty select reads as guidance too, so it is centred the same way. */
+select:has(> option[value='']:checked) {
+  text-align: center;
 }
 
 select:has(> option[value='']:checked) {

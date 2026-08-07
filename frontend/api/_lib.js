@@ -82,8 +82,10 @@ function rows(data) {
 
 export function buildEmail(heading, data) {
   return `<div style="font:14px/1.6 -apple-system,Segoe UI,sans-serif">
-    <h2 style="font-weight:normal;letter-spacing:.04em;text-transform:uppercase;font-size:15px;color:#111">${escape(heading)}</h2>
+    <p style="margin:0 0 4px;letter-spacing:.12em;text-transform:uppercase;font-size:11px;color:#999">Motif Floral</p>
+    <h2 style="margin:0 0 12px;font-weight:normal;letter-spacing:.04em;text-transform:uppercase;font-size:15px;color:#111">${escape(heading)}</h2>
     ${rows(data)}
+    <p style="margin:20px 0 0;font-size:12px;color:#999">Sent from the form on <a href="https://motifloral.com" style="color:#999">motifloral.com</a></p>
   </div>`
 }
 
@@ -97,12 +99,17 @@ export async function sendEmail({ subject, html, replyTo }) {
       .join(', ')
     throw Object.assign(new Error(`Email not configured: ${missing}`), { status: 503 })
   }
+  // RECIPIENT_EMAIL takes a comma-separated list, so an enquiry can land in more
+  // than one inbox. Note that the shared onboarding@resend.dev sender refuses the
+  // whole request if any recipient is not the Resend account's own address: with
+  // that sender the list has to stay a single address.
+  const recipients = to.split(',').map((s) => s.trim()).filter(Boolean)
   const res = await fetch('https://api.resend.com/emails', {
     method: 'POST',
     headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
     body: JSON.stringify({
       from,
-      to: [to],
+      to: recipients,
       subject,
       html,
       ...(replyTo ? { reply_to: replyTo } : {}),

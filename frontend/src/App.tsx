@@ -1,5 +1,5 @@
 import { lazy, Suspense, type ReactNode } from 'react'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
 import { Layout } from './components/Layout'
 import { Home } from './pages/Home'
 
@@ -42,7 +42,10 @@ const router = createBrowserRouter([
       { path: 'testimonials', element: page(<Testimonials />) },
       { path: 'mfaccessori', element: page(<EmbroideredRibbons />) },
       { path: 'embroideredribbons', element: page(<EmbroideredRibbons />) },
-      { path: 'privacy', element: page(<Privacy />) },
+      { path: 'privacy-policy', element: page(<Privacy />) },
+      // The old paths still exist in the wild: keep them, send them onward.
+      { path: 'privacy', element: <Navigate to="/privacy-policy" replace /> },
+      { path: 'cookie-policy', element: <Navigate to="/privacy-policy#cookie-policy" replace /> },
       { path: 'weddings/:slug', element: page(<Location />) },
       // Anything else: a real 404 page rather than the router's default screen.
       { path: '*', element: page(<NotFound />) },

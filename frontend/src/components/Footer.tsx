@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { NAV } from '../data/nav'
+import { trackEvent } from '../lib/analytics'
 
 const ICON = 13
 
@@ -76,8 +77,11 @@ export function Footer() {
           ))}
         </nav>
         <nav className="mb-6 flex justify-center" aria-label="Legal">
-          <Link to="/privacy/" className="text-[0.7rem] uppercase tracking-[0.1em] text-mf-muted hover:text-mf-black">
-            Privacy Policy
+          <Link
+            to="/privacy-policy"
+            className="text-[0.62rem] lowercase tracking-[0.08em] text-mf-muted/80 hover:text-mf-black"
+          >
+            (privacy &amp; cookie policy)
           </Link>
         </nav>
         <div className="mb-3 flex justify-center gap-10 md:mb-4">
@@ -89,6 +93,7 @@ export function Footer() {
               rel="noreferrer"
               className="inline-flex min-h-9 min-w-9 items-center justify-center text-mf-black/70 transition-colors hover:text-mf-black"
               aria-label={s.label}
+              onClick={() => trackEvent('social_click', { network: s.label.toLowerCase(), source: 'footer' })}
             >
               <s.icon />
             </a>
@@ -110,13 +115,18 @@ export function Footer() {
           </p>
           <p className="mx-auto mt-3 max-w-md text-[0.7rem] normal-case leading-snug md:text-[0.75rem]">
             Reach us at{' '}
-            <a href="mailto:motifloral@gmail.com" className="underline decoration-mf-muted/40 underline-offset-2 hover:text-mf-black">
+            <a
+              href="mailto:motifloral@gmail.com"
+              className="underline decoration-mf-muted/40 underline-offset-2 hover:text-mf-black"
+              onClick={() => trackEvent('email_click', { source: 'footer' })}
+            >
               motifloral@gmail.com
             </a>{' '}
             or on WhatsApp{' '}
             <a
               href="https://wa.me/393345699447"
               className="underline decoration-mf-muted/40 underline-offset-2 hover:text-mf-black"
+              onClick={() => trackEvent('whatsapp_click', { source: 'footer' })}
             >
               +39 3345699447
             </a>

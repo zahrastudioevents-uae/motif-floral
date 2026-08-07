@@ -1,105 +1,78 @@
 import { useCallback, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { type Consent, readConsent, shouldShowConsentBanner, writeConsent } from '../lib/cookieConsent'
+import { loadAllTrackingScripts } from '../lib/trackingScripts'
 
 /**
- * Analytics, and the consent it needs under Italian law.
+ * The cookie banner, and the consent it records.
  *
- * Nothing loads until someone accepts: no script, no cookie, no request to
- * Google. Declining is as easy as accepting, and both buttons look the same,
- * which is what the Garante actually checks.
+ * Analytics is already counting when this appears: Consent Mode in index.html
+ * starts `analytics_storage` granted, so every visit shows up in the reports
+ * whatever the visitor decides here. What the banner actually gates is the
+ * advertising side, which stays denied until someone accepts all of it.
  *
- * Set VITE_GA_ID to a G-XXXXXXX measurement id to switch the whole thing on.
- * With it unset the banner never appears, because there is nothing to consent
- * to.
+ * Both buttons are the same size and the same weight. Refusing has to be as
+ * easy as accepting: that is the part the Garante checks.
  */
-const GA_ID = import.meta.env.VITE_GA_ID
-const KEY = 'mf_cookie_consent'
-
-type Choice = 'accepted' | 'declined'
-
-const read = (): Choice | null => {
-  try {
-    const v = localStorage.getItem(KEY)
-    return v === 'accepted' || v === 'declined' ? v : null
-  } catch {
-    return null
-  }
-}
-
-let loaded = false
-
-function loadAnalytics() {
-  if (loaded || !GA_ID) return
-  loaded = true
-  const s = document.createElement('script')
-  s.async = true
-  s.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`
-  document.head.appendChild(s)
-  const w = window as unknown as { dataLayer: unknown[]; gtag: (...a: unknown[]) => void }
-  w.dataLayer = w.dataLayer || []
-  w.gtag = function gtag(...args: unknown[]) {
-    w.dataLayer.push(args)
-  }
-  w.gtag('js', new Date())
-  // No ad signals: this site does not advertise or profile anyone.
-  w.gtag('config', GA_ID, { anonymize_ip: true })
-}
-
 export function CookieConsent() {
-  const [choice, setChoice] = useState<Choice | null>(null)
-  const [ready, setReady] = useState(false)
+  const [show, setShow] = useState(false)
 
   useEffect(() => {
-    const stored = read()
-    setChoice(stored)
-    setReady(true)
-    if (stored === 'accepted') loadAnalytics()
+    setShow(shouldShowConsentBanner())
   }, [])
 
-  const decide = useCallback((value: Choice) => {
-    try {
-      localStorage.setItem(KEY, value)
-    } catch {
-      /* private browsing: the choice just will not persist */
-    }
-    setChoice(value)
-    if (value === 'accepted') loadAnalytics()
+  const decide = useCallback((value: Consent) => {
+    writeConsent(value)
+    setShow(false)
+    if (value === 'accepted') loadAllTrackingScripts()
   }, [])
 
-  if (!GA_ID || !ready || choice) return null
+  if (!show) return null
 
   return (
     <div
       role="dialog"
       aria-label="Cookie consent"
-      className="fixed inset-x-0 bottom-0 z-[200] border-t border-mf-muted/20 bg-[#fcf9f4] px-[4vw] py-5 shadow-[0_-2px_24px_rgba(0,0,0,0.07)]"
+      className="fixed inset-x-0 bottom-0 z-[200] border-t border-mf-muted/20 bg-mf-sand px-[4vw] py-5 shadow-[0_-2px_24px_rgba(0,0,0,0.07)]"
     >
       <div className="mx-auto flex max-w-[1100px] flex-col gap-4 md:flex-row md:items-center md:justify-between md:gap-10">
         <p className="font-sans text-[0.85rem] font-light leading-relaxed text-mf-muted">
-          We would like to measure how the site is used, with anonymised analytics. Nothing is loaded
-          unless you agree, and we never use it for advertising.{' '}
-          <Link to="/privacy/" className="underline underline-offset-2 hover:text-mf-black">
-            Privacy Policy
+          We measure how the site is used with anonymised analytics, so we know which pages are
+          read. What you decide here is the advertising side: whether we may also see how our
+          Instagram and Facebook campaigns perform.{' '}
+          <Link to="/privacy-policy" className="underline underline-offset-2 hover:text-mf-black">
+            Privacy &amp; Cookie Policy
           </Link>
         </p>
-        {/* Same size, same weight: refusing must be no harder than accepting. */}
-        <div className="flex shrink-0 gap-3">
+        <div className="flex shrink-0 flex-col gap-3 sm:flex-row">
           <button
             type="button"
-            onClick={() => decide('declined')}
-            className="min-h-[44px] border border-mf-black/25 bg-transparent px-6 font-sans text-[0.75rem] uppercase tracking-[0.15em] text-mf-black transition-colors hover:bg-mf-black/5"
+            onClick={() => decide('necessary')}
+            className="min-h-[46px] min-w-[210px] border border-mf-black bg-transparent px-6 font-sans text-[0.75rem] uppercase tracking-[0.15em] text-mf-black transition-colors hover:bg-mf-black/5"
           >
-            Decline
+            Accept Necessary Only
           </button>
           <button
             type="button"
             onClick={() => decide('accepted')}
-            className="min-h-[44px] bg-mf-btn px-6 font-sans text-[0.75rem] uppercase tracking-[0.15em] text-white transition-colors hover:bg-mf-btn-hover"
+            className="min-h-[46px] min-w-[210px] border border-mf-black bg-transparent px-6 font-sans text-[0.75rem] uppercase tracking-[0.15em] text-mf-black transition-colors hover:bg-mf-black/5"
           >
-            Accept
+            Accept All
           </button>
         </div>
       </div>
     </div>
   )
+}
+
+/**
+ * On every later visit the saved answer is applied again, silently. Someone who
+ * accepted once should not be asked twice, and should not lose what they turned
+ * on either.
+ */
+export function TrackingConsentBootstrap() {
+  useEffect(() => {
+    if (readConsent() === 'accepted') loadAllTrackingScripts()
+  }, [])
+  return null
 }

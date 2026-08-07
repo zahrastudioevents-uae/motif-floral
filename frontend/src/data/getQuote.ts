@@ -1,10 +1,19 @@
 export type ServiceType = 'events' | 'wedding' | 'elopement'
 
-export const SERVICE_TABS: { key: ServiceType; label: string }[] = [
-  { key: 'wedding', label: 'Wedding' },
-  { key: 'elopement', label: 'Elopement' },
+/**
+ * Two choices, not three: a couple picks the celebration, not the label. Whether
+ * it is a wedding or an elopement is asked inside the form, because the two only
+ * diverge once the questions start (guest count, floral pieces, budget).
+ */
+export const SERVICE_TABS: { key: Exclude<ServiceType, 'elopement'>; label: string }[] = [
+  { key: 'wedding', label: 'Weddings and elopements' },
   { key: 'events', label: 'Events' },
 ]
+
+export const WEDDING_KIND_OPTIONS = [
+  { value: 'wedding', label: 'Wedding' },
+  { value: 'elopement', label: 'Elopement' },
+] as const
 
 export const LOCATION_OPTIONS = [
   { value: 'italy', label: 'Italy' },

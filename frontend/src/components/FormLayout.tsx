@@ -177,11 +177,45 @@ export function PrivacyConsent({
       <span>
         I authorise the processing of my personal data to respond to this request, as described in
         the{' '}
-        <a href="/privacy/" className="underline underline-offset-2 hover:text-mf-black">
+        <a href="/privacy-policy" className="underline underline-offset-2 hover:text-mf-black">
           Privacy Policy
         </a>
         . I may withdraw consent or ask for access or erasure at any time.
       </span>
     </label>
+  )
+}
+
+/**
+ * One error, under one field, only once the visitor has left it. Showing a
+ * complaint to someone still typing their email is how forms get abandoned.
+ */
+export function FieldError({ touched, error }: { touched: boolean; error: string }) {
+  if (!touched || !error) return null
+  return (
+    <p className="mt-1.5 flex items-start gap-1.5 font-sans text-[0.78rem] leading-snug text-red-700">
+      <span aria-hidden className="mt-px">&#9432;</span>
+      <span>{error}</span>
+    </p>
+  )
+}
+
+/**
+ * The list that appears above the button when submit is refused. Naming what is
+ * missing beats a red blur: the visitor knows exactly how many things are left.
+ */
+export function MissingFields({ fields }: { fields: { label: string }[] }) {
+  if (!fields.length) return null
+  return (
+    <div className="mb-6 border border-red-300 bg-red-50/60 px-5 py-4">
+      <p className="font-sans text-[0.85rem] font-medium text-red-800">
+        Please complete the following fields:
+      </p>
+      <ul className="mt-2 list-disc pl-5 font-sans text-[0.82rem] leading-relaxed text-red-700">
+        {fields.map((f) => (
+          <li key={f.label}>{f.label}</li>
+        ))}
+      </ul>
+    </div>
   )
 }

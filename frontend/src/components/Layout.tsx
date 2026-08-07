@@ -1,5 +1,5 @@
 import { Outlet, useLocation } from 'react-router-dom'
-import { CookieConsent } from './CookieConsent'
+import { CookieConsent, TrackingConsentBootstrap } from './CookieConsent'
 import { Footer } from './Footer'
 import { HomeHeader } from './HomeHeader'
 import { ScrollToTop } from './ScrollToTop'
@@ -25,6 +25,7 @@ export function Layout() {
         </div>
       </main>
       <Footer />
+      <TrackingConsentBootstrap />
       <CookieConsent />
     </div>
   )

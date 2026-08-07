@@ -1,9 +1,21 @@
 import { type FormEvent, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { CheckboxRow, FormError, FormSection, Hint, PrivacyConsent, QField, RadioRow } from '../components/FormLayout'
+import { DateField } from '../components/DateField'
+import {
+  CheckboxRow,
+  FieldError,
+  FormError,
+  FormSection,
+  Hint,
+  MissingFields,
+  PrivacyConsent,
+  QField,
+  RadioRow,
+} from '../components/FormLayout'
+import { PhoneField } from '../components/PhoneField'
 import { emptyPlanner, PlannerQuestion } from '../components/PlannerQuestion'
 import { RestyleHero } from '../components/RestyleHero'
 import { Seo } from '../components/Seo'
+import { trackEvent } from '../lib/analytics'
 import { breadcrumb, graph, webPage } from '../lib/structuredData'
 import {
   BUDGET_ELOPEMENT,
@@ -19,10 +31,23 @@ import {
   REFERRAL_SOURCES_NEEDING_DETAIL,
   SERVICE_TABS,
   type ServiceType,
+  WEDDING_KIND_OPTIONS,
   WEDDING_SERVICE_OPTIONS,
 } from '../data/getQuote'
 import { howFoundDetailPlaceholder } from '../data/forms'
 import { postJson } from '../lib/api'
+import {
+  getInputBorderClass,
+  type MissingField,
+  scrollToField,
+  validateDate,
+  validateEmail,
+  validateGuestCount,
+  validateName,
+  validatePhone,
+  validateRequired,
+} from '../lib/validation'
+import { describeSendError } from './Contact'
 import { img } from '../lib/assets'
 
 const QUOTE_HERO = img(
@@ -34,6 +59,7 @@ const currencyFor = (region: LocationValue) => (region === 'uae' ? 'AED' : 'EUR'
 const emptyEventFields = {
   fullName: '',
   email: '',
+  dial: '+971',
   phone: '',
   eventDate: '',
   eventLocation: '' as LocationValue,
@@ -52,6 +78,7 @@ const emptyWeddingFields = {
   fullName: '',
   fianceName: '',
   email: '',
+  dial: '+971',
   phone: '',
   whereFrom: '',
   instagram: '',
@@ -79,9 +106,8 @@ const emptyWeddingFields = {
 }
 
 export function GetQuote() {
-  const nav = useNavigate()
   const [selectedService, setSelectedService] = useState<ServiceType>('wedding')
-  const [status, setStatus] = useState<'idle' | 'loading' | 'err'>('idle')
+  const [status, setStatus] = useState<'idle' | 'loading' | 'ok' | 'err'>('idle')
   const [err, setErr] = useState('')
 
   const [eventFields, setEventFields] = useState(emptyEventFields)
@@ -89,14 +115,69 @@ export function GetQuote() {
 
   const isWeddingLike = selectedService === 'wedding' || selectedService === 'elopement'
 
+  const [touched, setTouched] = useState<Set<string>>(new Set())
+  const [missing, setMissing] = useState<MissingField[]>([])
+
+  /**
+   * One rule per required field, per form. Keeping them in a list is what lets
+   * the same source drive the red frames, the inline messages and the summary
+   * above the button, so the three can never disagree.
+   */
+  const eventRules: { name: string; label: string; error: string }[] = [
+    { name: 'e_fullName', label: 'Full Name or Company Name', error: validateName(eventFields.fullName) },
+    { name: 'e_email', label: 'Email', error: validateEmail(eventFields.email) },
+    { name: 'e_phone', label: 'Phone Number', error: validatePhone(eventFields.phone) },
+    { name: 'e_eventDate', label: 'Event Date', error: validateDate(eventFields.eventDate) },
+    { name: 'e_guestCount', label: 'Estimated Guest Count', error: validateGuestCount(eventFields.guestCount) },
+    { name: 'e_vision', label: 'Tell us about your vision', error: validateRequired(eventFields.vision) },
+    { name: 'e_howDidYouHear', label: 'How did you find us?', error: validateRequired(eventFields.howDidYouHear) },
+  ]
+
+  const weddingRules: { name: string; label: string; error: string }[] = [
+    { name: 'w_fullName', label: 'Full Name', error: validateName(weddingFields.fullName) },
+    { name: 'w_fianceName', label: 'Fiancé Full Name', error: validateName(weddingFields.fianceName) },
+    { name: 'w_email', label: 'Email', error: validateEmail(weddingFields.email) },
+    { name: 'w_phone', label: 'Phone Number', error: validatePhone(weddingFields.phone) },
+    { name: 'w_whereFrom', label: 'Where are you from?', error: validateName(weddingFields.whereFrom) },
+    { name: 'w_eventDate', label: 'Event Date', error: validateDate(weddingFields.eventDate) },
+    { name: 'w_howDidYouHear', label: 'How did you find us?', error: validateRequired(weddingFields.howDidYouHear) },
+    ...(selectedService === 'wedding'
+      ? [{ name: 'w_guestCount', label: 'Estimated Guest Count', error: validateGuestCount(weddingFields.guestCount) }]
+      : []),
+  ]
+
+  const touch = (name: string) => setTouched((p) => new Set(p).add(name))
+  const isTouched = (name: string) => touched.has(name)
+  const ruleError = (rules: { name: string; error: string }[], name: string) =>
+    rules.find((r) => r.name === name)?.error ?? ''
+  const frame = (rules: { name: string; error: string }[], name: string) =>
+    getInputBorderClass(isTouched(name), ruleError(rules, name))
+
+  /** Refuses the send, names what is missing and takes the page to the first. */
+  const blockSubmit = (
+    rules: { name: string; label: string; error: string }[],
+    privacyAccepted: boolean,
+  ) => {
+    const failed = rules.filter((r) => r.error)
+    if (!failed.length && privacyAccepted) return false
+    setTouched(new Set(rules.map((r) => r.name)))
+    const list: MissingField[] = failed.map((r) => ({ label: r.label, scrollText: r.label }))
+    if (!privacyAccepted) list.push({ label: 'Privacy Policy consent', scrollText: 'I authorise' })
+    setMissing(list)
+    scrollToField(list[0].scrollText)
+    return true
+  }
+
   async function onSubmitEvent(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
     const fd = new FormData(e.currentTarget)
     const surname = String(fd.get('surname') || '')
     if (surname) {
-      nav('/portfolio/', { state: { quoteSuccess: true } })
+      setStatus('ok')
       return
     }
+    if (blockSubmit(eventRules, eventFields.privacyAccepted)) return
+    setMissing([])
     setStatus('loading')
     setErr('')
     try {
@@ -104,7 +185,7 @@ export function GetQuote() {
         form_type: 'events',
         full_name: eventFields.fullName,
         email: eventFields.email,
-        phone: eventFields.phone,
+        phone: `${eventFields.dial} ${eventFields.phone}`,
         event_date: eventFields.eventDate,
         event_location: eventFields.eventLocation,
         event_location_detail: eventFields.eventLocationDetail,
@@ -119,10 +200,13 @@ export function GetQuote() {
         wants_planning: eventFields.planner.wantsPlanning,
         privacy_accepted: eventFields.privacyAccepted,
       })
-      nav('/portfolio/', { state: { quoteSuccess: true } })
+      trackEvent('generate_lead', { form: 'quote', service: 'events' })
+      setStatus('ok')
+      setEventFields(emptyEventFields)
+      setTouched(new Set())
     } catch (er) {
       setStatus('err')
-      setErr(er instanceof Error ? er.message : 'Error')
+      setErr(describeSendError(er instanceof Error ? er.message : ''))
     }
   }
 
@@ -131,9 +215,11 @@ export function GetQuote() {
     const fd = new FormData(e.currentTarget)
     const surname = String(fd.get('surname') || '')
     if (surname) {
-      nav('/portfolio/', { state: { quoteSuccess: true } })
+      setStatus('ok')
       return
     }
+    if (blockSubmit(weddingRules, weddingFields.privacyAccepted)) return
+    setMissing([])
     setStatus('loading')
     setErr('')
     try {
@@ -142,7 +228,7 @@ export function GetQuote() {
         full_name: weddingFields.fullName,
         fiance_name: weddingFields.fianceName,
         email: weddingFields.email,
-        phone: weddingFields.phone,
+        phone: `${weddingFields.dial} ${weddingFields.phone}`,
         where_from: weddingFields.whereFrom,
         instagram: weddingFields.instagram,
         how_did_you_meet: weddingFields.howDidYouMeet,
@@ -169,10 +255,13 @@ export function GetQuote() {
         wants_planning: weddingFields.planner.wantsPlanning,
         privacy_accepted: weddingFields.privacyAccepted,
       })
-      nav('/portfolio/', { state: { quoteSuccess: true } })
+      trackEvent('generate_lead', { form: 'quote', service: 'wedding' })
+      setStatus('ok')
+      setWeddingFields(emptyWeddingFields)
+      setTouched(new Set())
     } catch (er) {
       setStatus('err')
-      setErr(er instanceof Error ? er.message : 'Error')
+      setErr(describeSendError(er instanceof Error ? er.message : ''))
     }
   }
 
@@ -219,10 +308,13 @@ export function GetQuote() {
   )
 
   const submitButton = (
-    <div className="mt-8 flex justify-center">
+    <div className="mt-8">
+      <MissingFields fields={missing} />
+      <div className="flex justify-center">
       <button type="submit" disabled={status === 'loading'} className="mf-cta mf-cta-dark disabled:opacity-50">
         {status === 'loading' ? 'Sending…' : 'Send your request'}
-      </button>
+        </button>
+      </div>
     </div>
   )
 
@@ -242,35 +334,48 @@ export function GetQuote() {
       />
       <RestyleHero title="Share the vision. We will shape the floral world." image={QUOTE_HERO} />
 
-      <section className="bg-[#f6eee1] px-[4vw] py-20 md:py-24">
+      <section className="bg-mf-sand px-[4vw] py-20 md:py-24">
         <div className="mx-auto max-w-3xl">
-          <h2 className="pl-[0.5em] text-center font-sans text-[0.95rem] font-extralight uppercase tracking-[0.5em] text-mf-black">
+          <p className="pl-[0.5em] text-center font-sans text-[0.95rem] font-extralight uppercase tracking-[0.5em] text-mf-black">
             Get a quote
+          </p>
+          <h2 className="mt-7 text-center font-display text-[min(2.6rem,1.25rem+2.1vw)] font-normal leading-[1.15] text-mf-black">
+            What services are you interested in?
           </h2>
-          <p className="mt-6 text-center font-sans text-[1rem] leading-[1.9] text-mf-black/75">
-            Please select the option below that best fits your celebration.
+          <p className="mt-5 text-center font-sans text-[1rem] leading-[1.9] text-mf-black/75">
+            Please fill out the form below to request your quote.
           </p>
 
-          <div className="mx-auto mt-10 grid max-w-xl grid-cols-3 gap-3">
-            {SERVICE_TABS.map((t) => (
-              <button
-                key={t.key}
-                type="button"
-                onClick={() => setSelectedService(t.key)}
-                className={`border px-3 py-4 font-sans text-[0.75rem] font-light uppercase tracking-[0.18em] transition-colors ${
-                  selectedService === t.key
-                    ? 'border-mf-black bg-mf-black text-white'
-                    : 'border-mf-muted/25 text-mf-black hover:border-mf-black'
-                }`}
-              >
-                {t.label}
-              </button>
-            ))}
+          <div className="mx-auto mt-10 grid max-w-xl grid-cols-1 gap-3 sm:grid-cols-2">
+            {SERVICE_TABS.map((t) => {
+              // The wedding button stays lit for elopements too: they share the form.
+              const active = t.key === 'events' ? selectedService === 'events' : isWeddingLike
+              return (
+                <button
+                  key={t.key}
+                  type="button"
+                  onClick={() => setSelectedService(t.key)}
+                  className={`border px-5 py-6 font-sans text-[1.05rem] font-light uppercase leading-snug tracking-[0.14em] transition-colors ${
+                    active
+                      ? 'border-mf-black bg-mf-sand-deep text-mf-black'
+                      : 'border-mf-muted/25 text-mf-black hover:border-mf-black'
+                  }`}
+                >
+                  {t.label}
+                </button>
+              )
+            })}
           </div>
 
+          {status === 'ok' ? (
+            <p className="mt-14 text-center font-sans text-[1.05rem] leading-relaxed text-mf-black/80">
+              Thank you for your request. We will come back to you shortly.
+            </p>
+          ) : null}
+
           {/* ===================== EVENTS ===================== */}
-          {selectedService === 'events' ? (
-            <form onSubmit={onSubmitEvent} className="mt-12">
+          {status !== 'ok' && selectedService === 'events' ? (
+            <form onSubmit={onSubmitEvent} className="mt-12" noValidate>
               <input type="text" name="surname" tabIndex={-1} autoComplete="off" className="sr-only" aria-hidden />
 
               <FormSection large title="Contact information">
@@ -283,7 +388,10 @@ export function GetQuote() {
                     maxLength={100}
                     value={eventFields.fullName}
                     onChange={(e) => setEventFields((p) => ({ ...p, fullName: e.target.value }))}
+                    onBlur={() => touch('e_fullName')}
+                    className={frame(eventRules, 'e_fullName')}
                   />
+                  <FieldError touched={isTouched('e_fullName')} error={ruleError(eventRules, 'e_fullName')} />
                 </QField>
                 <div className="grid gap-x-8 md:grid-cols-2">
                   <QField large label="Email" required>
@@ -293,16 +401,21 @@ export function GetQuote() {
                       required
                       value={eventFields.email}
                       onChange={(e) => setEventFields((p) => ({ ...p, email: e.target.value }))}
+                      onBlur={() => touch('e_email')}
+                      className={frame(eventRules, 'e_email')}
                     />
+                    <FieldError touched={isTouched('e_email')} error={ruleError(eventRules, 'e_email')} />
                   </QField>
                   <QField large label="Phone Number" required>
-                    <input
-                      placeholder="Numbers only, 6 to 15 digits"
-                      type="tel"
-                      required
-                      value={eventFields.phone}
-                      onChange={(e) => setEventFields((p) => ({ ...p, phone: e.target.value }))}
+                    <PhoneField
+                      dial={eventFields.dial}
+                      number={eventFields.phone}
+                      onDial={(v) => setEventFields((p) => ({ ...p, dial: v }))}
+                      onNumber={(v) => setEventFields((p) => ({ ...p, phone: v }))}
+                      onBlur={() => touch('e_phone')}
+                      invalid={!!frame(eventRules, 'e_phone')}
                     />
+                    <FieldError touched={isTouched('e_phone')} error={ruleError(eventRules, 'e_phone')} />
                   </QField>
                 </div>
               </FormSection>
@@ -310,13 +423,13 @@ export function GetQuote() {
               <FormSection large title="Event information">
                 <div className="grid gap-x-8 md:grid-cols-2">
                   <QField large label="Event Date" required>
-                    <input
-                      type="text"
-                      required
-                      placeholder="DD / MM / YYYY"
+                    <DateField
                       value={eventFields.eventDate}
-                      onChange={(e) => setEventFields((p) => ({ ...p, eventDate: e.target.value }))}
+                      onChange={(v) => setEventFields((p) => ({ ...p, eventDate: v }))}
+                      onBlur={() => touch('e_eventDate')}
+                      invalid={!!frame(eventRules, 'e_eventDate')}
                     />
+                    <FieldError touched={isTouched('e_eventDate')} error={ruleError(eventRules, 'e_eventDate')} />
                   </QField>
                   <QField large label="Estimated Guest Count" required>
                     <input
@@ -325,7 +438,10 @@ export function GetQuote() {
                       placeholder="50, 100, 200..."
                       value={eventFields.guestCount}
                       onChange={(e) => setEventFields((p) => ({ ...p, guestCount: e.target.value }))}
+                      onBlur={() => touch('e_guestCount')}
+                      className={frame(eventRules, 'e_guestCount')}
                     />
+                    <FieldError touched={isTouched('e_guestCount')} error={ruleError(eventRules, 'e_guestCount')} />
                   </QField>
                 </div>
 
@@ -379,7 +495,10 @@ export function GetQuote() {
                     placeholder="We're planning a corporate gala for 150 guests with a black-tie dress code..."
                     value={eventFields.vision}
                     onChange={(e) => setEventFields((p) => ({ ...p, vision: e.target.value }))}
+                    onBlur={() => touch('e_vision')}
+                    className={frame(eventRules, 'e_vision')}
                   />
+                  <FieldError touched={isTouched('e_vision')} error={ruleError(eventRules, 'e_vision')} />
                 </QField>
 
                 <div className="grid gap-x-8 md:grid-cols-2">
@@ -426,8 +545,8 @@ export function GetQuote() {
           ) : null}
 
           {/* ===================== WEDDING / ELOPEMENT ===================== */}
-          {isWeddingLike ? (
-            <form onSubmit={onSubmitWedding} className="mt-12">
+          {status !== 'ok' && isWeddingLike ? (
+            <form onSubmit={onSubmitWedding} className="mt-12" noValidate>
               <input type="text" name="surname" tabIndex={-1} autoComplete="off" className="sr-only" aria-hidden />
 
               <FormSection large title="Contact information">
@@ -440,7 +559,10 @@ export function GetQuote() {
                       minLength={2}
                       value={weddingFields.fullName}
                       onChange={(e) => setWeddingFields((p) => ({ ...p, fullName: e.target.value }))}
+                      onBlur={() => touch('w_fullName')}
+                      className={frame(weddingRules, 'w_fullName')}
                     />
+                    <FieldError touched={isTouched('w_fullName')} error={ruleError(weddingRules, 'w_fullName')} />
                   </QField>
                   <QField large label="Fiancé Full Name" required>
                     <input
@@ -450,7 +572,10 @@ export function GetQuote() {
                       minLength={2}
                       value={weddingFields.fianceName}
                       onChange={(e) => setWeddingFields((p) => ({ ...p, fianceName: e.target.value }))}
+                      onBlur={() => touch('w_fianceName')}
+                      className={frame(weddingRules, 'w_fianceName')}
                     />
+                    <FieldError touched={isTouched('w_fianceName')} error={ruleError(weddingRules, 'w_fianceName')} />
                   </QField>
                 </div>
                 <div className="grid gap-x-8 md:grid-cols-2">
@@ -461,16 +586,21 @@ export function GetQuote() {
                       required
                       value={weddingFields.email}
                       onChange={(e) => setWeddingFields((p) => ({ ...p, email: e.target.value }))}
+                      onBlur={() => touch('w_email')}
+                      className={frame(weddingRules, 'w_email')}
                     />
+                    <FieldError touched={isTouched('w_email')} error={ruleError(weddingRules, 'w_email')} />
                   </QField>
                   <QField large label="Phone Number" required>
-                    <input
-                      placeholder="Numbers only, 6 to 15 digits"
-                      type="tel"
-                      required
-                      value={weddingFields.phone}
-                      onChange={(e) => setWeddingFields((p) => ({ ...p, phone: e.target.value }))}
+                    <PhoneField
+                      dial={weddingFields.dial}
+                      number={weddingFields.phone}
+                      onDial={(v) => setWeddingFields((p) => ({ ...p, dial: v }))}
+                      onNumber={(v) => setWeddingFields((p) => ({ ...p, phone: v }))}
+                      onBlur={() => touch('w_phone')}
+                      invalid={!!frame(weddingRules, 'w_phone')}
                     />
+                    <FieldError touched={isTouched('w_phone')} error={ruleError(weddingRules, 'w_phone')} />
                   </QField>
                 </div>
                 <div className="grid gap-x-8 md:grid-cols-2">
@@ -482,7 +612,10 @@ export function GetQuote() {
                       minLength={2}
                       value={weddingFields.whereFrom}
                       onChange={(e) => setWeddingFields((p) => ({ ...p, whereFrom: e.target.value }))}
+                      onBlur={() => touch('w_whereFrom')}
+                      className={frame(weddingRules, 'w_whereFrom')}
                     />
+                    <FieldError touched={isTouched('w_whereFrom')} error={ruleError(weddingRules, 'w_whereFrom')} />
                   </QField>
                   <QField large label="Your Instagram Profile">
                     <input
@@ -502,14 +635,43 @@ export function GetQuote() {
               </FormSection>
 
               <FormSection large title={selectedService === 'wedding' ? 'Wedding information' : 'Elopement information'}>
+                <div className="mb-6">
+                  <span className="font-sans text-[0.9rem] font-normal text-mf-black/80">
+                    Is this a wedding or an elopement? *
+                  </span>
+                  <div className="mt-3">
+                    <RadioRow large
+                      name="weddingKind"
+                      options={WEDDING_KIND_OPTIONS as unknown as { value: string; label: string }[]}
+                      value={selectedService}
+                      onChange={(v) => {
+                        setSelectedService(v as ServiceType)
+                        // The two ask for guests, pieces and budget in different
+                        // shapes, so anything already answered in the other shape
+                        // would otherwise ride along unseen into the email.
+                        setWeddingFields((p) => ({
+                          ...p,
+                          guestCount: '',
+                          elopementGuestType: '',
+                          elopementGuestCount: '',
+                          servicesInterested: [],
+                          floralPieces: [],
+                          multiDayDetail: '',
+                          budget: '',
+                        }))
+                      }}
+                    />
+                  </div>
+                </div>
+
                 <QField large label="Event Date" required>
-                  <input
-                    type="text"
-                    required
-                    placeholder="DD / MM / YYYY"
+                  <DateField
                     value={weddingFields.eventDate}
-                    onChange={(e) => setWeddingFields((p) => ({ ...p, eventDate: e.target.value }))}
+                    onChange={(v) => setWeddingFields((p) => ({ ...p, eventDate: v }))}
+                    onBlur={() => touch('w_eventDate')}
+                    invalid={!!frame(weddingRules, 'w_eventDate')}
                   />
+                  <FieldError touched={isTouched('w_eventDate')} error={ruleError(weddingRules, 'w_eventDate')} />
                 </QField>
 
                 <div className="mb-6">
@@ -589,7 +751,10 @@ export function GetQuote() {
                       required
                       value={weddingFields.guestCount}
                       onChange={(e) => setWeddingFields((p) => ({ ...p, guestCount: e.target.value }))}
+                      onBlur={() => touch('w_guestCount')}
+                      className={frame(weddingRules, 'w_guestCount')}
                     />
+                    <FieldError touched={isTouched('w_guestCount')} error={ruleError(weddingRules, 'w_guestCount')} />
                   </QField>
                 ) : (
                   <div className="mb-6">
