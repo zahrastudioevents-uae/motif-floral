@@ -86,4 +86,20 @@ for (const route of ROUTES) {
   written += 1
 }
 
-console.log(`Prerendered meta for ${written} routes`)
+/**
+ * dist/404.html, which Vercel serves with a real 404 status for any address
+ * that matches no file. Without it the SPA rewrite answered 200 with the home
+ * page for every dead link, and Google files that as a soft 404: it keeps
+ * recrawling addresses that no longer exist instead of the pages that do.
+ */
+const notFound = setMeta(
+  shell
+    .replace(/<title>[^<]*<\/title>/i, '<title>Page not found | Motif Floral</title>')
+    .replace(/(<link rel="canonical" href=")[^"]*(")/i, `$1${SITE_URL}/404$2`),
+  'name',
+  'robots',
+  'noindex, follow',
+)
+writeFileSync(join(distDir, '404.html'), notFound)
+
+console.log(`Prerendered meta for ${written} routes, plus 404.html`)

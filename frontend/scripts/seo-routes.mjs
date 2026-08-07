@@ -97,12 +97,23 @@ export const ROUTES = [
     image: '/images/site/2qZExp/3vdn63/Villa-Astor-Editorial-Haute-Weddings-113-a3126e19-1500.webp',
   },
   {
-    path: '/privacy/',
+    // The page lives at /privacy-policy/; /privacy/ is only a redirect to it,
+    // so it is the one that belongs here.
+    path: '/privacy-policy/',
     priority: '0.3',
     changefreq: 'yearly',
     title: 'Privacy Policy | Motif Floral',
     description:
       'How Motif Floral collects, uses and stores the personal data you send through the contact and quote forms.',
+    image: '/images/home/home-hero-tablescape.webp',
+  },
+  {
+    path: '/embroideredribbons/',
+    priority: '0.6',
+    changefreq: 'monthly',
+    title: 'Hand Embroidered Silk Ribbons | Motif Floral',
+    description:
+      'Hand embroidered silk ribbons made in Rome for bouquets, stationery and favours, dyed and stitched to match each palette.',
     image: '/images/home/home-hero-tablescape.webp',
   },
   {
