@@ -1,95 +1,368 @@
 {
-  "_comment_redirects": "The domain carried a WordPress site until 2021 and a Wix site until August 2026; the Wayback Machine still lists 271 addresses from those years. Only the ones with a real equivalent here are redirected, so the value they accumulated moves to the new page. Everything else is deliberately left to 404: Google treats a redirect to an unrelated page as a soft 404 and ignores it anyway.",
   "redirects": [
-    { "source": "/privacy", "destination": "/privacy-policy", "permanent": true },
-    { "source": "/cookie-policy", "destination": "/privacy-policy", "permanent": true },
-
-    { "source": "/it", "destination": "/", "permanent": true },
-    { "source": "/en", "destination": "/", "permanent": true },
-    { "source": "/it/:path*", "destination": "/:path*", "permanent": true },
-    { "source": "/en/:path*", "destination": "/:path*", "permanent": true },
-
-    { "source": "/home", "destination": "/", "permanent": true },
-    { "source": "/home2", "destination": "/", "permanent": true },
-
-    { "source": "/chi-sono", "destination": "/about", "permanent": true },
-    { "source": "/copia-di-about", "destination": "/about", "permanent": true },
-    { "source": "/copia-di-about-1", "destination": "/about", "permanent": true },
-
-    { "source": "/contacts", "destination": "/contact", "permanent": true },
-    { "source": "/contatti", "destination": "/contact", "permanent": true },
-    { "source": "/contattaci", "destination": "/contact", "permanent": true },
-
-    { "source": "/bouquet", "destination": "/chooseyourbouquet", "permanent": true },
-    { "source": "/bouquet-2", "destination": "/chooseyourbouquet", "permanent": true },
-    { "source": "/copiabouquet", "destination": "/chooseyourbouquet", "permanent": true },
-    { "source": "/copia-di-bouquet", "destination": "/chooseyourbouquet", "permanent": true },
-    { "source": "/quotebouquet", "destination": "/chooseyourbouquet", "permanent": true },
-    { "source": "/copia-di-quote-bouquet", "destination": "/chooseyourbouquet", "permanent": true },
-    { "source": "/copia-di-quote-bouquet-1", "destination": "/chooseyourbouquet", "permanent": true },
-
-    { "source": "/accessori", "destination": "/mfaccessori", "permanent": true },
-    { "source": "/mf-accessories", "destination": "/mfaccessori", "permanent": true },
-    { "source": "/mfaccessorimodifica", "destination": "/mfaccessori", "permanent": true },
-    { "source": "/copia-di-mf-accessori", "destination": "/mfaccessori", "permanent": true },
-    { "source": "/copia-di-mf-accessori-1", "destination": "/mfaccessori", "permanent": true },
-    { "source": "/copia-di-mf-accessori-2", "destination": "/mfaccessori", "permanent": true },
-    { "source": "/copia-di-copia-di-mf-accessori", "destination": "/mfaccessori", "permanent": true },
-    { "source": "/copia-di-copia-di-mf-accessori-1", "destination": "/mfaccessori", "permanent": true },
-    { "source": "/prodotti", "destination": "/mfaccessori", "permanent": true },
-    { "source": "/product-page/:path*", "destination": "/mfaccessori", "permanent": true },
-    { "source": "/nastri-in-seta", "destination": "/mfaccessori", "permanent": true },
-    { "source": "/bracciali-e-collane", "destination": "/mfaccessori", "permanent": true },
-    { "source": "/coroncina", "destination": "/mfaccessori", "permanent": true },
-    { "source": "/copia-di-coroncine", "destination": "/mfaccessori", "permanent": true },
-    { "source": "/copia-di-coroncine-1", "destination": "/mfaccessori", "permanent": true },
-    { "source": "/pettinini", "destination": "/mfaccessori", "permanent": true },
-    { "source": "/copia-di-pettinini", "destination": "/mfaccessori", "permanent": true },
-    { "source": "/copia-di-pettinini-1", "destination": "/mfaccessori", "permanent": true },
-    { "source": "/orchidee", "destination": "/mfaccessori", "permanent": true },
-    { "source": "/orchidee-1", "destination": "/mfaccessori", "permanent": true },
-    { "source": "/eco-bomboniere", "destination": "/mfaccessori", "permanent": true },
-
-    { "source": "/i-nostri-servizi", "destination": "/getquote", "permanent": true },
-    { "source": "/services-4", "destination": "/getquote", "permanent": true },
-    { "source": "/get", "destination": "/getquote", "permanent": true },
-    { "source": "/bookings-checkout/:path*", "destination": "/getquote", "permanent": true },
-
-    { "source": "/editoriali", "destination": "/portfolio", "permanent": true },
-    { "source": "/editorials", "destination": "/portfolio", "permanent": true },
-    { "source": "/portfolio-1", "destination": "/portfolio", "permanent": true },
-    { "source": "/matrimonio", "destination": "/portfolio", "permanent": true },
-    { "source": "/wedding", "destination": "/portfolio", "permanent": true },
-    { "source": "/copia-di-wedding", "destination": "/portfolio", "permanent": true },
-    { "source": "/copia-di-wedding-1", "destination": "/portfolio", "permanent": true },
-    { "source": "/cerimonia", "destination": "/portfolio", "permanent": true },
-    { "source": "/cerimonia-civile", "destination": "/portfolio", "permanent": true },
-    { "source": "/cerimonia-religiosa", "destination": "/portfolio", "permanent": true },
-    { "source": "/copia-di-cerimonia", "destination": "/portfolio", "permanent": true },
-    { "source": "/copia-di-cerimonia-religiosa", "destination": "/portfolio", "permanent": true },
-    { "source": "/ceremony", "destination": "/portfolio", "permanent": true },
-    { "source": "/reception", "destination": "/portfolio", "permanent": true },
-    { "source": "/elopement", "destination": "/portfolio", "permanent": true },
-    { "source": "/engagementsproposals", "destination": "/portfolio", "permanent": true },
-    { "source": "/altri-eventi", "destination": "/portfolio", "permanent": true },
-    { "source": "/eventi", "destination": "/portfolio", "permanent": true },
-    { "source": "/events", "destination": "/portfolio", "permanent": true },
-    { "source": "/compleanni", "destination": "/portfolio", "permanent": true },
-
-    { "source": "/review", "destination": "/testimonials", "permanent": true },
-    { "source": "/dicono-di-noi", "destination": "/testimonials", "permanent": true },
-    { "source": "/copia-di-dicono-di-noi", "destination": "/testimonials", "permanent": true }
+    {
+      "source": "/privacy",
+      "destination": "/privacy-policy",
+      "permanent": true
+    },
+    {
+      "source": "/cookie-policy",
+      "destination": "/privacy-policy",
+      "permanent": true
+    },
+    {
+      "source": "/it",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/en",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/it/:path*",
+      "destination": "/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/en/:path*",
+      "destination": "/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/home",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/home2",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/chi-sono",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/copia-di-about",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/copia-di-about-1",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/contacts",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/contatti",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/contattaci",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/bouquet",
+      "destination": "/chooseyourbouquet",
+      "permanent": true
+    },
+    {
+      "source": "/bouquet-2",
+      "destination": "/chooseyourbouquet",
+      "permanent": true
+    },
+    {
+      "source": "/copiabouquet",
+      "destination": "/chooseyourbouquet",
+      "permanent": true
+    },
+    {
+      "source": "/copia-di-bouquet",
+      "destination": "/chooseyourbouquet",
+      "permanent": true
+    },
+    {
+      "source": "/quotebouquet",
+      "destination": "/chooseyourbouquet",
+      "permanent": true
+    },
+    {
+      "source": "/copia-di-quote-bouquet",
+      "destination": "/chooseyourbouquet",
+      "permanent": true
+    },
+    {
+      "source": "/copia-di-quote-bouquet-1",
+      "destination": "/chooseyourbouquet",
+      "permanent": true
+    },
+    {
+      "source": "/accessori",
+      "destination": "/mfaccessori",
+      "permanent": true
+    },
+    {
+      "source": "/mf-accessories",
+      "destination": "/mfaccessori",
+      "permanent": true
+    },
+    {
+      "source": "/mfaccessorimodifica",
+      "destination": "/mfaccessori",
+      "permanent": true
+    },
+    {
+      "source": "/copia-di-mf-accessori",
+      "destination": "/mfaccessori",
+      "permanent": true
+    },
+    {
+      "source": "/copia-di-mf-accessori-1",
+      "destination": "/mfaccessori",
+      "permanent": true
+    },
+    {
+      "source": "/copia-di-mf-accessori-2",
+      "destination": "/mfaccessori",
+      "permanent": true
+    },
+    {
+      "source": "/copia-di-copia-di-mf-accessori",
+      "destination": "/mfaccessori",
+      "permanent": true
+    },
+    {
+      "source": "/copia-di-copia-di-mf-accessori-1",
+      "destination": "/mfaccessori",
+      "permanent": true
+    },
+    {
+      "source": "/prodotti",
+      "destination": "/mfaccessori",
+      "permanent": true
+    },
+    {
+      "source": "/product-page/:path*",
+      "destination": "/mfaccessori",
+      "permanent": true
+    },
+    {
+      "source": "/nastri-in-seta",
+      "destination": "/mfaccessori",
+      "permanent": true
+    },
+    {
+      "source": "/bracciali-e-collane",
+      "destination": "/mfaccessori",
+      "permanent": true
+    },
+    {
+      "source": "/coroncina",
+      "destination": "/mfaccessori",
+      "permanent": true
+    },
+    {
+      "source": "/copia-di-coroncine",
+      "destination": "/mfaccessori",
+      "permanent": true
+    },
+    {
+      "source": "/copia-di-coroncine-1",
+      "destination": "/mfaccessori",
+      "permanent": true
+    },
+    {
+      "source": "/pettinini",
+      "destination": "/mfaccessori",
+      "permanent": true
+    },
+    {
+      "source": "/copia-di-pettinini",
+      "destination": "/mfaccessori",
+      "permanent": true
+    },
+    {
+      "source": "/copia-di-pettinini-1",
+      "destination": "/mfaccessori",
+      "permanent": true
+    },
+    {
+      "source": "/orchidee",
+      "destination": "/mfaccessori",
+      "permanent": true
+    },
+    {
+      "source": "/orchidee-1",
+      "destination": "/mfaccessori",
+      "permanent": true
+    },
+    {
+      "source": "/eco-bomboniere",
+      "destination": "/mfaccessori",
+      "permanent": true
+    },
+    {
+      "source": "/i-nostri-servizi",
+      "destination": "/getquote",
+      "permanent": true
+    },
+    {
+      "source": "/services-4",
+      "destination": "/getquote",
+      "permanent": true
+    },
+    {
+      "source": "/get",
+      "destination": "/getquote",
+      "permanent": true
+    },
+    {
+      "source": "/bookings-checkout/:path*",
+      "destination": "/getquote",
+      "permanent": true
+    },
+    {
+      "source": "/editoriali",
+      "destination": "/portfolio",
+      "permanent": true
+    },
+    {
+      "source": "/editorials",
+      "destination": "/portfolio",
+      "permanent": true
+    },
+    {
+      "source": "/portfolio-1",
+      "destination": "/portfolio",
+      "permanent": true
+    },
+    {
+      "source": "/matrimonio",
+      "destination": "/portfolio",
+      "permanent": true
+    },
+    {
+      "source": "/wedding",
+      "destination": "/portfolio",
+      "permanent": true
+    },
+    {
+      "source": "/copia-di-wedding",
+      "destination": "/portfolio",
+      "permanent": true
+    },
+    {
+      "source": "/copia-di-wedding-1",
+      "destination": "/portfolio",
+      "permanent": true
+    },
+    {
+      "source": "/cerimonia",
+      "destination": "/portfolio",
+      "permanent": true
+    },
+    {
+      "source": "/cerimonia-civile",
+      "destination": "/portfolio",
+      "permanent": true
+    },
+    {
+      "source": "/cerimonia-religiosa",
+      "destination": "/portfolio",
+      "permanent": true
+    },
+    {
+      "source": "/copia-di-cerimonia",
+      "destination": "/portfolio",
+      "permanent": true
+    },
+    {
+      "source": "/copia-di-cerimonia-religiosa",
+      "destination": "/portfolio",
+      "permanent": true
+    },
+    {
+      "source": "/ceremony",
+      "destination": "/portfolio",
+      "permanent": true
+    },
+    {
+      "source": "/reception",
+      "destination": "/portfolio",
+      "permanent": true
+    },
+    {
+      "source": "/elopement",
+      "destination": "/portfolio",
+      "permanent": true
+    },
+    {
+      "source": "/engagementsproposals",
+      "destination": "/portfolio",
+      "permanent": true
+    },
+    {
+      "source": "/altri-eventi",
+      "destination": "/portfolio",
+      "permanent": true
+    },
+    {
+      "source": "/eventi",
+      "destination": "/portfolio",
+      "permanent": true
+    },
+    {
+      "source": "/events",
+      "destination": "/portfolio",
+      "permanent": true
+    },
+    {
+      "source": "/compleanni",
+      "destination": "/portfolio",
+      "permanent": true
+    },
+    {
+      "source": "/review",
+      "destination": "/testimonials",
+      "permanent": true
+    },
+    {
+      "source": "/dicono-di-noi",
+      "destination": "/testimonials",
+      "permanent": true
+    },
+    {
+      "source": "/copia-di-dicono-di-noi",
+      "destination": "/testimonials",
+      "permanent": true
+    }
   ],
-  "_comment_rewrites": "There is deliberately no catch-all rewrite. Every real route is prerendered to its own dist/<route>/index.html, so Vercel serves it directly; anything else falls through to dist/404.html with a real 404 status.",
   "headers": [
     {
       "source": "/assets/(.*)",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
     },
     {
       "source": "/images/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=86400, stale-while-revalidate=2592000" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400, stale-while-revalidate=2592000"
+        }
       ]
     }
   ]
