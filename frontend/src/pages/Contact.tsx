@@ -170,6 +170,14 @@ export function Contact() {
                 onClick={() => trackEvent('whatsapp_click', { source: 'contact_page' })}
               >
                 +39 3345699447
+              </a>{' '}
+              or call{' '}
+              <a
+                href="tel:+393345699447"
+                className="text-mf-black underline decoration-mf-black/40 underline-offset-2 hover:decoration-mf-black"
+                onClick={() => trackEvent('phone_click', { source: 'contact_page' })}
+              >
+                +39 334 569 9447
               </a>
               .
             </span>

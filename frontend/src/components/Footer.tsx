@@ -129,6 +129,14 @@ export function Footer() {
               onClick={() => trackEvent('whatsapp_click', { source: 'footer' })}
             >
               +39 3345699447
+            </a>{' '}
+            or call{' '}
+            <a
+              href="tel:+393345699447"
+              className="underline decoration-mf-muted/40 underline-offset-2 hover:text-mf-black"
+              onClick={() => trackEvent('phone_click', { source: 'footer' })}
+            >
+              +39 334 569 9447
             </a>
             .
           </p>
