@@ -5,6 +5,12 @@
 1. Vercel project from this repository, **Root Directory** `frontend`.
 2. Framework preset: Vite (install `npm install`, build `npm run build`, output `dist`).
 3. Node: `frontend/.nvmrc` pins **20**; keep the Vercel Node version on the same major.
+3b. The build ends with `scripts/prerender.mjs`, which opens every route in
+   headless Chrome so the served HTML already contains the page. On Vercel it
+   uses `@sparticuz/chromium`, because the build container has none of the
+   system libraries a normal Chrome expects. If that step fails the build exits
+   non-zero and the previous deployment keeps serving — see
+   `frontend/ROUTING.md`.
 4. Optional environment variables:
    - `VITE_USE_LOCAL_IMAGES=true` after `npm run download:images`, to serve files
      from `frontend/public/images/` (paths must match `src/lib/assets.ts`).

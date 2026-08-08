@@ -3,7 +3,7 @@ import { GRID_SIZES, srcSetFor } from '../lib/assets'
 import { HeroSlideshow } from '../components/HeroSlideshow'
 import { HomeTestimonialsSection } from '../components/HomeTestimonialsSection'
 import { Seo } from '../components/Seo'
-import { faqSchema, graph, webPage } from '../lib/structuredData'
+import { FAQ, faqSchema, graph, webPage } from '../lib/structuredData'
 import {
   GALLERY_IMAGES,
   HOME_HERO_SLIDES,
@@ -235,6 +235,37 @@ export function Home() {
 
 
       <HomeTestimonialsSection slides={HOME_TESTIMONIAL_SLIDES} />
+
+      {/*
+        Le domande sono le stesse identiche di FAQ in lib/structuredData.ts, da
+        cui si costruisce anche faqSchema qui sopra: si legge una costante sola
+        apposta perché testo visibile e dati strutturati non possano separarsi.
+        Uno schema FAQPage che descrive testo non presente nella pagina è una
+        violazione delle linee guida di Google, non un vantaggio. Se una domanda
+        va cambiata, si cambia lì e cambia in tutti e due i posti.
+      */}
+      <section className="bg-mf-accent/40 px-[4vw] py-16 md:py-20">
+        <div className="mx-auto max-w-3xl">
+          <p className="font-sans text-[0.6875rem] font-light uppercase tracking-[0.28em] text-mf-muted">
+            Frequently asked
+          </p>
+          <h2 className="mt-4 font-display text-[min(3.4rem,1.5rem+3vw)] font-normal uppercase leading-tight text-mf-black">
+            Questions couples ask
+          </h2>
+          <div className="mt-10 md:mt-12">
+            {FAQ.map(({ q, a }) => (
+              <div key={q} className="border-t border-mf-muted/15 py-7 md:py-8">
+                <h3 className="font-sans text-[0.95rem] font-light uppercase leading-[1.5] tracking-[0.14em] text-mf-black md:text-[1rem]">
+                  {q}
+                </h3>
+                <p className="mt-4 font-sans text-[0.875rem] font-light leading-[1.9] text-mf-muted">
+                  {a}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <section
         className="relative flex min-h-[min(72vh,44rem)] flex-col bg-cover bg-center text-white md:min-h-[min(78vh,52rem)] lg:min-h-[min(82vh,56rem)]"

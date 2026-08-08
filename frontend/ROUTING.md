@@ -12,10 +12,43 @@ Fino al 7 agosto 2026 `vercel.json` conteneva `"rewrites": [{ "source":
 la home** a qualsiasi indirizzo, anche a quelli del vecchio sito. Google lo
 chiama **soft 404** e continua a ripassarci sopra invece che sulle pagine vere.
 
-Ora `scripts/prerender-meta.mjs` scrive un file per ogni rotta di
+Ora `scripts/prerender.mjs` scrive un file per ogni rotta di
 `scripts/seo-routes.mjs`, più **`dist/404.html`**, che Vercel serve con lo stato
 404 per tutto il resto. Le funzioni sotto `/api/` continuano a funzionare da
 sole: sono serverless function, non rotte dell'app.
+
+## Le pagine escono già renderizzate, non più come guscio
+
+Fino all'8 agosto 2026 il passaggio si chiamava `prerender-meta.mjs` e scriveva
+**solo i meta**: `/weddings/rome` arrivava a Google in 4,9 KB con `<div
+id="root">` vuoto, zero parole, zero link interni, zero dati strutturati. Il
+contenuto lo vedeva solo il secondo giro, quello che esegue il JavaScript e ha
+priorità più bassa. Si vedeva nei numeri: 62 query non-brand in cinque giorni ma
+posizione media 14,6, cioè seconda pagina.
+
+`scripts/prerender.mjs` apre ogni rotta in Chrome headless (puppeteer) su un
+server statico locale che serve `dist/`, aspetta che l'app si sia montata e
+salva l'HTML completo. Le stesse pagine ora escono a 40-96 KB con 250-800 parole,
+28-51 link interni e il blocco JSON-LD che il componente `Seo` inietta a runtime.
+`beasties` inlinea poi il CSS critico di quella pagina e rimanda il resto.
+
+Tre cose da non rompere:
+
+1. **Il client usa `createRoot`, non `hydrateRoot`** (`src/main.tsx`). L'HTML è
+   fotografato *dopo* gli effetti — slideshow avanzata, meta e JSON-LD già
+   iniettati — quindi la prima render del client non può coincidere e
+   l'idratazione fallirebbe a ogni caricamento.
+2. **Su Vercel serve `@sparticuz/chromium`**: il container di build non ha le
+   librerie di sistema che un Chrome normale si aspetta. Lo script se ne accorge
+   da `process.env.VERCEL || process.env.CI`.
+3. **I meta restano generati da `seo-routes.mjs`**, non lasciati a quello che il
+   componente `Seo` ha scritto a runtime: è la stessa sorgente della sitemap, e
+   una rotta non può stare in uno e non nell'altro.
+
+Se il prerender fallisce, il build esce con 1 e il deploy non parte: su Vercel
+resta servita la versione precedente, che è la risposta giusta. Per lavorare
+sulla build senza aprire Chrome c'è `npm run build:nopre`, che però lascia i
+gusci vuoti e **non va usata per un deploy**.
 
 **Conseguenza da ricordare**: una rotta in `App.tsx` che non sia anche in
 `seo-routes.mjs` **risponderà 404**. Il 7 agosto è già successo di scoprirne tre

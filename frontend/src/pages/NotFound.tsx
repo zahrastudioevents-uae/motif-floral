@@ -1,5 +1,8 @@
 import { Link } from 'react-router-dom'
 import { Seo } from '../components/Seo'
+import { graph, webPage } from '../lib/structuredData'
+
+const DESCRIPTION = 'That page does not exist. Browse the portfolio or get in touch.'
 
 /**
  * Without this, an unknown URL fell through to the router's default error
@@ -9,9 +12,15 @@ import { Seo } from '../components/Seo'
 export function NotFound() {
   return (
     <>
+      {/*
+        La pagina è noindex, quindi il grafo qui non serve a farla trovare:
+        serve a far sapere di chi è il sito anche a chi ci arriva per sbaglio,
+        motori di risposta compresi, che leggono la pagina lo stesso.
+      */}
       <Seo
         title="Page not found | Motif Floral"
-        description="That page does not exist. Browse the portfolio or get in touch."
+        description={DESCRIPTION}
+        jsonLd={graph(webPage('Page not found', '/404', DESCRIPTION))}
       />
       <section className="flex min-h-[70svh] flex-col items-center justify-center px-[4vw] py-24 text-center">
         <p className="font-sans text-[0.6875rem] uppercase tracking-[0.3em] text-mf-muted">404</p>

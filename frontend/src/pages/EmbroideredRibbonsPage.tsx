@@ -9,10 +9,12 @@ export function EmbroideredRibbonsPage({
   seoTitle,
   seoDescription,
   contactTo,
+  jsonLd,
 }: {
   seoTitle: string
   seoDescription: string
   contactTo: string
+  jsonLd?: unknown
 }) {
   const picBox =
     'mx-auto shrink-0 overflow-hidden rounded-sm md:mx-0 h-[17.75rem] w-[clamp(226px,min(248px,88vw))] sm:h-[19rem]'
@@ -26,7 +28,7 @@ export function EmbroideredRibbonsPage({
 
   return (
     <>
-      <Seo title={seoTitle} description={seoDescription} />
+      <Seo title={seoTitle} description={seoDescription} jsonLd={jsonLd} />
       <RestyleHero
         eyebrow="MF accessories"
         title="The art of embroidery, designed just for you."

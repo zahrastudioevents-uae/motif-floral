@@ -119,6 +119,13 @@ export function webPage(name: string, path: string, description: string) {
  * Questions couples actually ask before enquiring. Answer engines quote these
  * almost verbatim, so the answers must be true and specific: vague marketing
  * copy gets skipped in favour of a competitor who gave a real number.
+ *
+ * This same array is rendered as the visible FAQ section on the home page
+ * (pages/Home.tsx) and turned into faqSchema below. Both read from here on
+ * purpose: Google's guidelines require the marked-up questions and answers to
+ * be visible on the page, so a schema describing text nobody can see is a
+ * violation. Edit the copy here and it changes in both places at once; never
+ * paste a second copy of it into the page.
  */
 export const FAQ = [
   {

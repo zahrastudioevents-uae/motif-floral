@@ -3,13 +3,24 @@ import { ImageCarousel } from '../components/ImageCarousel'
 import { RestyleHero } from '../components/RestyleHero'
 import { Seo } from '../components/Seo'
 import { BOUQUET_TIERS, CHOOSE_HERO_IMAGES, RIBBON_SECTION } from '../data/chooseBouquet'
+import { breadcrumb, graph, webPage } from '../lib/structuredData'
+
+const DESCRIPTION =
+  'Browse our curated selection of bouquets to find the perfect design reflecting your taste and wedding theme.'
 
 export function ChooseBouquet() {
   return (
     <>
       <Seo
         title="Choose Your Bouquet – Curated Collections - Motif Floral"
-        description="Browse our curated selection of bouquets to find the perfect design reflecting your taste and wedding theme."
+        description={DESCRIPTION}
+        jsonLd={graph(
+          webPage('Choose your bouquet', '/chooseyourbouquet/', DESCRIPTION),
+          breadcrumb([
+            { name: 'Home', path: '/' },
+            { name: 'Choose your bouquet', path: '/chooseyourbouquet/' },
+          ]),
+        )}
       />
 
       <RestyleHero
