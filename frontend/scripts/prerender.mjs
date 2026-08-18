@@ -167,6 +167,23 @@ async function renderOnce(route) {
   }
 }
 
+/**
+ * Rimette media="print" sul foglio dei font.
+ *
+ * Nel sorgente il link ai Google Fonts nasce con media="print" e onload che lo
+ * riporta ad "all": è il modo standard di caricarli senza bloccare il primo
+ * disegno. Ma qui si serializza il DOM vivo, e a quel punto onload è già
+ * scattato: Chrome scrive media="all" e la pagina servita si ferma a aspettare
+ * la risposta di Google prima di disegnare qualsiasi cosa (misurati 1,2 s).
+ * La copia dentro <noscript> non ha attributo media e non viene toccata.
+ */
+function restoreFontMediaPrint(html) {
+  return html.replace(
+    /(<link[^>]*href="https:\/\/fonts\.googleapis\.com[^"]*"[^>]*?)media="all"([^>]*onload=)/i,
+    '$1media="print"$2',
+  )
+}
+
 const escape = (s) =>
   s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
 
@@ -310,6 +327,7 @@ for (const route of routes) {
   }
 
   out = minifyJsonLd(out)
+  out = restoreFontMediaPrint(out)
   try {
     out = await beasties.process(out)
   } catch (err) {
