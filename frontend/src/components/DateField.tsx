@@ -80,7 +80,20 @@ export function DateField({
 }) {
   const [open, setOpen] = useState<Part | null>(null)
   const box = useRef<HTMLDivElement>(null)
-  const parts = split(value)
+
+  // The three wheels are filled one at a time, so the field holds its own
+  // half-written date: until all three are picked there is no DD/MM/YYYY to
+  // hand up, and a value read back from the parent would come back empty and
+  // wipe the choice that was just made.
+  const [parts, setParts] = useState(() => split(value))
+  const sent = useRef(value)
+
+  // A date set from outside, or cleared from outside, still wins.
+  useEffect(() => {
+    if (value === sent.current) return
+    sent.current = value
+    setParts(split(value))
+  }, [value])
 
   useEffect(() => {
     if (!open) return
@@ -107,8 +120,11 @@ export function DateField({
       const max = daysIn(Number(next.month), Number(next.year))
       if (next.day && Number(next.day) > max) next.day = pad(max)
     }
-    onChange(next.day && next.month && next.year ? `${next.day}/${next.month}/${next.year}` : '')
-    if (next.day && next.month && next.year) setOpen(null)
+    setParts(next)
+    const whole = next.day && next.month && next.year ? `${next.day}/${next.month}/${next.year}` : ''
+    sent.current = whole
+    onChange(whole)
+    if (whole) setOpen(null)
     else setOpen(part === 'day' ? 'month' : part === 'month' ? 'year' : null)
   }
 
